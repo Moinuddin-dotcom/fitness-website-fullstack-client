@@ -54,13 +54,15 @@ const Navbar = () => {
                         </div>
                         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 
-                            <Button className="inline-flex items-center gap-2 rounded-md bg-[#82b440] py-1.5 px-3 text-sm/6 font-bold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-[#ffc107] data-[open]:bg-[#ffc107] data-[focus]:outline-1 data-[focus]:outline-white">
-                                Join us
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3.5} stroke="currentColor" className="size-4 font-extrabold">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                </svg>
+                            <Link to={'/login'}>
+                                <Button className="inline-flex items-center gap-2 rounded-md bg-[#82b440] py-1.5 px-3 text-sm/6 font-bold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-[#ffc107] data-[open]:bg-[#ffc107] data-[focus]:outline-1 data-[focus]:outline-white">
+                                    Join us
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3.5} stroke="currentColor" className="size-4 font-extrabold">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
 
-                            </Button>
+                                </Button>
+                            </Link>
 
                             {/* Profile dropdown */}
                             <Menu as="div" className="relative ml-3">

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import googleLogo from '../../../../src/assets/images/Google-logo.png'
+import { Link } from 'react-router-dom';
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -25,6 +26,7 @@ const Register = () => {
                     </div>
                 </div>
 
+
                 {/* Right Panel */}
                 <div className="flex-1 flex flex-col justify-center px-16">
                     <h2 className="text-2xl font-bold mb-6 text-center">Sign Up Account</h2>
@@ -36,23 +38,23 @@ const Register = () => {
                             <span>Google</span>
                         </button>
                     </div>
-
+                    <div className="divider divider-accent">OR</div>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                         {/* First Name */}
-                        <div className="flex gap-4">
-                            <input
-                                {...register("Your Name", { required: "Name is required" })}
-                                className="flex-1 bg-gray-800 text-white py-2 px-4 rounded"
-                                placeholder="Your Name"
-                            />
-
-                        </div>
-                        {errors.firstName && <p className="text-red-500">{errors.firstName.message}</p>}
-                        {/* File input (Image) */}
                         <input
-                            {...register("image", { required: true })}
-                            type="file" className="file-input file-input-bordered file-input-accent w-full max-w-xs" />
-
+                            {...register("name", { required: "Name is required" })}
+                            className="w-full bg-gray-800 text-white py-2 px-4 rounded"
+                            placeholder="Your Name"
+                        />
+                        {errors.name && <p className="text-red-500">{errors.name.message}</p>}
+                        {/* Photo URL */}
+                        <input
+                            type='text'
+                            {...register("PhotoURL", { required: "Photo is required" })}
+                            className="w-full bg-gray-800 text-white py-2 px-4 rounded"
+                            placeholder="Photo URL"
+                        />
+                        {errors.PhotoURL && <p className="text-red-500">{errors.PhotoURL.message}</p>}
                         {/* Email */}
                         <input
                             {...register("email", { required: "Email is required" })}
@@ -62,27 +64,32 @@ const Register = () => {
                         {errors.email && <p className="text-red-500">{errors.email.message}</p>}
 
                         {/* Password */}
-                        <input
-                            {...register("password", {
-                                required: "Password is required",
-                                minLength: { value: 6, message: "Must be at least 6 characters" },
-                            })}
-                            type="password"
-                            className="w-full bg-gray-800 text-white py-2 px-4 rounded"
-                            placeholder="Password"
-                        />
-                        {errors.password && <p className="text-red-500">{errors.password.message}</p>}
+                        <input type="password" placeholder="password" {...register("password", {
+                            required: true,
+                            minLength: 6,
+                            pattern: /(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/
+                        })} name='password' className=" w-full bg-gray-800 text-white py-2 px-4 rounded" required />
+
+                        {errors.password?.type === "required" && (
+                            <p className='text-red-700' role="alert">Password is required</p>
+                        )}
+                        {errors.password?.type === "minLength" && (
+                            <p className='text-red-700' role="alert">Minimum 6 character required</p>
+                        )}
+                        {errors.password?.type === "pattern" && (
+                            <p className='text-red-700' role="alert">Password must have one uppercase one lower case one special character one number</p>
+                        )}
 
                         <button
                             type="submit"
                             className="w-full bg-white text-black py-2 px-4 rounded mt-4 font-bold"
                         >
-                            Sign Up
+                            Register
                         </button>
                     </form>
 
                     <p className="text-gray-500 mt-4 text-center">
-                        Already have an account? <a href="#" className="text-white">Log in</a>
+                        Already have an account? <Link to={'/login'} className="text-white">Log in</Link>
                     </p>
                 </div>
             </div>
