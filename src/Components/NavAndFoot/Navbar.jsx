@@ -6,9 +6,19 @@ import websiteLogo from '../../../src/assets/Animation - Website-logo.json'
 import Lottie from 'lottie-react'
 import useAuth from '../../Hooks/useAuth'
 
+
+// import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import {
+    ArchiveBoxXMarkIcon,
+    ChevronDownIcon,
+    PencilIcon,
+    Square2StackIcon,
+    TrashIcon,
+} from '@heroicons/react/16/solid'
+
 const Navbar = () => {
     const { user, logout } = useAuth()
-    const navLink = <>
+    const navLinks = <>
         <NavLink to={'/'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-green-400 font-semibold" : ""} >Home</NavLink>
         <NavLink to={'/trainer'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-green-400 font-semibold" : ""}>Trainer</NavLink>
         <NavLink to={'/classes'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-green-400 font-semibold" : ""}>Classes </NavLink>
@@ -24,23 +34,32 @@ const Navbar = () => {
     }
 
 
-    // function classNames(...classes) {
-    //     return classes.filter(Boolean).join(' ')
-    // }
-
     return (
         <div>
             <Disclosure as="nav" className=" border">
                 <div className="mx-auto max-w-[95vw] border px-2 py-4 sm:px-6 lg:px-8">
                     <div className="relative flex h-16 items-center justify-between">
                         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                            {/* Mobile menu button*/}
-                            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                                <span className="absolute -inset-0.5" />
-                                <span className="sr-only">Open main menu</span>
-                                <Bars3Icon aria-hidden="true" className="block size-6 group-data-[open]:hidden" />
-                                <XMarkIcon aria-hidden="true" className="hidden size-6 group-data-[open]:block" />
-                            </DisclosureButton>
+                            <Menu>
+                                <MenuButton className="inline-flex items-center gap-2 rounded-md bg-gray-800 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-700 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
+                                    </svg>
+
+                                </MenuButton>
+
+                                <MenuItems
+                                    transition
+                                    anchor="bottom end"
+                                    className="w-52 origin-top-right rounded-xl border border-white/5 bg-white/5 p-1 text-sm/6 text-white transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
+                                >
+                                    <MenuItem>
+                                        <button className="group flex flex-col w-full items-start gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-black">
+                                            {navLinks}
+                                        </button>
+                                    </MenuItem>
+                                </MenuItems>
+                            </Menu>
                         </div>
                         <div className="flex flex-1 items-center justify-center  sm:justify-start">
                             <Link to={'/'}>
@@ -50,14 +69,14 @@ const Navbar = () => {
                                     </div>
                                     <div className='hidden lg:flex flex-col'>
                                         <h1 className='font-bold text-xl text-start'>Aura Fusion Gym</h1>
-                                        <h3 className='uppercase text-green-500 text-sm text-start'>Fitness & Yoga</h3>
+                                        <h3 className=' text-green-500 text-sm text-start'>Fitness & Yoga</h3>
                                     </div>
                                 </Button>
                             </Link>
 
                             <div className="hidden sm:ml-6 sm:block">
                                 <div className="flex space-x-4">
-                                    {navLink}
+                                    {navLinks}
                                 </div>
                             </div>
                         </div>
@@ -65,7 +84,7 @@ const Navbar = () => {
 
                             {
                                 user && user?.email ? <div>
-                                    Welcome! <p className='hidden lg:flex'>{user?.displayName}</p>
+                                    <p className='md:text-xl font-bold'>Welcome!</p> <p className='hidden lg:flex text-green-500'>{user?.displayName}</p>
                                 </div>
                                     :
                                     <Link to={'/login'}>
@@ -108,14 +127,6 @@ const Navbar = () => {
                                             Your Profile
                                         </a>
                                     </MenuItem>
-                                    {/* <MenuItem>
-                                        <a
-                                            href="#"
-                                            className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
-                                        >
-                                            Settings
-                                        </a>
-                                    </MenuItem> */}
                                     <MenuItem>
                                         <Button
                                             onClick={handleLogout}
@@ -129,12 +140,6 @@ const Navbar = () => {
                         </div>
                     </div>
                 </div>
-
-                <DisclosurePanel className="sm:hidden">
-                    <div className="space-y-1 px-2 pb-3 pt-2">
-                        {navLink}
-                    </div>
-                </DisclosurePanel>
             </Disclosure>
         </div>
     )

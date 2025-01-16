@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 import useAuth from '../../../Hooks/useAuth';
+import GoogleLogin from './GoogleLogin';
 
 const Register = () => {
     const { createUser, updateUserProfile } = useAuth()
@@ -68,15 +69,10 @@ const Register = () => {
 
                 {/* Right Panel */}
                 <div className="flex-1 flex flex-col justify-center px-16">
-                    <h2 className="text-2xl font-bold mb-6 text-center">Sign Up Account</h2>
+                    <h2 className="text-2xl font-bold mb-6 text-center">Register Account</h2>
                     <p className="mb-8 text-center">Enter your personal data to create your account.</p>
-
-                    <div className="flex gap-4 mb-6">
-                        <button className="flex-1 bg-gray-800 text-white py-2 px-4 rounded flex items-center justify-center gap-2">
-                            <img src={googleLogo} alt="google icon" className='h-8' />
-                            <span>Google</span>
-                        </button>
-                    </div>
+                    {/* Social Register */}
+                    <GoogleLogin />
                     <div className="divider divider-accent">OR</div>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                         {/* First Name */}

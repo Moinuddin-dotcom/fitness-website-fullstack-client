@@ -1,21 +1,25 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import Navbar from '../Components/NavAndFoot/Navbar'
 import Footer from '../Components/NavAndFoot/Footer'
 import { Helmet } from 'react-helmet'
 
 const Main = () => {
+    const location = useLocation()
+    // console.log(location)
+
+    const isLogin = location.pathname.includes('login')
+    const isRegister = location.pathname.includes('register')
     return (
         <div className='poppins bg-black text-white' >
             <Helmet>
                 <title>Home | Aura Fusion Gym</title>
             </Helmet>
-            <Navbar />
+            {isLogin || isRegister || <Navbar />}
             <section className='min-h-screen'>
-
-            <Outlet />
+                <Outlet />
             </section>
-            <Footer />
+            {isLogin || isRegister || <Footer />}
 
         </div>
     )

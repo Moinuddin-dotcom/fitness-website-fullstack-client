@@ -1,10 +1,11 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
-import googleLogo from '../../../../src/assets/images/Google-logo.png'
+
 import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import useAuth from '../../../Hooks/useAuth';
 import toast from 'react-hot-toast';
+import GoogleLogin from './GoogleLogin';
 
 const Login = () => {
   const { signIn } = useAuth()
@@ -34,15 +35,11 @@ const Login = () => {
 
         {/* Left Panel */}
         <div className="flex-1 flex flex-col justify-center px-16">
-          <h2 className="text-2xl font-bold mb-6 text-center">Sign Up Account</h2>
-          <p className="mb-8 text-center">Enter your personal data to create your account.</p>
+          <h2 className="text-2xl font-bold mb-6 text-center">Log In Account</h2>
+          <p className="mb-8 text-center">Enter your email & password.</p>
+          {/* social log in */}
+          <GoogleLogin />
 
-          <div className="flex gap-4 mb-6">
-            <button className="flex-1 bg-gray-800 text-white py-2 px-4 rounded flex items-center justify-center gap-2">
-              <img src={googleLogo} alt="google icon" className='h-8' />
-              <span>Google</span>
-            </button>
-          </div>
           <div className="divider divider-accent">OR</div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -79,7 +76,7 @@ const Login = () => {
           </p>
         </div>
         {/* Right Panel */}
-        <div className="flex-1 bg-gradient-to-br from-purple-700 to-black p-12 flex flex-col justify-center items-center rounded-l-xl">
+        <div className="flex-1 bg-gradient-to-br from-purple-700 to-black p-12 flex flex-col justify-center items-center rounded-r-xl">
           <h1 className="text-4xl font-bold mb-4">Hello, <br /> Welcome Back</h1>
           <p className="text-2xl mb-6"></p>
           <p className="text-center mb-10">
