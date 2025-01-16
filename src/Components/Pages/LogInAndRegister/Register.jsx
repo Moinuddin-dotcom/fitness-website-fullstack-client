@@ -2,15 +2,54 @@ import React from 'react'
 import { useForm } from 'react-hook-form';
 import googleLogo from '../../../../src/assets/images/Google-logo.png'
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+import toast from 'react-hot-toast';
+import useAuth from '../../../Hooks/useAuth';
 
 const Register = () => {
+    const { createUser, updateUserProfile } = useAuth()
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
         console.log(data);
+        createUser(data.email, data.password)
+            .then(res => {
+                const user = res.user
+                console.log("User created successfully on", user)
+                toast.success("User registered successfully")
+                updateUserProfile(data.name, data.PhotoURL)
+                    .then(() => {
+                        // console.log("User profile updated successfully")
+                        const userInfo = {
+                            name: data.name,
+                            email: data.email,
+                            photo: data.PhotoURL
+                        }
+                        console.log(userInfo)
+                        // axiosPublic.post('users', userInfo)
+                        //     .then((res) => {
+                        //         if (res.data.insertedId) {
+                        //             console.log("User added to the database")
+                        //             toast.success("User registered successfully and added to the database")
+                        //             reset()
+                        //             navigate('/')
+                        //         }
+                        //     })
+                    })
+                    .catch((err) => {
+                        console.log(err.message)
+                    })
+            })
+            .catch(err => {
+                console.log("Error registering user: ", err.message)
+                toast.error("Error registering user: ", err.message)
+            })
     };
     return (
         <div>
+            <Helmet>
+                <title>Register | Aura Fusion Gym</title>
+            </Helmet>
             <div className="flex max-w-[80vw] mx-auto min-h-screen bg-black text-white p-10">
                 {/* Left Panel */}
                 <div className="flex-1 bg-gradient-to-br from-purple-700 to-black p-12 flex flex-col justify-center items-center rounded-l-xl">

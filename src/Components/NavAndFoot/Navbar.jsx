@@ -1,11 +1,13 @@
 import { Button, Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/16/solid'
+import { Bars3Icon, BellIcon, UserCircleIcon, XMarkIcon } from '@heroicons/react/16/solid'
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import websiteLogo from '../../../src/assets/Animation - Website-logo.json'
 import Lottie from 'lottie-react'
+import useAuth from '../../Hooks/useAuth'
 
 const Navbar = () => {
+    const { user, logout } = useAuth()
     const navLink = <>
         <NavLink to={'/'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-green-400 font-semibold" : ""} >Home</NavLink>
         <NavLink to={'/trainer'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-green-400 font-semibold" : ""}>Trainer</NavLink>
@@ -15,9 +17,16 @@ const Navbar = () => {
 
     </>
 
-    function classNames(...classes) {
-        return classes.filter(Boolean).join(' ')
+    const handleLogout = () => {
+        logout()
+            .then(() => { })
+            .catch((err) => toast.error(err.message));
     }
+
+
+    // function classNames(...classes) {
+    //     return classes.filter(Boolean).join(' ')
+    // }
 
     return (
         <div>
@@ -54,15 +63,21 @@ const Navbar = () => {
                         </div>
                         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 
-                            <Link to={'/login'}>
-                                <Button className="inline-flex items-center gap-2 rounded-md bg-[#82b440] py-1.5 px-3 text-sm/6 font-bold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-[#ffc107] data-[open]:bg-[#ffc107] data-[focus]:outline-1 data-[focus]:outline-white">
-                                    Join us
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3.5} stroke="currentColor" className="size-4 font-extrabold">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                    </svg>
+                            {
+                                user && user?.email ? <div>
+                                    Welcome! <p className='hidden lg:flex'>{user?.displayName}</p>
+                                </div>
+                                    :
+                                    <Link to={'/login'}>
+                                        <Button className="inline-flex items-center gap-2 rounded-md bg-[#82b440] py-1.5 px-3 text-sm/6 font-bold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-[#ffc107] data-[open]:bg-[#ffc107] data-[focus]:outline-1 data-[focus]:outline-white">
+                                            Join us
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3.5} stroke="currentColor" className="size-4 font-extrabold">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                            </svg>
 
-                                </Button>
-                            </Link>
+                                        </Button>
+                                    </Link>
+                            }
 
                             {/* Profile dropdown */}
                             <Menu as="div" className="relative ml-3">
@@ -70,11 +85,15 @@ const Navbar = () => {
                                     <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                                         <span className="absolute -inset-1.5" />
                                         <span className="sr-only">Open user menu</span>
-                                        <img
-                                            alt=""
-                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                            className="size-8 rounded-full"
-                                        />
+                                        {
+                                            user && user?.email &&
+                                            <img
+                                                alt=""
+                                                src={user?.photoURL}
+                                                className="size-10 rounded-full"
+                                            />
+                                        }
+
                                     </MenuButton>
                                 </div>
                                 <MenuItems
@@ -89,21 +108,21 @@ const Navbar = () => {
                                             Your Profile
                                         </a>
                                     </MenuItem>
-                                    <MenuItem>
+                                    {/* <MenuItem>
                                         <a
                                             href="#"
                                             className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
                                         >
                                             Settings
                                         </a>
-                                    </MenuItem>
+                                    </MenuItem> */}
                                     <MenuItem>
-                                        <a
-                                            href="#"
+                                        <Button
+                                            onClick={handleLogout}
                                             className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
                                         >
                                             Sign out
-                                        </a>
+                                        </Button>
                                     </MenuItem>
                                 </MenuItems>
                             </Menu>

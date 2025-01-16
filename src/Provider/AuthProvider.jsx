@@ -1,20 +1,59 @@
-import { createContext } from "react";
+import { createContext, useEffect, useState } from "react";
 import { app } from "../Firebase/Firebase.config";
-import { getAuth } from "firebase/auth"
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 
 
 
 export const AuthContext = createContext(null)
 const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState(true)
+    // const googleProvider = new GoogleAuthProvider()
+    // const axiosPublic = useAxiosPublic()
 
+    // create new user
+    const createUser = (email, passord) => {
+        setLoading(true)
+        return createUserWithEmailAndPassword(auth, email, passord)
+    }
 
+    // user Sign in
+    const signIn = (email, passord) => {
+        setLoading(true)
+        return signInWithEmailAndPassword(auth, email, passord)
+    }
+
+    // user logout
+    const logout = () => {
+        setLoading(true)
+        return signOut(auth)
+    }
+
+    // update user profile
+    const updateUserProfile = (name, photo) => {
+        return updateProfile(auth.currentUser, {
+            displayName: name, photoURL: photo
+        })
+    }
+
+    useEffect(() => {
+        const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+            console.log("Current user=> ", currentUser)
+            setLoading(false)
+            setUser(currentUser)
+        })
+        return () => {
+            unSubscribe()
+        }
+
+    }, [])
 
 
 
 
     const authInfo = {
-
+        user, loading, createUser, signIn, logout, updateUserProfile
     }
     return (
         <AuthContext.Provider value={authInfo}>

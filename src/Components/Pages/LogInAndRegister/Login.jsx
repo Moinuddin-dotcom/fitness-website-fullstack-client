@@ -1,16 +1,35 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import googleLogo from '../../../../src/assets/images/Google-logo.png'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+import useAuth from '../../../Hooks/useAuth';
+import toast from 'react-hot-toast';
 
 const Login = () => {
+  const { signIn } = useAuth()
+  const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
+    signIn(data.email, data.password)
+      .then(res => {
+        const user = res.user
+        console.log("User logged in with:", user)
+        toast.success("User log in successfully")
+        navigate('/')
+      })
+      .catch(err => {
+        console.log("Error logged in user: ", err.message)
+        toast.error("Error logged in user: ", err.message)
+      })
   };
   return (
     <div>
+      <Helmet>
+        <title>Log In | Aura Fusion Gym</title>
+      </Helmet>
       <div className="flex max-w-[80vw] mx-auto min-h-screen bg-black text-white p-10">
 
         {/* Left Panel */}
