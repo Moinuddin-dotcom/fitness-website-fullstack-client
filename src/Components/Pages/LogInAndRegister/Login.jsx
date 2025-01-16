@@ -31,10 +31,10 @@ const Login = () => {
       <Helmet>
         <title>Log In | Aura Fusion Gym</title>
       </Helmet>
-      <div className="flex max-w-[80vw] mx-auto min-h-screen bg-black text-white p-10">
+      <div className="flex lg:max-w-[80vw] mx-auto min-h-screen bg-black text-white p-10">
 
         {/* Left Panel */}
-        <div className="flex-1 flex flex-col justify-center px-16">
+        <div className="flex-1 flex flex-col justify-center lg:px-16">
           <h2 className="text-2xl font-bold mb-6 text-center">Log In Account</h2>
           <p className="mb-8 text-center">Enter your email & password.</p>
           {/* social log in */}
@@ -76,7 +76,7 @@ const Login = () => {
           </p>
         </div>
         {/* Right Panel */}
-        <div className="flex-1 bg-gradient-to-br from-purple-700 to-black p-12 flex flex-col justify-center items-center rounded-r-xl">
+        <div className="hidden bg-gradient-to-br from-purple-700 to-black p-12 lg:flex flex-col justify-center items-center rounded-r-xl lg:w-[30vw] xl:w-[35vw]">
           <h1 className="text-4xl font-bold mb-4">Hello, <br /> Welcome Back</h1>
           <p className="text-2xl mb-6"></p>
           <p className="text-center mb-10">

@@ -1,15 +1,18 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import googleLogo from '../../../../src/assets/images/Google-logo.png'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 import useAuth from '../../../Hooks/useAuth';
 import GoogleLogin from './GoogleLogin';
+import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 
 const Register = () => {
     const { createUser, updateUserProfile } = useAuth()
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const axiosPublic = useAxiosPublic()
+    const navigate = useNavigate()
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
         console.log(data);
@@ -17,25 +20,26 @@ const Register = () => {
             .then(res => {
                 const user = res.user
                 console.log("User created successfully on", user)
-                toast.success("User registered successfully")
+
                 updateUserProfile(data.name, data.PhotoURL)
                     .then(() => {
                         // console.log("User profile updated successfully")
                         const userInfo = {
                             name: data.name,
                             email: data.email,
-                            photo: data.PhotoURL
+                            photo: data.PhotoURL,
+                            role: "member"
                         }
                         console.log(userInfo)
-                        // axiosPublic.post('users', userInfo)
-                        //     .then((res) => {
-                        //         if (res.data.insertedId) {
-                        //             console.log("User added to the database")
-                        //             toast.success("User registered successfully and added to the database")
-                        //             reset()
-                        //             navigate('/')
-                        //         }
-                        //     })
+                        axiosPublic.post('/users', userInfo)
+                            .then((res) => {
+                                if (res.data.insertedId) {
+                                    // console.log("User added to the database")
+                                    toast.success("User registered successfully")
+                                    reset()
+                                    navigate('/login')
+                                }
+                            })
                     })
                     .catch((err) => {
                         console.log(err.message)
@@ -51,9 +55,9 @@ const Register = () => {
             <Helmet>
                 <title>Register | Aura Fusion Gym</title>
             </Helmet>
-            <div className="flex max-w-[80vw] mx-auto min-h-screen bg-black text-white p-10">
+            <div className="flex  lg:max-w-[80vw] mx-auto min-h-screen bg-black text-white p-10">
                 {/* Left Panel */}
-                <div className="flex-1 bg-gradient-to-br from-purple-700 to-black p-12 flex flex-col justify-center items-center rounded-l-xl">
+                <div className="hidden bg-gradient-to-br from-purple-700 to-black p-12 lg:flex flex-col justify-center items-center rounded-l-xl lg:w-[30vw] xl:w-[35vw] ">
                     <h1 className="text-4xl font-bold mb-4">Aura Fusion Gym</h1>
                     <p className="text-2xl mb-6">Get Started with Us</p>
                     <p className="text-center mb-10">
@@ -68,7 +72,7 @@ const Register = () => {
 
 
                 {/* Right Panel */}
-                <div className="flex-1 flex flex-col justify-center px-16">
+                <div className="flex-1 flex flex-col justify-center lg:px-16">
                     <h2 className="text-2xl font-bold mb-6 text-center">Register Account</h2>
                     <p className="mb-8 text-center">Enter your personal data to create your account.</p>
                     {/* Social Register */}

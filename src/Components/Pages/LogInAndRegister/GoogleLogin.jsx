@@ -3,10 +3,12 @@ import googleLogo from '../../../../src/assets/images/Google-logo.png'
 import useAuth from '../../../Hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
+import useAxiosPublic from '../../../Hooks/useAxiosPublic'
 
 const GoogleLogin = () => {
     const { googleLogin } = useAuth()
     const navigate = useNavigate()
+    const axiosPublic = useAxiosPublic()
 
     const handleGoogle = () => {
         googleLogin()
@@ -15,11 +17,18 @@ const GoogleLogin = () => {
                 const userInfo = {
                     email: res.user.email,
                     name: res.user.displayName,
-                    photoURL: res.user.photoURL
+                    photoURL: res.user.photoURL,
+                    role: "member"
                 }
-                console.log(userInfo)
-                toast.success("User log in successfully")
-                // axiosPublic.post('/users', userInfo)
+                // console.log(userInfo)
+
+                axiosPublic.post('/users', userInfo)
+                    .then((res) => {
+                        if (res.data.insertedId) {
+                            toast.success("User log in successfully")
+
+                        }
+                    })
                 navigate('/')
             })
             .catch(err => {

@@ -16,7 +16,7 @@ const Main = () => {
                 <title>Home | Aura Fusion Gym</title>
             </Helmet>
             {isLogin || isRegister || <Navbar />}
-            <section className='min-h-screen'>
+            <section className='min-h-screen pt-24'>
                 <Outlet />
             </section>
             {isLogin || isRegister || <Footer />}

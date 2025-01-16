@@ -36,8 +36,8 @@ const Navbar = () => {
 
     return (
         <div>
-            <Disclosure as="nav" className=" border">
-                <div className="mx-auto max-w-[95vw] border px-2 py-4 sm:px-6 lg:px-8">
+            <Disclosure as="nav" className="fixed z-10 w-full">
+                <div className=" px-2 py-4 sm:px-6 lg:px-8 ">
                     <div className="relative flex h-16 items-center justify-between">
                         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                             <Menu>
@@ -51,7 +51,7 @@ const Navbar = () => {
                                 <MenuItems
                                     transition
                                     anchor="bottom end"
-                                    className="w-52 origin-top-right rounded-xl border border-white/5 bg-white/5 p-1 text-sm/6 text-white transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
+                                    className="w-52 origin-top-right rounded-xl  border-white/5 bg-white/5 p-1 text-sm/6 text-white transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
                                 >
                                     <MenuItem>
                                         <button className="group flex flex-col w-full items-start gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-black">
