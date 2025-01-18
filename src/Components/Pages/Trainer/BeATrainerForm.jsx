@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Select from 'react-select';
 import useAuth from '../../../Hooks/useAuth';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import toast from 'react-hot-toast';
+import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 
 const availableDaysOptions = [
     { value: 'Sun', label: 'Sun' },
@@ -12,16 +15,81 @@ const availableDaysOptions = [
     { value: 'Fri', label: 'Fri' },
     { value: 'Sat', label: 'Sat' },
 ];
+const experience = [
+    { value: 'Less then 1 year', label: 'Less then 1 year' },
+    { value: '2-3 Years', label: '2-3 Years' },
+    { value: '3-4 Years', label: '3-4 Years' },
+    { value: '5 Years or above', label: '5 Years or above' },
+];
+
+const trainingPrograms = [
+    { value: 'How do you assess a client’s fitness level and design a personalized program?', label: 'How do you assess a client’s fitness level and design a personalized program?' },
+    { value: 'What kind of equipment do you use in your training sessions?', label: 'What kind of equipment do you use in your training sessions?' },
+    { value: 'How do you track progress and adjust workout plans?', label: 'How do you track progress and adjust workout plans?' },
+
+];
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 
 const BeATrainerForm = () => {
 
-    const { register, handleSubmit, setValue, formState: { errors } } = useForm();
+    const { register, handleSubmit, setValue, reset, formState: { errors } } = useForm();
     // const [status, setStatus] = useState('pending');
     const { user } = useAuth()
+    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
+    const [textareaVisible, setTextareaVisible] = useState(false)
+    const [selectedPrograms, setSelectedPrograms] = useState([]);
 
-    const onSubmit = (data) => {
+    const handleSelectChange = (selected) => {
+        setSelectedPrograms(selected || []);
+        setTextareaVisible(selected && selected.length > 0);
+    };
+
+    const onSubmit = async (data) => {
         console.log('Submitted Data:', data);
-        // Store the data in the database (You can replace this with your API call)
+
+
+        const imageFile = { image: data.image[0] }
+        const response = await axiosPublic.post(image_hosting_api, imageFile, {
+            headers: { 'content-type': 'multipart/form-data' }
+        })
+
+
+        if (response.data.success) {
+            const trainerInfo = {
+                name: user?.displayName,
+                email: user?.email,
+                image: response.data.data.display_url,
+                age: parseInt(data.age),
+                skills: data.skills,
+                availableTime: parseInt(data.availableTime),
+                availableDays: data.availableDays,
+                qualifications: data.qualifications,
+                experience: data.experience,
+                cost: data.cost,
+                trainingPrograms: selectedPrograms,
+                trainingInfo: textareaVisible ? data.trainingInfo : null,
+                otherInfo: data.otherInfo,
+                role: "Member",
+                status: "Pending"
+            }
+            // console.log(trainerInfo.name)
+            await axiosSecure.post('/trainers', trainerInfo)
+                .then(res => {
+                    console.log(res.data)
+                    if (res.data.insertedId) {
+                        toast.success(`${user?.displayName} your trainer request sent`)
+                        reset()
+                    }
+                    if (res.data.insertedId === null) {
+                        toast.error("You already applied for trainer")
+                        reset()
+                    }
+                })
+        }
+        console.log("With Image URL--->", response.data)
     };
     return (
         <div className="max-w-lg mx-auto p-6  border rounded-md shadow-md">
@@ -29,14 +97,16 @@ const BeATrainerForm = () => {
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700">Full Name</label>
+                    <label className="block text-sm font-medium text-gray-700">Your name is</label>
                     {/* Name */}
                     <input
                         type="text"
-                        {...register('fullName', { required: 'Full Name is required' })}
-                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                        defaultValue={user?.displayName}
+                        {...register(`${user?.displayName}`)}
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 text-white rounded-md"
+                        readOnly
                     />
-                    {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName.message}</p>}
+                    {/* {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName.message}</p>} */}
                 </div>
 
                 <div className="mb-4">
@@ -45,17 +115,10 @@ const BeATrainerForm = () => {
                     <input
                         type="email"
                         defaultValue={user?.email}
-                        {...register('email', { required: 'Email is required' })}
+                        {...register(`${user?.email}`, { required: 'Email is required' })}
                         className="mt-1 block w-full px-3 py-2 border border-gray-300 text-white rounded-md"
                         readOnly
                     />
-
-                    {/* <input
-                            {...register("email", { required: "Email is required" })}
-                            className="w-full bg-gray-800 text-white py-2 px-4 rounded"
-                            placeholder="Email"
-                        /> */}
-                    {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
                 </div>
 
                 <div className="mb-4">
@@ -74,10 +137,10 @@ const BeATrainerForm = () => {
                     {/* Profile image */}
                     <input
                         type="file"
-                        {...register('profileImage', { required: 'Profile Image is required' })}
+                        {...register('image', { required: 'Profile Image is required' })}
                         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
                     />
-                    {errors.profileImage && <p className="text-red-500 text-sm">{errors.profileImage.message}</p>}
+                    {errors.image && <p className="text-red-500 text-sm">{errors.image.message}</p>}
                 </div>
 
                 {/* Skills */}
@@ -136,13 +199,72 @@ const BeATrainerForm = () => {
                     {errors.availableTime && <p className="text-red-500 text-sm">{errors.availableTime.message}</p>}
                 </div>
 
-                {/* <div className="mb-4">
+                <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">Qualifications and Certifications</label>
+                    {/* Qualifications */}
+                    <input
+                        type="text"
+                        {...register('qualifications', { required: 'Qualifications is required' })}
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                    />
+                    {errors.qualifications && <p className="text-red-500 text-sm">{errors.qualifications.message}</p>}
+                </div>
+
+
+                <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">Experience</label>
+                    {/* Experience */}
+                    <Select
+                        isMulti
+                        name="experience"
+                        options={experience}
+                        onChange={(selectedExperience) => setValue('experience', selectedExperience)}
+                        className="mt-1 "
+                    />
+                    {errors.experience && <p className="text-red-500 text-sm">{errors.experience.message}</p>}
+                </div>
+
+                <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">Costs and Policies</label>
+                    {/* Costs and Policies */}
+                    <input
+                        type="number"
+                        {...register('cost', { required: 'Costs and Policies is required' })}
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                    />
+                    {errors.cost && <p className="text-red-500 text-sm">{errors.cost.message}</p>}
+                </div>
+
+                <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">Training Programs</label>
+                    {/* Training Programs */}
+                    <Select
+                        isMulti
+                        name="trainingPrograms"
+                        options={trainingPrograms}
+                        onChange={(selected) => {
+                            setValue('trainingPrograms', selected)
+                            handleSelectChange(selected)
+                        }}
+                        className="mt-1 "
+                    />
+                    {textareaVisible && <textarea
+                        {...register('trainingInfo')}
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                        placeholder='Your answer'
+                    />}
+                    {/* {errors.experience && <p className="text-red-500 text-sm">{errors.experience.message}</p>} */}
+                </div>
+
+                <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700">Other Info</label>
+                    {/* otherInfo */}
                     <textarea
                         {...register('otherInfo')}
                         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
                     />
-                </div> */}
+                </div>
+
 
                 <div className="mb-4">
                     <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">
@@ -151,9 +273,6 @@ const BeATrainerForm = () => {
                 </div>
             </form>
 
-            {/* <div className="mt-4">
-                <p>Status: <strong>{status}</strong></p>
-            </div> */}
         </div>
     )
 }

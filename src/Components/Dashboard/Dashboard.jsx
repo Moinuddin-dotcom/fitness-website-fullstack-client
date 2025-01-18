@@ -4,25 +4,33 @@ import useUser from '../../Hooks/useUser'
 import { NavLink, Outlet } from 'react-router-dom'
 import Loading from '../Pages/Loading'
 import { Button, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import useRole from '../../Hooks/useRole'
 
 
 const Dashboard = () => {
-    // const { user } = useAuth()
-    const [isLoading, users] = useUser()
-    console.log(users)
+    const { user, loading } = useAuth()
+    // const [isLoading, users] = useUser()
+    // console.log(users)
+    const [role, isLoading] = useRole()
+    console.log(role)
 
-    if (isLoading) return <Loading />
+    if (loading, isLoading) return <Loading />
+
+    // const isAdmin = true;
     return (
         <div className='poppins bg-black text-white'>
             <h1 className='text-center py-10 font-bold text-2xl'>Dashboard</h1>
             <div className='max-w-[90vw] mx-auto border flex justify-between items-center relative'>
                 <div>
-                    {users && users.length > 0 ? (
+                    {/* {users ? (
                         users.map((user) =>
                             <div key={user._id}>
                                 <h2 className=' py-2 font-bold text-2xl'>Hi! {user.name}</h2>
                                 <p>You are our honourable <b>({user.role})</b> </p>
-                            </div>)) : ""}
+                            </div>)) : ""} */}
+                    <h2 className=' py-2 font-bold text-2xl'>Hi! {user?.displayName}</h2>
+                    <h2 >Role: <span className='uppercase'>{role}</span></h2>
+                    {/* {user.displayName} */}
                 </div>
                 {/* mobile view */}
                 <div className="absolute inset-y-0 right-0 flex items-center lg:hidden">
@@ -54,12 +62,33 @@ const Dashboard = () => {
                 </div>
                 {/* mobile view end */}
                 <div className='space-x-4 hidden lg:flex'>
+
+                    {/* Admin route */}
+                    {
+                        role === 'admin' && <Button className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white">
+                            <NavLink to={'/dashboard/applied-trainer'}>
+                                Applied Trainer
+                            </NavLink>
+                        </Button>
+                    }
+                    {/* Seller Route */}
+                    {
+                        role === 'seller' && ""
+                    }
+
+
                     {/* Member route */}
-                    <Button className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white">
-                        <NavLink to={'/dashboard/member-activity'}>
-                            Activity Log
-                        </NavLink>
-                    </Button>
+                    {
+                        role === 'member' && <Button className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white">
+                            <NavLink to={'/dashboard/member-activity'}>
+                                Activity Log
+                            </NavLink>
+                        </Button>
+                    }
+
+
+
+
 
                 </div>
             </div>

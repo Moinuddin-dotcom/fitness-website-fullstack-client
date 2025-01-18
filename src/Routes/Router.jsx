@@ -6,10 +6,12 @@ import Trainer from "../Components/Pages/Trainer/Trainer";
 import Register from "../Components/Pages/LogInAndRegister/Register";
 import Login from "../Components/Pages/LogInAndRegister/Login";
 import Dashboard from "../Components/Dashboard/Dashboard";
-import ActivityLog from "../Components/Pages/DashboardPages/ActivityLog";
 import TrainerDetails from "../Components/Pages/Trainer/TrainerDetails";
 import TrainerBooking from "../Components/Pages/Trainer/TrainerBooking";
 import BeATrainerForm from "../Components/Pages/Trainer/BeATrainerForm";
+import AppliedTrainer from "../Components/Pages/DashboardPages/TrainerRoutes/AppliedTrainer";
+import AppliedTrainerDetails from "../Components/Pages/DashboardPages/TrainerRoutes/Pages/AppliedTrainerDetails";
+import ActivityLog from "../Components/Pages/DashboardPages/MemberRoutes/ActivityLog";
 
 export const Router = createBrowserRouter([
     {
@@ -57,11 +59,20 @@ export const Router = createBrowserRouter([
         path: "dashboard",
         element: <Dashboard />,
         children: [
+            // Member routes
             {
                 path: "member-activity",
                 element: <ActivityLog />
-
-            }
+            },
+            // Trainer routes
+            {
+                path: "applied-trainer",
+                element: <AppliedTrainer />
+            },
+            {
+                path: "applied-trainer-details/:id",
+                element: <AppliedTrainerDetails />
+            },
         ]
     }
 ])
