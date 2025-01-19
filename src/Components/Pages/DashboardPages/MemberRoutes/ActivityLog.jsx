@@ -8,7 +8,7 @@ const ActivityLog = () => {
     const { data: trainers = [], refetch } = useQuery({
         queryKey: ['trainers'],
         queryFn: async () => {
-            const res = await axiosSecure('/trainers')
+            const res = await axiosSecure('/applied-trainers')
             console.log(res.data)
             return res.data
 
@@ -52,7 +52,7 @@ const ActivityLog = () => {
                                         {post.email}
                                     </td> */}
                                     <td>{post.role}</td>
-                                    <td>{post.status}</td>
+                                    <td >{post.status}</td>
                                     {/* <th>
                                         <Link to={`/dashboard/applied-trainer-details/${post._id}`}>
                                             <button className="btn btn-ghost btn-xs">details</button>

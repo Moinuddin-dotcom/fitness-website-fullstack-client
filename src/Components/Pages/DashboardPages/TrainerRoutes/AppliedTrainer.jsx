@@ -2,18 +2,21 @@ import React from 'react'
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
+import useAuth from '../../../../Hooks/useAuth'
 
 const AppliedTrainer = () => {
+    const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
-    const { data: trainers = [], refetch } = useQuery({
-        queryKey: ['trainers'],
+    const { data: appliedTrainers = [], isLoading, refetch } = useQuery({
+        queryKey: ['appliedTrainers', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure('/trainers')
-            console.log(res.data)
-            return res.data
+            const { data } = await axiosSecure(`/applied-trainers/${user?.email}`)
+            // console.log(data)
+            return data
 
         }
     })
+    console.log(appliedTrainers)
     return (
         <div>
 
@@ -25,14 +28,14 @@ const AppliedTrainer = () => {
                             <th>#</th>
                             <th>Photo & Name </th>
                             <th>Email</th>
-                            <th>Role</th>
+                            {/* <th>Role</th> */}
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            trainers.map((post, idx) =>
+                            appliedTrainers.map((post, idx) =>
                                 <tr key={idx}>
                                     <th>{idx + 1}</th>
                                     <td>
@@ -52,8 +55,10 @@ const AppliedTrainer = () => {
                                     <td>
                                         {post.email}
                                     </td>
-                                    <td>{post.role}</td>
-                                    <td>{post.status}</td>
+                                    {/* <td>{post.role}</td> */}
+                                    <td >
+                                        {post.status ? <p className={`${post.status === 'Pending' ? 'text-yellow-500' : 'text-green-500'}`}>{post.status}</p> : <p className='text-red-500'>Unavailable</p>}
+                                    </td>
                                     <th>
                                         <Link to={`/dashboard/applied-trainer-details/${post._id}`}>
                                             <button className="btn btn-ghost btn-xs">details</button>

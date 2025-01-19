@@ -14,6 +14,8 @@ import AppliedTrainerDetails from "../Components/Pages/DashboardPages/TrainerRou
 import ActivityLog from "../Components/Pages/DashboardPages/MemberRoutes/ActivityLog";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
+import ManageSlots from "../Components/Pages/DashboardPages/RealTrainerRoutes/RealTrainerRoutesPages/ManageSlots";
+import AllTrainers from "../Components/Pages/DashboardPages/Admin/AdminRoutePages/AllTrainers";
 
 export const Router = createBrowserRouter([
     {
@@ -72,7 +74,21 @@ export const Router = createBrowserRouter([
                 path: "member-activity",
                 element: <ActivityLog />
             },
+            // Trainers routes
+            {
+                path: "manage-slots",
+                element: <ManageSlots />
+            },
             // Admin routes
+            {
+                path: "all-trainers",
+                element:
+                    <PrivateRoute>
+                        <AdminRoute>
+                            <AllTrainers />
+                        </AdminRoute>
+                    </PrivateRoute>
+            },
             {
                 path: "applied-trainer",
                 element:

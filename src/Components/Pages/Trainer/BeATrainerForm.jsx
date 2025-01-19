@@ -72,7 +72,7 @@ const BeATrainerForm = () => {
                 trainingPrograms: selectedPrograms,
                 trainingInfo: textareaVisible ? data.trainingInfo : null,
                 otherInfo: data.otherInfo,
-                role: "Member",
+                // role: "Member",
                 status: "Pending"
             }
             // console.log(trainerInfo.name)

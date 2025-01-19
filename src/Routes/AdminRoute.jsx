@@ -11,8 +11,8 @@ const AdminRoute = ({ children }) => {
     if (isLoading) return <Loading />
 
     if (role === 'admin') return children
-    return <Navigate to={'/dashboard'}
-    // state={{ from: location }} replace
+    return <Navigate to={'/dashboard'} replace
+    // state={{ from: location }} 
     />
 }
 
