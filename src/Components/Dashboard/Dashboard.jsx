@@ -5,6 +5,7 @@ import { NavLink, Outlet } from 'react-router-dom'
 import Loading from '../Pages/Loading'
 import { Button, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import useRole from '../../Hooks/useRole'
+import MemberRoute from '../Pages/DashboardPages/MemberRoutes/MemberRoute'
 
 
 const Dashboard = () => {
@@ -71,19 +72,17 @@ const Dashboard = () => {
                             </NavLink>
                         </Button>
                     }
+
+
                     {/* Seller Route */}
                     {
-                        role === 'seller' && ""
+                        role === 'trainer' && ""
                     }
 
 
                     {/* Member route */}
                     {
-                        role === 'member' && <Button className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white">
-                            <NavLink to={'/dashboard/member-activity'}>
-                                Activity Log
-                            </NavLink>
-                        </Button>
+                        role === 'member' && <MemberRoute />
                     }
 
 

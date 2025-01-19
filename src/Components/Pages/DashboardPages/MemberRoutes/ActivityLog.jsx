@@ -32,7 +32,7 @@ const ActivityLog = () => {
                     <tbody>
                         {
                             trainers.map((post, idx) =>
-                                <tr>
+                                <tr key={idx}>
                                     <th>{idx + 1}</th>
                                     <td>
                                         <div className="flex items-center gap-3">

@@ -12,6 +12,8 @@ import BeATrainerForm from "../Components/Pages/Trainer/BeATrainerForm";
 import AppliedTrainer from "../Components/Pages/DashboardPages/TrainerRoutes/AppliedTrainer";
 import AppliedTrainerDetails from "../Components/Pages/DashboardPages/TrainerRoutes/Pages/AppliedTrainerDetails";
 import ActivityLog from "../Components/Pages/DashboardPages/MemberRoutes/ActivityLog";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 
 export const Router = createBrowserRouter([
     {
@@ -38,11 +40,17 @@ export const Router = createBrowserRouter([
             },
             {
                 path: "/trainerBooking",
-                element: <TrainerBooking />
+                element:
+                    <PrivateRoute>
+                        <TrainerBooking />
+                    </PrivateRoute>
             },
             {
                 path: "/beAtrainerform",
-                element: <BeATrainerForm />
+                element:
+                    <PrivateRoute>
+                        <BeATrainerForm />
+                    </PrivateRoute>
             },
             {
                 path: "/register",
@@ -64,14 +72,24 @@ export const Router = createBrowserRouter([
                 path: "member-activity",
                 element: <ActivityLog />
             },
-            // Trainer routes
+            // Admin routes
             {
                 path: "applied-trainer",
-                element: <AppliedTrainer />
+                element:
+                    <PrivateRoute>
+                        <AdminRoute>
+                            <AppliedTrainer />
+                        </AdminRoute>
+                    </PrivateRoute>
             },
             {
                 path: "applied-trainer-details/:id",
-                element: <AppliedTrainerDetails />
+                element:
+                    <PrivateRoute>
+                        <AdminRoute>
+                            <AppliedTrainerDetails />
+                        </AdminRoute>
+                    </PrivateRoute>
             },
         ]
     }
