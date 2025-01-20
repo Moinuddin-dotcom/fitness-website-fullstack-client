@@ -4,7 +4,14 @@ import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import useAuth from '../../../../Hooks/useAuth'
 
+// import { useForm } from 'react-hook-form'
+
 const AppliedTrainer = () => {
+
+
+
+
+
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
     const { data: appliedTrainers = [], isLoading, refetch } = useQuery({
@@ -19,13 +26,12 @@ const AppliedTrainer = () => {
     console.log(appliedTrainers)
     return (
         <div>
-
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
                     <thead>
                         <tr>
-                            <th>#</th>
+                            {/* <th>#</th> */}
                             <th>Photo & Name </th>
                             <th>Email</th>
                             {/* <th>Role</th> */}
@@ -33,44 +39,48 @@ const AppliedTrainer = () => {
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {
-                            appliedTrainers.map((post, idx) =>
-                                <tr key={idx}>
-                                    <th>{idx + 1}</th>
-                                    <td>
-                                        <div className="flex items-center gap-3">
-                                            <div className="avatar">
-                                                <div className="mask mask-squircle h-12 w-12">
-                                                    <img
-                                                        src={post.photoURL}
-                                                        alt="Photo" />
+                    {
+                        appliedTrainers.map((post, idx) =>
+
+                            <tbody key={post._id}>
+                                {
+                                    ((post.status === 'Pending') || (post.status === 'Approved')) && <tr >
+                                        {/* <th>{idx + 1}</th> */}
+                                        <td>
+                                            <div className="flex items-center gap-3">
+                                                <div className="avatar">
+                                                    <div className="mask mask-squircle h-12 w-12">
+                                                        <img
+                                                            src={post.photoURL}
+                                                            alt="Photo" />
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div className="font-bold">{post.name}</div>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <div className="font-bold">{post.name}</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        {post.email}
-                                    </td>
-                                    {/* <td>{post.role}</td> */}
-                                    <td >
-                                        {post.status ? <p className={`${post.status === 'Pending' ? 'text-yellow-500' : 'text-green-500'}`}>{post.status}</p> : <p className='text-red-500'>Unavailable</p>}
-                                    </td>
-                                    <th>
-                                        <Link to={`/dashboard/applied-trainer-details/${post._id}`}>
-                                            <button className="btn btn-ghost btn-xs">details</button>
-                                        </Link>
-                                    </th>
-                                </tr>
-                            )
-                        }
+                                        </td>
+                                        <td>
+                                            {post.email}
+                                        </td>
+                                        {/* <td>{post.role}</td> */}
+                                        <td >
+                                            {post.status ? <p className={`${post.status === 'Pending' ? 'text-yellow-500' : 'text-green-500'}`}>{post.status}</p> : <p className='text-red-500'>Unavailable</p>}
+                                        </td>
+                                        <th>
+                                            <Link to={`/dashboard/applied-trainer-details/${post._id}`}>
+                                                <button className="btn btn-ghost btn-xs">details</button>
+                                            </Link>
+                                        </th>
+                                    </tr>
+                                }
+                            </tbody>
+                        )
+                    }
 
-                    </tbody>
                 </table>
             </div>
+
 
         </div>
     )

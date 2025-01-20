@@ -75,7 +75,7 @@ const BeATrainerForm = () => {
             trainingPrograms: selectedPrograms,
             trainingInfo: textareaVisible ? data.trainingInfo : null,
             otherInfo: data.otherInfo,
-            // role: "Member",
+            rejectInfo: " ",
             status: "Pending"
         }
         const res = await axiosSecure.patch(`/users-from/${user?.email}`, trainerInfo)
