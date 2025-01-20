@@ -5,6 +5,7 @@ import useAuth from '../../../Hooks/useAuth';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
 import useAxiosPublic from '../../../Hooks/useAxiosPublic';
+import { useNavigate } from 'react-router-dom';
 
 const availableDaysOptions = [
     { value: 'Sun', label: 'Sun' },
@@ -29,8 +30,8 @@ const trainingPrograms = [
 
 ];
 
-const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY
-const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
+// const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY
+// const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 
 const BeATrainerForm = () => {
 
@@ -41,6 +42,7 @@ const BeATrainerForm = () => {
     const axiosSecure = useAxiosSecure()
     const [textareaVisible, setTextareaVisible] = useState(false)
     const [selectedPrograms, setSelectedPrograms] = useState([]);
+    const navigate = useNavigate()
 
     const handleSelectChange = (selected) => {
         setSelectedPrograms(selected || []);
@@ -51,45 +53,63 @@ const BeATrainerForm = () => {
         console.log('Submitted Data:', data);
 
 
-        const imageFile = { image: data.image[0] }
-        const response = await axiosPublic.post(image_hosting_api, imageFile, {
-            headers: { 'content-type': 'multipart/form-data' }
-        })
+        // const imageFile = { image: data.image[0] }
+        // const response = await axiosPublic.post(image_hosting_api, imageFile, {
+        //     headers: { 'content-type': 'multipart/form-data' }
+        // })
 
 
-        if (response.data.success) {
-            const trainerInfo = {
-                name: user?.displayName,
-                email: user?.email,
-                image: response.data.data.display_url,
-                age: parseInt(data.age),
-                skills: data.skills,
-                availableTime: parseInt(data.availableTime),
-                availableDays: data.availableDays,
-                qualifications: data.qualifications,
-                experience: data.experience,
-                cost: data.cost,
-                trainingPrograms: selectedPrograms,
-                trainingInfo: textareaVisible ? data.trainingInfo : null,
-                otherInfo: data.otherInfo,
-                // role: "Member",
-                status: "Pending"
-            }
-            // console.log(trainerInfo.name)
-            await axiosSecure.post('/trainers', trainerInfo)
-                .then(res => {
-                    console.log(res.data)
-                    if (res.data.insertedId) {
-                        toast.success(`${user?.displayName} your trainer request sent`)
-                        reset()
-                    }
-                    if (res.data.insertedId === null) {
-                        toast.error("You already applied for trainer")
-                        reset()
-                    }
-                })
+        // if (response.data.success) {
+        const trainerInfo = {
+            name: user?.displayName,
+            email: user?.email,
+            // image: response.data.data.display_url,
+            image: user?.photoURL,
+            age: parseInt(data.age),
+            skills: data.skills,
+            availableTime: parseInt(data.availableTime),
+            availableDays: data.availableDays,
+            qualifications: data.qualifications,
+            experience: data.experience,
+            cost: data.cost,
+            trainingPrograms: selectedPrograms,
+            trainingInfo: textareaVisible ? data.trainingInfo : null,
+            otherInfo: data.otherInfo,
+            // role: "Member",
+            status: "Pending"
         }
-        console.log("With Image URL--->", response.data)
+        const res = await axiosSecure.patch(`/users-from/${user?.email}`, trainerInfo)
+        console.log(res.data)
+        // if (res.status === 200) {
+        if (res.data.modifiedCount > 0) {
+            toast.success('Trainer request sent successfully!');
+            navigate('/dashboard/member-activity')
+            reset();
+        } else {
+            toast.error('Failed to send trainer request.');
+        }
+        // console.log(trainerInfo.name)
+        // const { res } = `/userdata/${user?._id}`
+        // await axiosSecure.post('/trainers', trainerInfo)
+        // if (res.modifiedCount > 0) {
+        //     // show success message
+        //     // toast.success(`${data.name} is updated on menu `)
+        //     console.log("Done")
+        //     // reset()
+        // }
+        // .then(res => {
+        //     console.log(res.data)
+        //     if (res.data.insertedId) {
+        //         toast.success(`${user?.displayName} your trainer request sent`)
+        //         reset()
+        //     }
+        //     if (res.data.insertedId === null) {
+        //         toast.error("You already applied for trainer")
+        //         reset()
+        //     }
+        // })
+        // }
+        // console.log("With Image URL--->", response.data)
     };
     return (
         <div className="max-w-lg mx-auto p-6  border rounded-md shadow-md">
@@ -136,11 +156,12 @@ const BeATrainerForm = () => {
                     <label className="block text-sm font-medium text-gray-700">Profile Image</label>
                     {/* Profile image */}
                     <input
-                        type="file"
-                        {...register('image', { required: 'Profile Image is required' })}
+                        type="image"
+                        defaultValue={user?.photoURL}
+                        {...register(`${user?.photoURL}`, { required: 'Profile Image is required' })}
                         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
                     />
-                    {errors.image && <p className="text-red-500 text-sm">{errors.image.message}</p>}
+                    {/* {errors.image && <p className="text-red-500 text-sm">{errors.image.message}</p>} */}
                 </div>
 
                 {/* Skills */}
@@ -151,25 +172,25 @@ const BeATrainerForm = () => {
                             <input
                                 type="checkbox"
                                 {...register('skills', { required: 'At least one skill is required' })}
-                                value="Skill1"
+                                value="ROM"
                             />
-                            Skill1
+                            ROM
                         </label>
                         <label>
                             <input
                                 type="checkbox"
                                 {...register('skills')}
-                                value="Skill2"
+                                value="AMRAP"
                             />
-                            Skill2
+                            AMRAP
                         </label>
                         <label>
                             <input
                                 type="checkbox"
                                 {...register('skills')}
-                                value="Skill3"
+                                value="DOMS"
                             />
-                            Skill3
+                            DOMS
                         </label>
                     </div>
                     {errors.skills && <p className="text-red-500 text-sm">{errors.skills.message}</p>}

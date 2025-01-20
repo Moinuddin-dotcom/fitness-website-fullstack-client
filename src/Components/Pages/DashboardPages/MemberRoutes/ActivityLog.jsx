@@ -8,7 +8,7 @@ const ActivityLog = () => {
     const { data: trainers = [], refetch } = useQuery({
         queryKey: ['trainers'],
         queryFn: async () => {
-            const res = await axiosSecure('/applied-trainers')
+            const res = await axiosSecure('/users')
             console.log(res.data)
             return res.data
 

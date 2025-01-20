@@ -10,7 +10,7 @@ const AppliedTrainer = () => {
     const { data: appliedTrainers = [], isLoading, refetch } = useQuery({
         queryKey: ['appliedTrainers', user?.email],
         queryFn: async () => {
-            const { data } = await axiosSecure(`/applied-trainers/${user?.email}`)
+            const { data } = await axiosSecure(`/users/${user?.email}`)
             // console.log(data)
             return data
 
