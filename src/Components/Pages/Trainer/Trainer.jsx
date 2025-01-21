@@ -22,7 +22,7 @@ const Trainer = () => {
     console.log(trainers)
 
     return (
-        <div className="max-w-[80vw] mx-auto border border-white grid grid-cols-3">
+        <div className="max-w-[80vw] mx-auto shadow-xl shadow-white rounded-xl grid grid-cols-3 my-10">
             {trainers.map((trainer) => (
                 <TrainerCard key={trainer._id} trainer={trainer} />
             ))}

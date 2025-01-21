@@ -6,7 +6,10 @@ import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Loading from '../Loading';
 import { Button, Menu } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
-import { Chip } from '@material-tailwind/react';
+import { Chip, Tooltip, Typography } from '@material-tailwind/react';
+import { faFacebook, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 // const trainers =
 //     [
@@ -137,11 +140,15 @@ const TrainerDetails = () => {
                         <img src={image} alt="" className='border-4 border-fuchsia-800 border-dotted p-4 rounded-full w-96' />
                     </div>
                     <div className='my-5 bg-white border-2 border-black p-2 rounded-xl  '>
-                        <div className="text-black"><span className='border-b-2 border-cyan-300 font-semibold'>availableDays:</span>
+                        <div className="text-black"><span className='border-b-2 border-cyan-300 font-semibold'>Available Days:</span>
                             <br />
-                            <Button className='bg-green-500 w-full text-center py-1 rounded-full mt-2'>
-                                {availableDays.map(exp => exp.value)}
-                            </Button>
+                            <div className=''>
+                                {availableDays.map((exp, idx) =>
+                                    <Link to={`/trainerBooking/${_id}/${exp.value}`} key={idx}>
+                                        <Button className='border bg-green-500 w-full text-center py-1 rounded-full mt-2'>{exp.value}</Button>
+                                    </Link>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -151,6 +158,41 @@ const TrainerDetails = () => {
                     <h1 className="text-center font-semibold ">{email}</h1>
                     <h1 className="text-center font-semibold ">Age:{age}</h1>
                     <h1 className="text-center font-semibold ">Role:{role}</h1>
+                    <div className='flex justify-center gap-8 my-8'>
+                        <Tooltip content="Like">
+                            <Typography
+                                as="a"
+                                href="#facebook"
+                                variant="lead"
+                                color="blue"
+                                textGradient
+                            >
+                                <FontAwesomeIcon icon={faFacebook} size="xl" className="text-blue-600 hover:text-blue-800" />
+                            </Typography>
+                        </Tooltip>
+                        <Tooltip content="Follow">
+                            <Typography
+                                as="a"
+                                href="#twitter"
+                                variant="lead"
+                                color="light-blue"
+                                textGradient
+                            >
+                                <FontAwesomeIcon icon={faTwitter} size="xl" className="text-blue-400 hover:text-blue-600" />
+                            </Typography>
+                        </Tooltip>
+                        <Tooltip content="Follow">
+                            <Typography
+                                as="a"
+                                href="#instagram"
+                                variant="lead"
+                                color="purple"
+                                textGradient
+                            >
+                                <FontAwesomeIcon icon={faInstagram} size="xl" className="text-pink-500 hover:text-pink-700" />
+                            </Typography>
+                        </Tooltip>
+                    </div>
                     <div className='my-5 bg-white border-2 border-black p-2 rounded-xl'>
 
                         <p className=""> <span className='border-b-2 border-cyan-300 font-semibold'>Experience:</span> {experience.map(exp => exp.value)}</p>

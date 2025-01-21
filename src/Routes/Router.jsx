@@ -16,6 +16,7 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import ManageSlots from "../Components/Pages/DashboardPages/RealTrainerRoutes/RealTrainerRoutesPages/ManageSlots";
 import AllTrainers from "../Components/Pages/DashboardPages/Admin/AdminRoutePages/AllTrainers";
+import TrainerBookedPage from "../Components/Pages/Trainer/TrainerBookedPage/TrainerBookedPage";
 
 export const Router = createBrowserRouter([
     {
@@ -34,11 +35,6 @@ export const Router = createBrowserRouter([
             {
                 path: "/trainerDetails/:id",
                 element: <TrainerDetails />,
-                // loader: async ({ params }) => {
-                //     const response = await fetch("/public/trainer.json");
-                //     const trainers = await response.json();
-                //     return trainers.find(trainer => trainer.id === parseInt(params.id));
-                // }
             },
             {
                 path: "/trainerBooking",
@@ -52,6 +48,13 @@ export const Router = createBrowserRouter([
                 element:
                     <PrivateRoute>
                         <BeATrainerForm />
+                    </PrivateRoute>
+            },
+            {
+                path: "/trainerBookedPage",
+                element:
+                    <PrivateRoute>
+                        <TrainerBookedPage />
                     </PrivateRoute>
             },
             {

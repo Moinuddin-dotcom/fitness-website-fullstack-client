@@ -60,69 +60,87 @@ const TrainerCard = ({ trainer }) => {
         //         <p className="text-gray-500">Available Slots: {availableSlots}</p>
         //     </div>
         // </div>
-        <Card className="w-96 p-4">
-            <CardHeader floated={false} className=" mt-0 ">
-                <img src={image} alt="profile-picture" />
-            </CardHeader>
-            <CardBody className="text-center">
-                <div className='flex justify-between'>
+        <Card className=" relative overflow-hidden group border-4 bg-white/65 text-black border-fuchsia-800 rounded-xl m-10 p-4 ">
+            {/* <CardHeader floated={false} className=" my-5 "> */}
+            <div className='flex justify-center '>
+
+                <img src={image} alt="profile-picture" className='rounded-full w-32 h-32 p-1 border-4 border-fuchsia-800 border-dotted shadow-md shadow-black' />
+            </div>
+            {/* </CardHeader> */}
+            {/* <CardBody className="text-center mx-0"> */}
+            <div className='my-8'>
+                <div className='flex flex-col justify-between items-center border-2  border-black p-2 rounded-xl rounded-b-none shadow-xl shadow-black '>
                     <Typography variant="h4" color="blue-gray" className="mb-2">
                         {name}
                     </Typography>
                     {/* <Chip size="sm" value="chip small" className='bg-black' /> */}
                     {/* <Chip color="green" value="green" className='py-0' /> */}
-                    <Button className="inline-flex items-center gap-2 rounded-md bg-gray-700 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white">
-                        {experience.map((exp, idx) => <p key={idx}>{exp.value}</p>)}
-                    </Button>
-                </div>
-                <Typography color="blue-gray" className="font-medium" textGradient>
-                    Hi! I am a <strong>{role}</strong>
-                </Typography>
-                <Typography color="blue-gray" className="font-medium flex" textGradient>
-                    <span className='mr-4'>I am available:</span>
-                    {availableDays.map(day => day.value).join(', ')}
-                    {/* {role} */}
-                </Typography>
-            </CardBody>
-            <CardFooter className="flex justify-center gap-7 pt-2">
-                <Tooltip content="Like">
-                    <Typography
-                        as="a"
-                        href="#facebook"
-                        variant="lead"
-                        color="blue"
-                        textGradient
-                    >
-                        <FontAwesomeIcon icon={faFacebook} size="xl" className="text-blue-600 hover:text-blue-800" />
-                    </Typography>
-                </Tooltip>
-                <Tooltip content="Follow">
-                    <Typography
-                        as="a"
-                        href="#twitter"
-                        variant="lead"
-                        color="light-blue"
-                        textGradient
-                    >
-                        <FontAwesomeIcon icon={faTwitter} size="xl" className="text-blue-400 hover:text-blue-600" />
-                    </Typography>
-                </Tooltip>
-                <Tooltip content="Follow">
-                    <Typography
-                        as="a"
-                        href="#instagram"
-                        variant="lead"
-                        color="purple"
-                        textGradient
-                    >
-                        <FontAwesomeIcon icon={faInstagram} size="xl" className="text-pink-500 hover:text-pink-700" />
-                    </Typography>
-                </Tooltip>
+                    {/* <Button className="inline-flex items-center gap-2 rounded-md bg-gray-700 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white">
+                    </Button> */}
+                    <div>
 
-            </CardFooter>
+                        {experience.map((exp, idx) => <p key={idx}>{exp.value} years of exp..</p>)}
+                    </div>
+                </div>
+                <div className=' bg-white border-2 border-black p-2 rounded-xl rounded-t-none shadow-md shadow-black'>
+
+                    <Typography color="blue-gray" className="font-medium text-start" textGradient>
+                        Hi! I am a <strong>{role}</strong>
+                    </Typography>
+                    <Typography color="blue-gray" className="font-medium flex" textGradient>
+                        <span className='mr-4'>I am available:</span>
+                        <br />
+                        <div>
+                            {availableDays.map(day => day.value).join(', ')}
+                        </div>
+                        {/* {role} */}
+                    </Typography>
+                </div>
+                {/* </CardBody> */}
+            </div>
+            <div className="absolute top-1/4 -left-10 transform -translate-y-1/2 group-hover:left-4 transition-all duration-500">
+                <div className="flex flex-col space-y-2">
+                    {/* <CardFooter className="flex justify-center gap-7 pt-2"> */}
+                    <Tooltip content="Like">
+                        <Typography
+                            as="a"
+                            href="#facebook"
+                            variant="lead"
+                            color="blue"
+                            textGradient
+                        >
+                            <FontAwesomeIcon icon={faFacebook} size="xl" className="text-blue-600 hover:text-blue-800" />
+                        </Typography>
+                    </Tooltip>
+                    <Tooltip content="Follow">
+                        <Typography
+                            as="a"
+                            href="#twitter"
+                            variant="lead"
+                            color="light-blue"
+                            textGradient
+                        >
+                            <FontAwesomeIcon icon={faTwitter} size="xl" className="text-blue-400 hover:text-blue-600" />
+                        </Typography>
+                    </Tooltip>
+                    <Tooltip content="Follow">
+                        <Typography
+                            as="a"
+                            href="#instagram"
+                            variant="lead"
+                            color="purple"
+                            textGradient
+                        >
+                            <FontAwesomeIcon icon={faInstagram} size="xl" className="text-pink-500 hover:text-pink-700" />
+                        </Typography>
+                    </Tooltip>
+
+                    {/* </CardFooter> */}
+                </div>
+            </div>
             <div className="text-center">
                 <Link to={`/trainerDetails/${_id}`} >
-                    <Button size="sm" variant="text" className="flex items-center gap-2">
+                    <Button size="sm" variant="text" className="flex items-center gap-2 hover:text-white hover:underline">
                         Know More
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
