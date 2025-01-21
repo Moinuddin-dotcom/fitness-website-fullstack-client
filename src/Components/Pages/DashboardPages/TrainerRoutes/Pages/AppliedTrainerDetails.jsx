@@ -127,6 +127,7 @@ const AppliedTrainerDetails = () => {
                         <div className="flex justify-between mt-2">
                             <p className="text-sm text-gray-600">Available Days:</p>
                             <span className="text-sm text-gray-800">{availableDays.map(day => day.value).join(', ')}</span>
+                           
                         </div>
 
                         <div className="flex justify-between mt-2">
