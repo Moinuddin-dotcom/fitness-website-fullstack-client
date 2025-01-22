@@ -100,51 +100,22 @@ const TrainerDetails = () => {
 
     return (
         <>
-            {/* <div className="max-w-3xl mx-auto p-6 border border-white shadow-md rounded-lg">
-                <div className="text-center">
-
-                    <img
-                        className="  mx-auto mb-4"
-                        src={image}
-                        alt={''}
-                    />
-                    <h1 className="text-2xl font-bold">{name}</h1>
-                    <p className="text-gray-600">{experience.map(exp => exp.value)}</p>
-                    <p className="text-green-500 font-semibold">{qualifications}</p>
-                </div>
-                <div className="my-6">
-                    <h2 className="text-xl font-bold mb-2">Details</h2>
-                    <p className="text-gray-700">{otherInfo}</p>
-                </div>
-                <div className="my-6">
-                    <h2 className="text-xl font-bold mb-2">Available Slots</h2>
-                    <div className="flex flex-wrap gap-2">
-                        {availableDays.map((slot, index) => (
-                            <Link to={'/trainerBooking'}
-                                key={index}
-                                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                            >
-                                {slot.value}
-                            </Link>
-                        ))}
-                    </div>
-                </div>
-                <div className="my-6">
-                    <h2 className="text-xl font-bold mb-2">Connect</h2>
-                </div>
-                <BeATrainer />
-            </div> */}
             <div className="mainCard max-w-[80vw] mx-auto grid grid-cols-2 gap-4 border-4 border-fuchsia-800 my-10 rounded-xl">
                 <div className="image  space-y-40 justify-self-center mt-20 ">
                     <div>
                         <img src={image} alt="" className='border-4 border-fuchsia-800 border-dotted p-4 rounded-full w-96' />
                     </div>
                     <div className='my-5 bg-white border-2 border-black p-2 rounded-xl  '>
-                        <div className="text-black"><span className='border-b-2 border-cyan-300 font-semibold'>Available Days:</span>
+                        <div className="text-black">
+                            <div className='flex justify-between'>
+                                <span className='border-b-2 border-cyan-300 font-semibold'>Available Slots: ({availableDays.length})</span>
+                                <p className="bg-green-400 py-1 px-2 rounded-full">
+                                    <span className=' font-semibold'>Free:</span> {availableTime} Hrs.</p>
+                            </div>
                             <br />
                             <div className=''>
                                 {availableDays.map((exp, idx) =>
-                                    <Link to={`/trainerBooking/${_id}/${exp.value}`} key={idx}>
+                                    <Link to={`/trainerBookedPage/${_id}/${exp.value}`} key={idx}>
                                         <Button className='border bg-green-500 w-full text-center py-1 rounded-full mt-2'>{exp.value}</Button>
                                     </Link>
                                 )}

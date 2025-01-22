@@ -17,6 +17,11 @@ const availableDaysOptions = [
     { value: 'Friday', label: 'Friday' },
     { value: 'Saturday', label: 'Saturday' },
 ];
+const availableTimeZoneOptions = [
+    { value: 'Morning', label: 'Morning' },
+    { value: 'Evening', label: 'Evening' },
+    { value: 'Night', label: 'Night' },
+];
 const experience = [
     { value: '0-1', label: '0-1' },
     { value: '1-2', label: '1-2' },
@@ -70,6 +75,7 @@ const BeATrainerForm = () => {
             skills: data.skills,
             availableTime: parseInt(data.availableTime),
             availableDays: data.availableDays,
+            availableTimeZone: data.availableTimeZone,
             qualifications: data.qualifications,
             experience: data.experience,
             cost: data.cost,
@@ -89,28 +95,6 @@ const BeATrainerForm = () => {
         } else {
             toast.error('Failed to send trainer request.');
         }
-        // console.log(trainerInfo.name)
-        // const { res } = `/userdata/${user?._id}`
-        // await axiosSecure.post('/trainers', trainerInfo)
-        // if (res.modifiedCount > 0) {
-        //     // show success message
-        //     // toast.success(`${data.name} is updated on menu `)
-        //     console.log("Done")
-        //     // reset()
-        // }
-        // .then(res => {
-        //     console.log(res.data)
-        //     if (res.data.insertedId) {
-        //         toast.success(`${user?.displayName} your trainer request sent`)
-        //         reset()
-        //     }
-        //     if (res.data.insertedId === null) {
-        //         toast.error("You already applied for trainer")
-        //         reset()
-        //     }
-        // })
-        // }
-        // console.log("With Image URL--->", response.data)
     };
     return (
         <div className="max-w-5xl mx-auto  rounded-md shadow-md border-4 bg-white/65 text-black border-fuchsia-800  m-10 p-10">
@@ -311,24 +295,36 @@ const BeATrainerForm = () => {
                     </div>
                     {errors.skills && <p className="text-red-500 text-sm">{errors.skills.message}</p>}
                 </div>
-
-                <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700">Available Days</label>
-                    {/* Available Days */}
-                    <Select
-                        isMulti
-                        name="availableDays"
-                        options={availableDaysOptions}
-                        onChange={(selectedOptions) => setValue('availableDays', selectedOptions)}
-                        className="mt-1 "
-                    />
-                    {errors.availableDays && <p className="text-red-500 text-sm">{errors.availableDays.message}</p>}
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700">Available Days</label>
+                        {/* Available Days */}
+                        <Select
+                            isMulti
+                            name="availableDays"
+                            options={availableDaysOptions}
+                            onChange={(selectedOptions) => setValue('availableDays', selectedOptions)}
+                            className="mt-1 "
+                        />
+                        {errors.availableDays && <p className="text-red-500 text-sm">{errors.availableDays.message}</p>}
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700">Available TimeZone: </label>
+                        {/* Available availableTimeZone */}
+                        <Select
+                            isMulti
+                            name="availableTimeZone"
+                            options={availableTimeZoneOptions}
+                            onChange={(selectedOptions) => setValue('availableTimeZone', selectedOptions)}
+                            className="mt-1 "
+                        />
+                        {errors.availableTimeZone && <p className="text-red-500 text-sm">{errors.availableTimeZone.message}</p>}
+                    </div>
                 </div>
-                {/* </div> */}
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">Available Time(In a day)</label>
-                        {/* Available Time */}
+                        {/* Available Time hrs */}
                         <input
                             type="number"
                             {...register('availableTime', { required: 'Available Time is required' })}

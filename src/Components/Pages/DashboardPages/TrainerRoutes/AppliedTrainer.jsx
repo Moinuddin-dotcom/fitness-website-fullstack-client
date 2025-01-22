@@ -3,6 +3,7 @@ import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import useAuth from '../../../../Hooks/useAuth'
+import Loading from '../../Loading'
 
 // import { useForm } from 'react-hook-form'
 
@@ -23,6 +24,7 @@ const AppliedTrainer = () => {
 
         }
     })
+    if (isLoading) return <Loading />
     console.log(appliedTrainers)
     return (
         <div>
@@ -44,7 +46,7 @@ const AppliedTrainer = () => {
 
                             <tbody key={post._id}>
                                 {
-                                    ((post.status === 'Pending') || (post.status === 'Approved')) && <tr >
+                                    (post.status === 'Pending') && <tr >
                                         {/* <th>{idx + 1}</th> */}
                                         <td>
                                             <div className="flex items-center gap-3">

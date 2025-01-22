@@ -17,6 +17,8 @@ import AdminRoute from "./AdminRoute";
 import ManageSlots from "../Components/Pages/DashboardPages/RealTrainerRoutes/RealTrainerRoutesPages/ManageSlots";
 import AllTrainers from "../Components/Pages/DashboardPages/Admin/AdminRoutePages/AllTrainers";
 import TrainerBookedPage from "../Components/Pages/Trainer/TrainerBookedPage/TrainerBookedPage";
+import TrainerRoute from "./TrainerRoute";
+import AddNewClass from "../Components/Pages/DashboardPages/Admin/AdminRoutePages/AddNewClass";
 
 export const Router = createBrowserRouter([
     {
@@ -51,7 +53,8 @@ export const Router = createBrowserRouter([
                     </PrivateRoute>
             },
             {
-                path: "/trainerBookedPage",
+                // /trainerBookedPage/${_id}/${exp.value}
+                path: "/trainerBookedPage/:id/:exp",
                 element:
                     <PrivateRoute>
                         <TrainerBookedPage />
@@ -80,7 +83,12 @@ export const Router = createBrowserRouter([
             // Trainers routes
             {
                 path: "manage-slots",
-                element: <ManageSlots />
+                element:
+                    <PrivateRoute>
+                        <TrainerRoute>
+                            <ManageSlots />
+                        </TrainerRoute>
+                    </PrivateRoute>
             },
             // Admin routes
             {
@@ -89,6 +97,15 @@ export const Router = createBrowserRouter([
                     <PrivateRoute>
                         <AdminRoute>
                             <AllTrainers />
+                        </AdminRoute>
+                    </PrivateRoute>
+            },
+            {
+                path: "add-new-class",
+                element:
+                    <PrivateRoute>
+                        <AdminRoute>
+                            <AddNewClass />
                         </AdminRoute>
                     </PrivateRoute>
             },

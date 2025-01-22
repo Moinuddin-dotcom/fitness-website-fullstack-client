@@ -18,7 +18,8 @@ const GoogleLogin = () => {
                     email: res.user.email,
                     name: res.user.displayName,
                     photoURL: res.user.photoURL,
-                    role: "member"
+                    role: "member",
+                    status: " "
                 }
                 // console.log(userInfo)
 
