@@ -19,6 +19,7 @@ import AllTrainers from "../Components/Pages/DashboardPages/Admin/AdminRoutePage
 import TrainerBookedPage from "../Components/Pages/Trainer/TrainerBookedPage/TrainerBookedPage";
 import TrainerRoute from "./TrainerRoute";
 import AddNewClass from "../Components/Pages/DashboardPages/Admin/AdminRoutePages/AddNewClass";
+import AllClasses from "../Components/Pages/Class/AllClasses";
 
 export const Router = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ export const Router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home />
+            },
+            {
+                path: "/all-classes",
+                element: <AllClasses />
             },
             {
                 path: "/trainer",

@@ -22,7 +22,7 @@ const HeroSwiperSlide = ({ image, bannerImage, title, description }) => {
                         <h1 className='text-3xl font-bold text-white lg:text-4xl'>{title}</h1>
                         <p>{description}</p>
                         <Link
-                            to='/rooms'
+                            to='/all-classes'
                             className='btn btn-wide underline bg-gradient-to-t from-[#c1e502] to-[#ced8d1] text-black'
                         >
                             Classes
