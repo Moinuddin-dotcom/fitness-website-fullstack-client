@@ -49,18 +49,24 @@ const AuthProvider = ({ children }) => {
             console.log("Current user=> ", currentUser)
             setUser(currentUser)
             if (currentUser) {
-                // get token and store client
-                const userInfo = { email: currentUser.email }
-                axiosPublic.post('/jwt', userInfo)
-                    .then(res => {
-                        if (res.data.token) {
-                            localStorage.setItem('access-token', res.data.token)
-                        }
-                    })
+                const existingToken = localStorage.getItem('access-token');
+                if (!existingToken) {
+                    // get token and store client
+                    const userInfo = { email: currentUser.email }
+                    axiosPublic.post('/jwt', userInfo)
+                        .then(res => {
+                            if (res.data.token) {
+                                localStorage.setItem('access-token', res.data.token)
+                                // setUser(currentUser)
+                                // setLoading(false)
+                            }
+                        })
+                }
             } else {
                 // TODO: remove token
                 // if somehow token is null then remove token
                 localStorage.removeItem('access-token')
+                // setLoading(false)
             }
             setLoading(false)
         })

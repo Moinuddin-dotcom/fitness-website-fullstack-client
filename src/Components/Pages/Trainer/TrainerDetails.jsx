@@ -9,78 +9,13 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { Chip, Tooltip, Typography } from '@material-tailwind/react';
 import { faFacebook, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useLoggedUser from '../../../Hooks/useLoggedUser';
 
-
-// const trainers =
-//     [
-//         {
-//             "id": 1,
-//             "name": "John Doe",
-//             "profileImage": "https://i.ibb.co.com/Rv8X7dp/about-1.jpg",
-//             "experience": "10 years",
-//             "expertise": "Fitness and Strength Training",
-//             "qualification": "Certified Personal Trainer (CPT) from NASM",
-//             "details": "John Doe is a certified fitness trainer with over 10 years of experience helping clients achieve their health goals. He specializes in strength training, nutrition, and weight loss programs.",
-//             "socialIcons": {
-//                 "facebook": "https://facebook.com/johndoe",
-//                 "twitter": "https://twitter.com/johndoe",
-//                 "linkedin": "https://linkedin.com/in/johndoe"
-//             },
-//             "availableSlots": [
-//                 "Monday 9:00 AM - 10:00 AM",
-//                 "Wednesday 2:00 PM - 3:00 PM",
-//                 "Friday 6:00 PM - 7:00 PM"
-//             ]
-//         },
-//         {
-//             "id": 2,
-//             "name": "Jane Smith",
-//             "profileImage": "https://i.ibb.co.com/cL9W1DS/about-2.jpg",
-//             "experience": "8 years",
-//             "expertise": "Yoga and Meditation",
-//             "qualification": "RYT-200 Certified Yoga Instructor",
-//             "details": "Jane Smith has been teaching yoga and meditation for 8 years. She is passionate about helping people achieve mental clarity and physical wellness through mindful practices.",
-//             "socialIcons": {
-//                 "facebook": "https://facebook.com/janesmith",
-//                 "twitter": "https://twitter.com/janesmith",
-//                 "linkedin": "https://linkedin.com/in/janesmith"
-//             },
-//             "availableSlots": [
-//                 "Tuesday 8:00 AM - 9:00 AM",
-//                 "Thursday 4:00 PM - 5:00 PM",
-//                 "Saturday 10:00 AM - 11:00 AM"
-//             ]
-//         },
-//         {
-//             "id": 3,
-//             "name": "Chris Johnson",
-//             "profileImage": "https://i.ibb.co.com/Jnvkmq2/about-3.jpg",
-//             "experience": "6 years",
-//             "expertise": "Dance and Choreography",
-//             "qualification": "Bachelor of Fine Arts in Dance",
-//             "details": "Chris Johnson is a professional dancer and choreographer with 6 years of experience. He has worked with numerous dance companies and specializes in modern and hip-hop dance styles.",
-//             "socialIcons": {
-//                 "facebook": "https://facebook.com/chrisjohnson",
-//                 "twitter": "https://twitter.com/chrisjohnson",
-//                 "linkedin": "https://linkedin.com/in/chrisjohnson"
-//             },
-//             "availableSlots": [
-//                 "Monday 3:00 PM - 4:00 PM",
-//                 "Wednesday 5:00 PM - 6:00 PM",
-//                 "Friday 7:00 PM - 8:00 PM"
-//             ]
-//         }
-//     ]
 
 const TrainerDetails = () => {
     const { id } = useParams();
     console.log(id)
     const axiosSecure = useAxiosSecure()
-    // const trainer = trainers.find((trainer) => trainer.id === parseInt(id));
-
-    // if (!trainer) {
-    //     return <p>Trainer not found.</p>;
-    // }
 
     const { data: trainerDetails = [], isLoading } = useQuery({
         queryKey: ['trainerDetails', id],
@@ -96,7 +31,10 @@ const TrainerDetails = () => {
     const { name, image, role, experience,
         availableDays, _id, age, availableTime,
         cost, email, otherInfo, qualifications,
-        skills, status, trainingInfo, trainingPrograms } = trainerDetails || {};
+        skills, status, trainingInfo, trainingPrograms,
+        slotName, slotTime } = trainerDetails || {};
+
+
 
     return (
         <>
@@ -110,7 +48,7 @@ const TrainerDetails = () => {
                             <div className='flex justify-between'>
                                 <span className='border-b-2 border-cyan-300 font-semibold'>Available Slots: ({availableDays.length})</span>
                                 <p className="bg-green-400 py-1 px-2 rounded-full">
-                                    <span className=' font-semibold'>Free:</span> {availableTime} Hrs.</p>
+                                    <span className=' font-semibold'>Free:</span> {availableTime-slotTime} Hrs.</p>
                             </div>
                             <br />
                             <div className=''>
@@ -171,6 +109,7 @@ const TrainerDetails = () => {
                         <p className=""> <span className='border-b-2 border-cyan-300 font-semibold'>Qualifications: </span> {qualifications}</p>
                         <p className=""> <span className='border-b-2 border-cyan-300 font-semibold'>Key skills: </span> {skills.join(', ')}</p>
                         <p className=""><span className='border-b-2 border-cyan-300 font-semibold'>Available Time:</span> {availableTime} Hrs.</p>
+                        <p className=""><span className='border-b-2 border-cyan-300 font-semibold'>My Classes:</span> {slotName}</p>
                     </div>
                     <div className='my-5 bg-white border-2 border-black p-2 rounded-xl'>
                         <h1 className='text-center border-b-2 mb-4 p-1 border-black font-bold'>Your knowledge: </h1>

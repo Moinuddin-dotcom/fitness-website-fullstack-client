@@ -8,6 +8,8 @@ import useAuth from '../../../Hooks/useAuth';
 import GoogleLogin from './GoogleLogin';
 import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 
+
+
 const Register = () => {
     const { createUser, updateUserProfile } = useAuth()
     const axiosPublic = useAxiosPublic()

@@ -19,7 +19,7 @@ const AllTrainers = () => {
         queryKey: ['allTrainers', user?.email],
         queryFn: async () => {
             const { data } = await axiosSecure(`/users/${user?.email}`)
-            // console.log(data)
+            console.log(data)
             return data
 
         }
@@ -54,63 +54,81 @@ const AllTrainers = () => {
                 <table className="w-full min-w-max table-auto text-left">
                     <thead>
                         <tr>
-                            {TABLE_HEAD.map((head) => (
-                                <th key={head} className="border-b border-gray-300 pb-4 pt-10">
-                                    <Typography
-                                        variant="small"
-                                        color="blue-gray"
-                                        className="font-bold leading-none"
-                                    >
-                                        {head}
-                                    </Typography>
-                                </th>
-                            ))}
+                            {
+                                trainers.length <= 0 ? "" :
+                                    <>
+
+                                        {TABLE_HEAD.map((head) => (
+                                            <th key={head} className="border-b border-gray-300 pb-4 pt-10">
+                                                <Typography
+                                                    variant="small"
+                                                    color="blue-gray"
+                                                    className="font-bold leading-none"
+                                                >
+                                                    {head}
+                                                </Typography>
+                                            </th>
+                                        ))}
+                                    </>
+                            }
+
                         </tr>
                     </thead>
                     <tbody>
-                        {trainers.map(({ name, role, email }, index) => {
-                            const isLast = index === trainers.length - 1;
-                            const classes = isLast ? "py-4" : "py-4 border-b border-gray-300";
+                        {
+                            (trainers.length <= 0) ?
+                                <>
+                                    <h1 className='flex justify-center items-center h-60 text-4xl font-bold'>No Trainers Added by Admin</h1>
+                                </>
+                                :
+                                <>
+                                    {trainers.map(({ name, role, email }, index) => {
+                                        const isLast = index === trainers.length - 1;
+                                        const classes = isLast ? "py-4" : "py-4 border-b border-gray-300";
 
-                            return (
-                                <tr key={name} className="hover:bg-gray-50">
-                                    <td className={classes}>
-                                        <Typography
-                                            variant="small"
-                                            color="blue-gray"
-                                            className="font-bold"
-                                        >
-                                            {name}
-                                        </Typography>
-                                    </td>
-                                    <td className={classes}>
-                                        <Typography
-                                            variant="small"
-                                            className="font-normal text-gray-600"
-                                        >
-                                            {role}
-                                        </Typography>
-                                    </td>
-                                    <td className={classes}>
-                                        <Typography
-                                            variant="small"
-                                            className="font-normal text-gray-600"
-                                        >
-                                            {email}
-                                        </Typography>
-                                    </td>
-                                    <td className={classes}>
-                                        <Typography
-                                            variant="small"
-                                            className="font-normal text-gray-600"
-                                        >
-                                            <Button onClick={() => handleDeleteTrainer(email, deletetrainer)}><GoTrash className='text-2xl text-red-600' /></Button>
-                                        </Typography>
+                                        return (
+                                            <tr key={name} className="hover:bg-gray-50">
+                                                <td className={classes}>
+                                                    <Typography
+                                                        variant="small"
+                                                        color="blue-gray"
+                                                        className="font-bold"
+                                                    >
+                                                        {name}
+                                                    </Typography>
+                                                </td>
+                                                <td className={classes}>
+                                                    <Typography
+                                                        variant="small"
+                                                        className="font-normal text-gray-600"
+                                                    >
+                                                        {role}
+                                                    </Typography>
+                                                </td>
+                                                <td className={classes}>
+                                                    <Typography
+                                                        variant="small"
+                                                        className="font-normal text-gray-600"
+                                                    >
+                                                        {email}
+                                                    </Typography>
+                                                </td>
+                                                <td className={classes}>
+                                                    <Typography
+                                                        variant="small"
+                                                        className="font-normal text-gray-600"
+                                                    >
+                                                        <Button onClick={() => handleDeleteTrainer(email, deletetrainer)}><GoTrash className='text-2xl text-red-600' /></Button>
+                                                    </Typography>
 
-                                    </td>
-                                </tr>
-                            );
-                        })}
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                </>
+                        }
+
+
                     </tbody>
                 </table>
             </Card>

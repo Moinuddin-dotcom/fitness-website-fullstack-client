@@ -20,6 +20,7 @@ import TrainerBookedPage from "../Components/Pages/Trainer/TrainerBookedPage/Tra
 import TrainerRoute from "./TrainerRoute";
 import AddNewClass from "../Components/Pages/DashboardPages/Admin/AdminRoutePages/AddNewClass";
 import AllClasses from "../Components/Pages/Class/AllClasses";
+import AddNewSlots from "../Components/Pages/DashboardPages/RealTrainerRoutes/RealTrainerRoutesPages/AddNewSlots";
 
 export const Router = createBrowserRouter([
     {
@@ -58,7 +59,6 @@ export const Router = createBrowserRouter([
                     </PrivateRoute>
             },
             {
-                // /trainerBookedPage/${_id}/${exp.value}
                 path: "/trainerBookedPage/:id/:exp",
                 element:
                     <PrivateRoute>
@@ -92,6 +92,15 @@ export const Router = createBrowserRouter([
                     <PrivateRoute>
                         <TrainerRoute>
                             <ManageSlots />
+                        </TrainerRoute>
+                    </PrivateRoute>
+            },
+            {
+                path: "add-new-slots",
+                element:
+                    <PrivateRoute>
+                        <TrainerRoute>
+                            <AddNewSlots />
                         </TrainerRoute>
                     </PrivateRoute>
             },

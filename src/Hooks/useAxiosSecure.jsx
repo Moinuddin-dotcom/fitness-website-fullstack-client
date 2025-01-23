@@ -11,8 +11,14 @@ const useAxiosSecure = () => {
     const navigate = useNavigate()
     axiosSecure.interceptors.request.use((config) => {
         const token = localStorage.getItem('access-token')
-        console.log("Resuest stopped by interceptor-->", token)
-        config.headers.authorization = `Bearer ${token}`;
+        if (token) {
+            console.log("Resuest stopped by interceptor-->", token)
+            config.headers.authorization = `Bearer ${token}`;
+        } else {
+            console.log("No token found in the interceptor")
+        }
+        // console.log('Config in the interceptor-->', config)
+        // console.log('Token in the interceptor-->', token)
         return config
     }, (error) => {
         return Promise.reject(error)
