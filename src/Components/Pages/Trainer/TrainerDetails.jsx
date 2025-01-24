@@ -9,23 +9,23 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { Chip, Tooltip, Typography } from '@material-tailwind/react';
 import { faFacebook, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import useLoggedUser from '../../../Hooks/useLoggedUser';
+import useClasses from '../../../Hooks/useClasses';
 
 
 const TrainerDetails = () => {
     const { id } = useParams();
-    console.log(id)
     const axiosSecure = useAxiosSecure()
+    const [adminClasses] = useClasses()
 
     const { data: trainerDetails = [], isLoading } = useQuery({
         queryKey: ['trainerDetails', id],
         queryFn: async () => {
             const { data } = await axiosSecure(`/trainerDetails/${id}`)
-            console.log(data)
+            // console.log(data)
             return data
         }
     })
-    console.log(trainerDetails)
+    // console.log(trainerDetails)
     if (isLoading) return <Loading />
 
     const { name, image, role, experience,

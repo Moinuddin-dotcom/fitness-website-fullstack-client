@@ -87,6 +87,7 @@ const Register = () => {
                             {...register("name", { required: "Name is required" })}
                             className="w-full bg-gray-800 text-white py-2 px-4 rounded"
                             placeholder="Your Name"
+                            required
                         />
                         {errors.name && <p className="text-red-500">{errors.name.message}</p>}
                         {/* Photo URL */}
@@ -99,12 +100,17 @@ const Register = () => {
                         {errors.PhotoURL && <p className="text-red-500">{errors.PhotoURL.message}</p>}
                         {/* Email */}
                         <input
-                            {...register("email", { required: "Email is required" })}
+                            type='email'
+                            {...register("email",
+                                {
+                                    required: true,
+                                    pattern: /^[a-z\d]+@[a-z\d]+\.[a-z]+$/,
+                                })}
                             className="w-full bg-gray-800 text-white py-2 px-4 rounded"
                             placeholder="Email"
                         />
-                        {errors.email && <p className="text-red-500">{errors.email.message}</p>}
-
+                        {errors.email?.type === 'required' && (<p className='text-red-700' role="alert">Email is required</p>)}
+                        {errors.email?.type === 'pattern' && (<p className='text-red-700' role="alert">Cant use any uppercase word & have to use a @ between name and domain</p>)}
                         {/* Password */}
                         <input type="password" placeholder="password" {...register("password", {
                             required: true,

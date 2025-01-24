@@ -1,39 +1,33 @@
 import React from 'react'
-import useAxiosSecure from '../../../Hooks/useAxiosSecure'
-import { useQuery } from '@tanstack/react-query'
 import Loading from '../Loading'
-
-// import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import useUser from '../../../Hooks/useUser';
+import useClasses from '../../../Hooks/useClasses';
+import { Avatar, CardFooter, Tooltip } from '@material-tailwind/react';
+import { Link } from 'react-router-dom';
+// Typography
+// import { IconButton, Typography } from "@material-tailwind/react";
+// import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 const AllClasses = () => {
-    const [, users] = useUser()
-    console.log(users)
+    const [adminClasses, isLoading] = useClasses()
+    // const [active, setActive] = React.useState(1);
 
-    const axiosSecure = useAxiosSecure()
-    const { data: allClass = [], isLoading } = useQuery({
-        queryKey: ['allClass'],
-        queryFn: async () => {
-            const { data } = await axiosSecure.get('/classes')
-            return data
-        }
-    })
+
+
     if (isLoading) return <Loading />
-    console.log(allClass)
 
-    // const userName = users.map(user => user.name)
-    // console.log(userName)
+
+
+
 
     return (
         <div>
             {
-                (allClass.length <= 0) ?
+                (adminClasses.length <= 0) ?
                     <>
                         <h1 className='flex justify-center items-center h-60 text-4xl font-bold'>No Class Added by Admin</h1>
 
@@ -41,7 +35,7 @@ const AllClasses = () => {
                     :
                     <>
                         <div className='max-w-[80vw] mx-auto my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-                            {allClass.map(classCard =>
+                            {adminClasses.map(classCard =>
                                 <Card key={classCard._id} sx={{ maxWidth: 345 }}>
                                     <CardMedia
                                         component="img"
@@ -58,17 +52,48 @@ const AllClasses = () => {
                                             {classCard.otherInfo.split(' ').slice(0, 10).join(' ')}...
                                         </Typography>
                                     </CardContent>
-                                    <CardActions className='border-t-2 border-gray-200'>
-                                        {/* {(classCard.className === (users?.slotName)) && "Hii"} */}
-                                        <Button size="small">Share</Button>
-                                        <Button size="small">Learn More</Button>
-                                    </CardActions>
+                                    <CardFooter className="flex items-center justify-between border-2 border-t">
+                                        <div className="flex items-center -space-x-3">
+                                            {classCard.slot.map(img =>
+                                                <Link to={`/trainerDetails/${img?.bookedById}`}>
+                                                    <Tooltip content={img?.bookedByName}>
+                                                        <Avatar
+                                                            size="sm"
+                                                            variant="circular"
+                                                            alt={img?.bookedByName}
+                                                            src={img?.bookedByImage}
+                                                            className="border-2 border-white hover:z-10 w-10 h-10 rounded-full"
+                                                        />
+                                                    </Tooltip>
+                                                </Link>
+                                            )}
+                                        </div>
+                                    </CardFooter>
                                 </Card>
                             )}
                         </div>
-                        <div>
-                            {/* {users.slotName} */}
-                        </div>
+                        {/* <div className="flex bg-white items-center gap-8 justify-center my-5">
+                            <IconButton
+                                size="sm"
+                                variant="outlined"
+                                onClick={prev}
+                                disabled={active === 1}
+                            >
+                                <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" />
+                            </IconButton>
+                            <Typography color="gray" className="font-normal">
+                                Page <strong className="text-gray-900">{active}</strong> of{" "}
+                                <strong className="text-gray-900">{totalPages}</strong>
+                            </Typography>
+                            <IconButton
+                                size="sm"
+                                variant="outlined"
+                                onClick={next}
+                                disabled={active === totalPages}
+                            >
+                                <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
+                            </IconButton>
+                        </div> */}
                     </>
             }
 

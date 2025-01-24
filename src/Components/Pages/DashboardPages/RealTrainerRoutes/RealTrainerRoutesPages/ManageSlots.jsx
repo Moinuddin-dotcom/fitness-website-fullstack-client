@@ -3,7 +3,6 @@ import useAxiosSecure from '../../../../../Hooks/useAxiosSecure';
 import { GoTrash } from 'react-icons/go';
 import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
-import useLoggedUser from '../../../../../Hooks/useLoggedUser';
 import Loading from '../../../Loading';
 import useClasses from '../../../../../Hooks/useClasses';
 import {
@@ -149,8 +148,8 @@ const ManageSlots = () => {
                                                                 (slot && slot.length > 0) ? <>
 
                                                                     {slot.map((slotItem, idx) =>
-                                                                        <div key={idx} className="flex items-center gap-3">
-                                                                            <Avatar src={slotItem?.bookedByImage} alt={slotItem?.bookedByName} size="" />
+                                                                        <div key={idx} className="flex items-center gap-3 space-y-4">
+                                                                            <Avatar src={slotItem?.bookedByImage} alt={slotItem?.bookedByName}  size="" />
                                                                             <div className="flex flex-col">
                                                                                 <Typography
                                                                                     variant="small"
