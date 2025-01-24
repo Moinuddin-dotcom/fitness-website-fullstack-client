@@ -48,7 +48,7 @@ const TrainerDetails = () => {
                             <div className='flex justify-between'>
                                 <span className='border-b-2 border-cyan-300 font-semibold'>Available Slots: ({availableDays.length})</span>
                                 <p className="bg-green-400 py-1 px-2 rounded-full">
-                                    <span className=' font-semibold'>Free:</span> {availableTime-slotTime} Hrs.</p>
+                                    <span className=' font-semibold'>Free:</span> {availableTime - slotTime} Hrs.</p>
                             </div>
                             <br />
                             <div className=''>

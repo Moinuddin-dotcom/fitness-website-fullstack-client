@@ -12,6 +12,7 @@ import Loading from '../../../Loading';
 import useUser from '../../../../../Hooks/useUser';
 import useLoggedUser from '../../../../../Hooks/useLoggedUser';
 import toast from 'react-hot-toast';
+import useClasses from '../../../../../Hooks/useClasses';
 
 const selectClass = [
     { value: 'Power Pump', label: 'Power Pump' },
@@ -29,23 +30,45 @@ const AddNewSlots = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
     const [loggedUser, isLoading] = useLoggedUser()
-    console.log(loggedUser)
+    // console.log(loggedUser._id)
     const navigate = useNavigate()
 
     const { name, email, image, age, skills, availableTime, availableTimeZone,
         availableDays, qualifications, experience, cost,
         trainingInfo, trainingPrograms, otherInfo, _id } = loggedUser || {}
 
+    // ______________________________________________________________________
+    // Get all classes by using useClasses() hooks
+    // const [adminClasses,] = useClasses()
+    // console.log(adminClasses)
+
 
     const onSubmit = async (data) => {
         // console.log('Submitted Data:', data);
         const userInfo = {
-            ...loggedUser,
+            bookedById: loggedUser._id,
+            bookedBy: loggedUser.email,
+            bookedByName: loggedUser.name,
+            bookedByImage: loggedUser.image,
             slotName: data.slotName,
             slotTime: parseInt(data.slotTime),
-            selectClass: data.selectClass,
+            selectClass: data.selectClass[0].value,
         }
         console.log(userInfo)
+        try {
+            const response = await axiosSecure.patch(`/add-slots`, userInfo, {
+                headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` },
+            })
+            console.log(response.data)
+            if (response?.data?.modifiedCount > 0) {
+                navigate("/dashboard/manage-slots")
+                toast.success("New Slot added successfully")
+                reset()
+            }
+        }
+        catch (err) {
+            console.log(err.message)
+        }
         // try {
         //     const token = localStorage.getItem('access-token');
         //     const response = await axiosSecure.patch(`/trainerAddingSlots/${email}`, userInfo, {
@@ -56,20 +79,20 @@ const AddNewSlots = () => {
         //     })
         //     console.log(response.data)
         // } 
-        try {
-            const response = await axiosSecure.patch(`/updateUser/${_id}`, userInfo, {
-                headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` },
-            })
-            console.log(response.data)
-            if (response?.data?.modifiedCount > 0) {
-                navigate("/dashboard/manage-slots")
-                toast.success("New Slot added successfully")
-                // reset()
-            }
-        }
-        catch (err) {
-            console.log(err)
-        }
+        // try {
+        //     const response = await axiosSecure.patch(`/updateUser/${_id}`, userInfo, {
+        //         headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` },
+        //     })
+        //     console.log(response.data)
+        //     if (response?.data?.modifiedCount > 0) {
+        //         navigate("/dashboard/manage-slots")
+        //         toast.success("New Slot added successfully")
+        //         // reset()
+        //     }
+        // }
+        // catch (err) {
+        //     console.log(err)
+        // }
 
     }
 
