@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import BeATrainer from './BeATrainer';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
@@ -32,7 +32,8 @@ const TrainerDetails = () => {
         availableDays, _id, age, availableTime,
         cost, email, otherInfo, qualifications,
         skills, status, trainingInfo, trainingPrograms,
-        slotName, slotTime } = trainerDetails || {};
+        slotName } = trainerDetails || {};
+    console.log(availableTime)
 
 
 
@@ -48,12 +49,12 @@ const TrainerDetails = () => {
                             <div className='flex justify-between'>
                                 <span className='border-b-2 border-cyan-300 font-semibold'>Available Slots: ({availableDays.length})</span>
                                 <p className="bg-green-400 py-1 px-2 rounded-full">
-                                    <span className=' font-semibold'>Free:</span> {availableTime - slotTime} Hrs.</p>
+                                    <span className=' font-semibold'>Free:</span> {parseInt(availableTime)} Hrs.</p>
                             </div>
                             <br />
                             <div className=''>
                                 {availableDays.map((exp, idx) =>
-                                    <Link to={`/trainerBookedPage/${_id}/${exp.value}`} key={idx}>
+                                    <Link to={`/trainerBookedPage/${_id}/${exp.value}`} key={idx} >
                                         <Button className='border bg-green-500 w-full text-center py-1 rounded-full mt-2'>{exp.value}</Button>
                                     </Link>
                                 )}

@@ -38,11 +38,11 @@ const AllClasses = () => {
 
     return (
         <div>
-             <Helmet>
+            <Helmet>
                 <title>All Classes | Aura Fusion Gym</title>
             </Helmet>
             {
-                (adminClasses.length <= 0) ?
+                (paginateClass.length <= 0) ?
                     <>
                         <h1 className='flex justify-center items-center h-60 text-4xl font-bold'>No Class Added by Admin</h1>
 
@@ -69,8 +69,8 @@ const AllClasses = () => {
                                     </CardContent>
                                     <CardFooter className="flex items-center justify-between border-2 border-t">
                                         <div className="flex items-center -space-x-3">
-                                            {classCard.slot.map(img =>
-                                                <Link to={`/trainerDetails/${img?.bookedById}`}>
+                                            {classCard.slot.map((img, idx) =>
+                                                <Link key={idx} to={`/trainerDetails/${img?.bookedById}`}>
                                                     <Tooltip content={img?.bookedByName}>
                                                         <Avatar
                                                             size="sm"
@@ -80,6 +80,7 @@ const AllClasses = () => {
                                                             className="border-2 border-white hover:z-10 w-10 h-10 rounded-full"
                                                         />
                                                     </Tooltip>
+                                                    {/* {img.slotTime} */}
                                                 </Link>
                                             )}
                                         </div>

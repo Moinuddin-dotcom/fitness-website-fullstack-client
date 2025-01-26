@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
-import PaymentCard from './PaymentCard';
+import PaymentCard from './Payment/PaymentCard';
 import { useQuery } from '@tanstack/react-query';
 import Loading from '../../Loading';
 import useClasses from '../../../../Hooks/useClasses';
@@ -42,14 +42,17 @@ const TrainerBookedPage = () => {
         }
     })
     if (isLoading || trainerBookingsLoading) return <Loading />
-    // console.log(usersData)
+    console.log(usersData)
 
     const trainerInfo = {
         trainerId: id,
         trainerName: usersData?.name,
+        trainerEmail: usersData?.email,
         slotName: exp,
-        bookedUserName: users?.name
+        // bookedUserName: users?.name
     }
+
+    console.log(trainerInfo)
 
     return (
         <div className=''>

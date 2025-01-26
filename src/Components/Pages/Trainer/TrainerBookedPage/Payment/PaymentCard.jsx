@@ -7,14 +7,17 @@ import {
     Typography,
     Button,
 } from "@material-tailwind/react";
-import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
+import useAxiosSecure from '../../../../../Hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import PaymentPage from './PaymentPage';
+import Swal from 'sweetalert2';
 
 const PaymentCard = ({ trainerInfo }) => {
     const [cardData, setCardData] = useState([])
     const axiosSecure = useAxiosSecure()
+    const navigate = useNavigate()
+    const location = useLocation()
     // console.log(cardData)
     try {
         useEffect(() => {
@@ -33,22 +36,31 @@ const PaymentCard = ({ trainerInfo }) => {
 
     const handleBooking = async (cardInfoId, cardInfoType, cardInfoPrice, cardInfoValidity, clues) => {
         try {
-            const updateTrainerInfo = {
-                ...trainerInfo,
-                cardInfoId, cardInfoType, cardInfoPrice, cardInfoValidity, clues
-            }
-            const { data } = await axiosSecure.post('/book-trainer', updateTrainerInfo, {
-                headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` },
-            })
-            console.log(data)
-            if (data.insertedId) {
-                toast.success("Payment successfully")
-                // reset()
-            }
-            // if (data.insertedId === null) {
-            //     toast.error("All ready Subscribed")
-            //     reset()
-            // }
+
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: `Redirecting for payment: ${cardInfoPrice} / ${cardInfoValidity} `,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, I want to make payment"
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    const updateTrainerInfo = {
+                        ...trainerInfo,
+                        cardInfoId, cardInfoType, cardInfoPrice, cardInfoValidity, clues
+                    }
+                    const { data } = await axiosSecure.post('/book-trainer', updateTrainerInfo, {
+                        headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` },
+                    })
+                    console.log(data)
+                    if (data.insertedId) {
+                        // navigate('/paymentPage')
+                    }
+                }
+            });
         } catch (error) {
             console.log(error)
         }
@@ -100,13 +112,22 @@ const PaymentCard = ({ trainerInfo }) => {
                             </ul>
                         </CardBody>
                         <CardFooter className="mt-12 p-0">
-                            <Button
+                            {/* <Button
                                 // paymentPage
                                 onClick={() => handleBooking(cardInfo.Id, cardInfo.type, parseInt(cardInfo.price), cardInfo.validity, cardInfo.benefits)}
                                 className='bg-black w-full text-center py-1 rounded-full mt-2'>
                                 Join Now
-                            </Button>
-                            <Link to={'/paymentPage'}>
+                            </Button> */}
+                            <Link to={'/paymentPage'}
+                                state={{
+                                    cardId: cardInfo.Id,
+                                    type: cardInfo.type,
+                                    price: parseInt(cardInfo.price),
+                                    validity: cardInfo.validity,
+                                    benefits: cardInfo.benefits,
+                                    trainerInfo: { ...trainerInfo },
+                                }}
+                            >
                                 Join Now
                             </Link>
                         </CardFooter>
