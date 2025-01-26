@@ -1,0 +1,35 @@
+[
+    {
+        "Id": 1,
+        "type": "Basic Membership",
+        "benefits": [
+            "Access to gym facilities during regular operating hours",
+            "Use of cardio and strength training equipment",
+            "Access to locker rooms and showers"
+        ],
+        "price": "10",
+        "validity": "Monthly"
+    },
+    {
+        "Id": 2,
+        "type": "Standard Membership",
+        "benefits": [
+            "All benefits of the basic membership",
+            "Access to group fitness classes such as yoga, spinning, and Zumba",
+            "Use of additional amenities like a sauna or steam room"
+        ],
+        "price": "50",
+        "validity": "Quaterly"
+    },
+    {
+        "Id": 3,
+        "type": "Premium Membership",
+        "benefits": [
+            "All benefits of the standard membership",
+            "Access to personal training sessions with certified trainers",
+            "Discounts on additional services such as massage therapy or nutrition counseling"
+        ],
+        "price": "100",
+        "validity": "Yearly"
+    }
+]

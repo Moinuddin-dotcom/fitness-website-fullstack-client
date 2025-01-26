@@ -8,6 +8,7 @@ import useRole from '../../Hooks/useRole'
 import MemberRoute from '../Pages/DashboardPages/MemberRoutes/MemberRoute'
 import RealTrainerRoutes from '../Pages/DashboardPages/RealTrainerRoutes/RealTrainerRoutes'
 import AdminRoutes from '../Pages/DashboardPages/Admin/AdminRoutes'
+import { Helmet } from 'react-helmet'
 
 
 const Dashboard = () => {
@@ -21,7 +22,10 @@ const Dashboard = () => {
 
     // const isAdmin = true;
     return (
-        <div className='poppins bg-black text-white'>
+        <div className='poppins bg-black text-white min-h-screen'>
+             <Helmet>
+                <title>Dashboard | Aura Fusion Gym</title>
+            </Helmet>
             //TODO: Remove the link from dashboard
             <Link to={'/'}><h1 className='text-center py-10 font-bold text-2xl'>Dashboard</h1></Link>
             <div className='max-w-[90vw] mx-auto border flex justify-between items-center relative'>

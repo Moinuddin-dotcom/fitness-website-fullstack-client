@@ -3,6 +3,7 @@ import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import ActivityLogModal from './ActivityLogModal'
+import { Helmet } from 'react-helmet'
 
 const ActivityLog = () => {
     const axiosSecure = useAxiosSecure()
@@ -17,7 +18,9 @@ const ActivityLog = () => {
     })
     return (
         <div>
-
+            <Helmet>
+                <title>Dashboard | Activity Log | Aura Fusion Gym</title>
+            </Helmet>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}

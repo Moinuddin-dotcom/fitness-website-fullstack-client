@@ -8,6 +8,7 @@ import { TrashIcon } from '@heroicons/react/20/solid'
 import { GoTrash } from 'react-icons/go'
 import { Button } from '@headlessui/react'
 import toast from 'react-hot-toast'
+import { Helmet } from 'react-helmet'
 
 const TABLE_HEAD = ["Name", "Role", "Email", "Action"];
 
@@ -49,6 +50,9 @@ const AllTrainers = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Dashboard | All Trainers | Aura Fusion Gym</title>
+            </Helmet>
             <Card className="max-w-[80vw] mx-auto my-10 overflow-scroll px-6">
                 <h1 className='font-bold text-xl underline underline-offset-4 text-center py-5'>All Trainers</h1>
                 <table className="w-full min-w-max table-auto text-left">

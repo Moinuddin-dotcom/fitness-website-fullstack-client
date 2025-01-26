@@ -13,6 +13,7 @@ import useUser from '../../../../../Hooks/useUser';
 import useLoggedUser from '../../../../../Hooks/useLoggedUser';
 import toast from 'react-hot-toast';
 import useClasses from '../../../../../Hooks/useClasses';
+import { Helmet } from 'react-helmet';
 
 const selectClass = [
     { value: 'Power Pump', label: 'Power Pump' },
@@ -69,30 +70,6 @@ const AddNewSlots = () => {
         catch (err) {
             console.log(err.message)
         }
-        // try {
-        //     const token = localStorage.getItem('access-token');
-        //     const response = await axiosSecure.patch(`/trainerAddingSlots/${email}`, userInfo, {
-        //         headers: {
-        //             // 'Content-Type': 'application/json',
-        //             'authorization': `Bearer ${token}`,
-        //         },
-        //     })
-        //     console.log(response.data)
-        // } 
-        // try {
-        //     const response = await axiosSecure.patch(`/updateUser/${_id}`, userInfo, {
-        //         headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` },
-        //     })
-        //     console.log(response.data)
-        //     if (response?.data?.modifiedCount > 0) {
-        //         navigate("/dashboard/manage-slots")
-        //         toast.success("New Slot added successfully")
-        //         // reset()
-        //     }
-        // }
-        // catch (err) {
-        //     console.log(err)
-        // }
 
     }
 
@@ -102,6 +79,9 @@ const AddNewSlots = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Dashboard | Add New Slots | Aura Fusion Gym</title>
+            </Helmet>
             <div className="max-w-5xl mx-auto  rounded-md shadow-md border-4 bg-white/65 text-black border-fuchsia-800  m-10 p-10">
                 <h2 className="text-2xl font-semibold mb-4 text-center underline underline-offset-4">Submit Your Information</h2>
 
@@ -117,7 +97,6 @@ const AddNewSlots = () => {
                                 className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-black/20  rounded-md"
                                 readOnly
                             />
-                            {/* {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName.message}</p>} */}
                         </div>
 
                         <div className="mb-4">
@@ -155,152 +134,8 @@ const AddNewSlots = () => {
                                 {...register(`${user?.photoURL}`, { required: 'Profile Image is required' })}
                                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
                             />
-                            {/* {errors.image && <p className="text-red-500 text-sm">{errors.image.message}</p>} */}
                         </div>
                     </div>
-
-                    {/* Skills */}
-
-                    {/* <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700">Skills</label>
-                        <div className="flex flex-wrap gap-8">
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    {...register('skills', { required: 'At least one skill is required' })}
-                                    value="ROM"
-                                />
-                                <span className='ml-2'>ROM</span>
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    {...register('skills')}
-                                    value="AMRAP"
-                                />
-
-                                <span className='ml-2'>AMRAP</span>
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    {...register('skills')}
-                                    value="DOMS"
-                                />
-
-                                <span className='ml-2'>DOMS</span>
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    {...register('skills')}
-                                    value="Deadlifting"
-                                />
-
-                                <span className='ml-2'>Deadlifting</span>
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    {...register('skills')}
-                                    value="BenchPress "
-                                />
-
-                                <span className='ml-2'>Bench Press </span>
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    {...register('skills')}
-                                    value="Squatting  "
-                                />
-
-                                <span className='ml-2'>Squatting</span>
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    {...register('skills')}
-                                    value="TreadmillRunning  "
-                                />
-
-                                <span className='ml-2'>Treadmill Running</span>
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    {...register('skills')}
-                                    value="RowingMachine  "
-                                />
-
-                                <span className='ml-2'>Rowing Machine</span>
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    {...register('skills')}
-                                    value="JumpRopeTechniques  "
-                                />
-
-                                <span className='ml-2'>Jump Rope Techniques</span>
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    {...register('skills')}
-                                    value="YogaPoses  "
-                                />
-
-                                <span className='ml-2'>Yoga Poses</span>
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    {...register('skills')}
-                                    value="Yoga"
-                                />
-
-                                <span className='ml-2'>Yoga</span>
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    {...register('skills')}
-                                    value="KettlebellSwings"
-                                />
-
-                                <span className='ml-2'>Kettlebell Swings</span>
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    {...register('skills')}
-                                    value="MedicineBallSlams"
-                                />
-
-                                <span className='ml-2'>Medicine Ball Slams</span>
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    {...register('skills')}
-                                    value="Pull-Ups"
-                                />
-
-                                <span className='ml-2'>Pull-Ups</span>
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    {...register('skills')}
-                                    value="Chin-Ups"
-                                />
-
-                                <span className='ml-2'>Chin-Ups</span>
-                            </label>
-                        </div>
-                        {errors.skills && <p className="text-red-500 text-sm">{errors.skills.message}</p>}
-                    </div> */}
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">Skills</label>
                         {/* skills */}
@@ -332,8 +167,6 @@ const AddNewSlots = () => {
                                 isMulti
                                 name="availableTimeZone"
                                 defaultValue={availableTimeZone}
-                                // options={availableTimeZoneOptions}
-                                // onChange={(selectedOptions) => setValue('availableTimeZone', selectedOptions)}
                                 className="mt-1 "
                             />
                             {errors.availableTimeZone && <p className="text-red-500 text-sm">{errors.availableTimeZone.message}</p>}
@@ -375,8 +208,6 @@ const AddNewSlots = () => {
                                 isMulti
                                 name="experience"
                                 defaultValue={experience}
-                                // options={experience}
-                                // onChange={(selectedExperience) => setValue('experience', selectedExperience)}
                                 className="mt-1 "
                                 readOnly
                             />
@@ -403,11 +234,6 @@ const AddNewSlots = () => {
                             isMulti
                             name="trainingPrograms"
                             defaultValue={trainingPrograms}
-                            // options={trainingPrograms}
-                            // onChange={(selected) => {
-                            //     setValue('trainingPrograms', selected)
-                            //     handleSelectChange(selected)
-                            // }}
                             className="mt-1 "
                             readOnly
                         />
@@ -419,8 +245,6 @@ const AddNewSlots = () => {
                             placeholder='Your answer'
                             readOnly
                         />
-                        {/* } */}
-                        {/* {errors.experience && <p className="text-red-500 text-sm">{errors.experience.message}</p>} */}
                     </div>
 
                     <div className="mb-4">

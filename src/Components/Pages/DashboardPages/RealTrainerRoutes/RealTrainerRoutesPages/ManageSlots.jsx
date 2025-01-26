@@ -13,6 +13,7 @@ import {
     Avatar,
 } from "@material-tailwind/react";
 import { Button } from '@mui/material';
+import { Helmet } from 'react-helmet';
 
 
 const TABLE_HEAD = ["All Class Information", "Trainer Information", "Action"];
@@ -71,6 +72,9 @@ const ManageSlots = () => {
 
     return (
         <div className="max-w-[80vw] mx-auto my-10">
+            <Helmet>
+                <title>Dashboard | ManageSlots | Aura Fusion Gym</title>
+            </Helmet>
 
             <Card className="h-full w-full">
                 <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -149,7 +153,7 @@ const ManageSlots = () => {
 
                                                                     {slot.map((slotItem, idx) =>
                                                                         <div key={idx} className="flex items-center gap-3 space-y-4">
-                                                                            <Avatar src={slotItem?.bookedByImage} alt={slotItem?.bookedByName}  size="" />
+                                                                            <Avatar src={slotItem?.bookedByImage} alt={slotItem?.bookedByName} size="" />
                                                                             <div className="flex flex-col">
                                                                                 <Typography
                                                                                     variant="small"

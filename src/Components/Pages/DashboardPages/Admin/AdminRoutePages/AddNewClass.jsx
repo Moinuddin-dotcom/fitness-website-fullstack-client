@@ -5,9 +5,7 @@ import useAxiosPublic from '../../../../../Hooks/useAxiosPublic';
 import useAxiosSecure from '../../../../../Hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
 import useAuth from '../../../../../Hooks/useAuth';
-
-
-
+import { Helmet } from 'react-helmet';
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
@@ -52,7 +50,9 @@ const AddNewClass = () => {
     }
     return (
         <div className='max-w-[80vw] mx-auto my-10 bg-white p-5 rounded-lg shadow-lg'>
-            AddNewClass Here
+             <Helmet>
+                <title>Dashboard | Add New Class | Aura Fusion Gym</title>
+            </Helmet>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='grid grid-cols-1 md:grid-cols-2 justify-center items-center gap-4'>
                     <div className="mb-4">

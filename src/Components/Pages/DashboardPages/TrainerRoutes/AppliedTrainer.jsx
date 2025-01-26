@@ -4,15 +4,11 @@ import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import useAuth from '../../../../Hooks/useAuth'
 import Loading from '../../Loading'
+import { Helmet } from 'react-helmet'
 
 // import { useForm } from 'react-hook-form'
 
 const AppliedTrainer = () => {
-
-
-
-
-
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
     const { data: appliedTrainers = [], isLoading, refetch } = useQuery({
@@ -28,6 +24,9 @@ const AppliedTrainer = () => {
     console.log(appliedTrainers)
     return (
         <div>
+            <Helmet>
+                <title>Dashboard | Applied Trainers | Aura Fusion Gym</title>
+            </Helmet>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}

@@ -21,6 +21,7 @@ import TrainerRoute from "./TrainerRoute";
 import AddNewClass from "../Components/Pages/DashboardPages/Admin/AdminRoutePages/AddNewClass";
 import AllClasses from "../Components/Pages/Class/AllClasses";
 import AddNewSlots from "../Components/Pages/DashboardPages/RealTrainerRoutes/RealTrainerRoutesPages/AddNewSlots";
+import PaymentPage from "../Components/Pages/Trainer/TrainerBookedPage/PaymentPage";
 
 export const Router = createBrowserRouter([
     {
@@ -63,6 +64,13 @@ export const Router = createBrowserRouter([
                 element:
                     <PrivateRoute>
                         <TrainerBookedPage />
+                    </PrivateRoute>
+            },
+            {
+                path: "/paymentPage",
+                element:
+                    <PrivateRoute>
+                        <PaymentPage />
                     </PrivateRoute>
             },
             {

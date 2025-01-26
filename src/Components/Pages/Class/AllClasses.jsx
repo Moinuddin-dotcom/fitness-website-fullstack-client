@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Loading from '../Loading'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -8,13 +8,25 @@ import Typography from '@mui/material/Typography';
 import useClasses from '../../../Hooks/useClasses';
 import { Avatar, CardFooter, Tooltip } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
-// Typography
-// import { IconButton, Typography } from "@material-tailwind/react";
-// import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import { Helmet } from 'react-helmet';
 
 const AllClasses = () => {
     const [adminClasses, isLoading] = useClasses()
-    // const [active, setActive] = React.useState(1);
+    const [currentPage, setCurrentPage] = useState(1)
+    const itemPerPage = 5;
+
+    const startPage = (currentPage - 1) * itemPerPage
+    const endPage = startPage + itemPerPage
+    const paginateClass = adminClasses.slice(startPage, endPage)
+
+    const totalPages = Math.ceil(adminClasses.length / itemPerPage)
+
+    const handlePageChange = (e, v) => {
+        setCurrentPage(v)
+    }
+
 
 
 
@@ -26,6 +38,9 @@ const AllClasses = () => {
 
     return (
         <div>
+             <Helmet>
+                <title>All Classes | Aura Fusion Gym</title>
+            </Helmet>
             {
                 (adminClasses.length <= 0) ?
                     <>
@@ -35,7 +50,7 @@ const AllClasses = () => {
                     :
                     <>
                         <div className='max-w-[80vw] mx-auto my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-                            {adminClasses.map(classCard =>
+                            {paginateClass.map(classCard =>
                                 <Card key={classCard._id} sx={{ maxWidth: 345 }}>
                                     <CardMedia
                                         component="img"
@@ -72,28 +87,16 @@ const AllClasses = () => {
                                 </Card>
                             )}
                         </div>
-                        {/* <div className="flex bg-white items-center gap-8 justify-center my-5">
-                            <IconButton
-                                size="sm"
-                                variant="outlined"
-                                onClick={prev}
-                                disabled={active === 1}
-                            >
-                                <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" />
-                            </IconButton>
-                            <Typography color="gray" className="font-normal">
-                                Page <strong className="text-gray-900">{active}</strong> of{" "}
-                                <strong className="text-gray-900">{totalPages}</strong>
-                            </Typography>
-                            <IconButton
-                                size="sm"
-                                variant="outlined"
-                                onClick={next}
-                                disabled={active === totalPages}
-                            >
-                                <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
-                            </IconButton>
-                        </div> */}
+                        <div className='flex justify-center items-center my-5'>
+
+                            <Stack spacing={2} className='bg-white py-2 px-10 rounded-lg'>
+                                <Pagination
+                                    count={totalPages}
+                                    page={currentPage}
+                                    onChange={handlePageChange}
+                                    color="secondary" />
+                            </Stack>
+                        </div>
                     </>
             }
 
