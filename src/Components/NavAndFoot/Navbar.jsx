@@ -36,7 +36,7 @@ const Navbar = () => {
 
     return (
         <div>
-            <Disclosure as="nav" className="fixed z-10 w-full">
+            <Disclosure as="nav" className="fixed z-10 w-full bg-white/25">
                 <div className=" px-2 py-4 sm:px-6 lg:px-8 ">
                     <div className="relative flex h-16 items-center justify-between">
                         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">

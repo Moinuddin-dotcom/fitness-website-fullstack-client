@@ -22,6 +22,7 @@ import AddNewClass from "../Components/Pages/DashboardPages/Admin/AdminRoutePage
 import AllClasses from "../Components/Pages/Class/AllClasses";
 import AddNewSlots from "../Components/Pages/DashboardPages/RealTrainerRoutes/RealTrainerRoutesPages/AddNewSlots";
 import PaymentPage from "../Components/Pages/Trainer/TrainerBookedPage/Payment/PaymentPage";
+import BookedTrainer from "../Components/Pages/DashboardPages/MemberRoutes/BookedTrainer";
 
 export const Router = createBrowserRouter([
     {
@@ -86,12 +87,19 @@ export const Router = createBrowserRouter([
     },
     {
         path: "dashboard",
-        element: <Dashboard />,
+        element:
+            <PrivateRoute>
+                <Dashboard />,
+            </PrivateRoute>,
         children: [
             // Member routes
             {
                 path: "member-activity",
                 element: <ActivityLog />
+            },
+            {
+                path: "booked-trainer",
+                element: <BookedTrainer />
             },
             // Trainers routes
             {

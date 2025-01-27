@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import useAxiosSecure from '../../../../../Hooks/useAxiosSecure';
 import useBookedTrainer from '../../../../../Hooks/useBookedTrainer';
 import useAuth from '../../../../../Hooks/useAuth';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 const CheckoutForm = () => {
@@ -19,6 +19,7 @@ const CheckoutForm = () => {
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth()
+    const navigate = useNavigate();
 
 
     const [bookedData, isLoading] = useBookedTrainer()
@@ -108,6 +109,7 @@ const CheckoutForm = () => {
                 console.log("Payment saved", data)
                 if (data.insertedId) {
                     toast.success("Your payment was successfully")
+                    navigate('/dashboard/booked-trainer')
                 }
             }
         }

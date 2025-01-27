@@ -12,10 +12,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useClasses from '../../../Hooks/useClasses';
 
 
+
 const TrainerDetails = () => {
     const { id } = useParams();
     const axiosSecure = useAxiosSecure()
-    const [adminClasses] = useClasses()
+
 
     const { data: trainerDetails = [], isLoading } = useQuery({
         queryKey: ['trainerDetails', id],
@@ -26,7 +27,7 @@ const TrainerDetails = () => {
         }
     })
     // console.log(trainerDetails)
-    if (isLoading) return <Loading />
+
 
     const { name, image, role, experience,
         availableDays, _id, age, availableTime,
@@ -34,6 +35,21 @@ const TrainerDetails = () => {
         skills, status, trainingInfo, trainingPrograms,
         slotName } = trainerDetails || {};
     console.log(availableTime)
+
+
+
+    const { data: trainerBookings = [], isLoading: trainerBookingsLoading } = useQuery({
+        queryKey: ['trainerBookings', id],
+        queryFn: async () => {
+            const { data } = await axiosSecure(`/trainer-bookings/${id}`)
+            // console.log(data)
+            return data
+        }
+    })
+    console.log(trainerBookings)
+    // const trainerClassTaking = trainerBookings.map(trainerClassName => trainerClassName?.className)
+    // console.log(trainerClassTaking)
+    if (isLoading || trainerBookingsLoading) return <Loading />
 
 
 
@@ -110,7 +126,7 @@ const TrainerDetails = () => {
                         <p className=""> <span className='border-b-2 border-cyan-300 font-semibold'>Qualifications: </span> {qualifications}</p>
                         <p className=""> <span className='border-b-2 border-cyan-300 font-semibold'>Key skills: </span> {skills.join(', ')}</p>
                         <p className=""><span className='border-b-2 border-cyan-300 font-semibold'>Available Time:</span> {availableTime} Hrs.</p>
-                        <p className=""><span className='border-b-2 border-cyan-300 font-semibold'>My Classes:</span> {slotName}</p>
+                        <p className=""><span className='border-b-2 border-cyan-300 font-semibold'>My Classes:</span> {trainerBookings.map(trainerClassName => trainerClassName?.className).join(', ')}</p>
                     </div>
                     <div className='my-5 bg-white border-2 border-black p-2 rounded-xl'>
                         <h1 className='text-center border-b-2 mb-4 p-1 border-black font-bold'>Your knowledge: </h1>

@@ -4,10 +4,11 @@ import Marque from '../Components/SharedMarque/Marque'
 import FeaturedSection from '../Components/HomeLayouts/FeaturedSection'
 import AboutUs from '../Components/HomeLayouts/AboutUs'
 import FeatureClass from '../Components/HomeLayouts/FeatureClass'
-import CustomerOpinioun from '../Components/HomeLayouts/CustomerOpinioun'
+import CustomerOpinioun from '../Components/HomeLayouts/CustomerOpinioun/CustomerOpinioun'
 import Community from '../Components/HomeLayouts/Community'
 import Subscriber from '../Components/HomeLayouts/Subscriber'
 import TeamSection from '../Components/HomeLayouts/TeamSection'
+import CustomerOpiniounData from '../Components/HomeLayouts/CustomerOpinioun/CustomerOpiniounData'
 
 const Home = () => {
     return (

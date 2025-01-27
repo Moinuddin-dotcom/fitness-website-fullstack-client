@@ -29,7 +29,7 @@ const TrainerBookedPage = () => {
             return data
         }
     })
-    // console.log(trainerBookings)
+    console.log(trainerBookings)
 
 
 
