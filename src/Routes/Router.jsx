@@ -24,6 +24,8 @@ import AddNewSlots from "../Components/Pages/DashboardPages/RealTrainerRoutes/Re
 import PaymentPage from "../Components/Pages/Trainer/TrainerBookedPage/Payment/PaymentPage";
 import BookedTrainer from "../Components/Pages/DashboardPages/MemberRoutes/BookedTrainer";
 import ProfilePage from "../Components/Pages/DashboardPages/MemberRoutes/MyProfile/ProfilePage";
+import NewsletterSubscribers from "../Components/Pages/DashboardPages/Admin/AdminRoutePages/NewsletterSubscribers";
+import AdminBalance from "../Components/Pages/DashboardPages/Admin/AdminRoutePages/AdminBalance";
 
 export const Router = createBrowserRouter([
     {
@@ -135,6 +137,24 @@ export const Router = createBrowserRouter([
                     </PrivateRoute>
             },
             // Admin routes
+            {
+                path: "admin-balance",
+                element:
+                    <PrivateRoute>
+                        <AdminRoute>
+                            <AdminBalance />
+                        </AdminRoute>
+                    </PrivateRoute>
+            },
+            {
+                path: "newsletter-subscribers",
+                element:
+                    <PrivateRoute>
+                        <AdminRoute>
+                            <NewsletterSubscribers />
+                        </AdminRoute>
+                    </PrivateRoute>
+            },
             {
                 path: "all-trainers",
                 element:

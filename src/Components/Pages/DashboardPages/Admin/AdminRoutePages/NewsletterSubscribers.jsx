@@ -1,41 +1,27 @@
 import React from 'react'
-import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
+import useAxiosSecure from '../../../../../Hooks/useAxiosSecure'
+import Loading from '../../../Loading'
 import { useQuery } from '@tanstack/react-query'
-import { Link } from 'react-router-dom'
-import useAuth from '../../../../Hooks/useAuth'
-import Loading from '../../Loading'
-import { Helmet } from 'react-helmet'
 import { Card, Typography } from "@material-tailwind/react";
+import { Helmet } from 'react-helmet';
+import useSubscribers from '../../../../../Hooks/useSubscribers';
 
-const TABLE_HEAD = ["Name", "Email", "Status", "Action"];
-
-
-// import { useForm } from 'react-hook-form'
-
-const AppliedTrainer = () => {
-    const { user } = useAuth()
-    const axiosSecure = useAxiosSecure()
-    const { data: appliedTrainers = [], isLoading, refetch } = useQuery({
-        queryKey: ['appliedTrainers', user?.email],
-        queryFn: async () => {
-            const { data } = await axiosSecure(`/users/${user?.email}`)
-            // console.log(data)
-            return data
-
-        }
-    })
+const TABLE_HEAD = ["", "User Name", "User Email"];
+const NewsletterSubscribers = () => {
+    const [subscribers, isLoading] = useSubscribers()
     if (isLoading) return <Loading />
-    console.log(appliedTrainers)
+
+
     return (
-        <div className='max-w-[80vw] mx-auto my-10'>
+        <div className='max-w-[60vw] mx-auto my-10'>
             <Helmet>
-                <title>Dashboard | Applied Trainers | Aura Fusion Gym</title>
+                <title>Dashboard | Subscribers | Aura Fusion Gym</title>
             </Helmet>
 
             <Card className="h-full w-full overflow-scroll">
                 <table className="w-full min-w-max table-auto text-left">
                     <thead>
-                        {(appliedTrainers) ? <>
+                        {(subscribers) ? <>
                             <tr>
                                 {TABLE_HEAD.map((head) => (
                                     <th
@@ -55,12 +41,24 @@ const AppliedTrainer = () => {
                         </> : ""}
                     </thead>
                     <tbody>
-                        {appliedTrainers.map(({ name, email, status, _id }, index) => {
-                            const isLast = index === appliedTrainers.length - 1;
+                        {subscribers.map(({ idx, name, email }, index) => {
+                            const isLast = index === subscribers.length - 1;
                             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
                             return (
-                                status === "Pending" && <tr key={name}>
+                                <tr key={name}>
+                                    <td className={classes}>
+                                        <Typography
+                                            variant="small"
+                                            color="blue-gray"
+                                            className="font-normal"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+                                            </svg>
+
+                                        </Typography>
+                                    </td>
                                     <td className={classes}>
                                         <Typography
                                             variant="small"
@@ -79,7 +77,7 @@ const AppliedTrainer = () => {
                                             {email}
                                         </Typography>
                                     </td>
-                                    <td className={classes}>
+                                    {/* <td className={classes}>
                                         <Typography
                                             variant="small"
                                             color="blue-gray"
@@ -100,7 +98,7 @@ const AppliedTrainer = () => {
                                                 <button className="btn btn-ghost btn-xs">details</button>
                                             </Link>
                                         </Typography>
-                                    </td>
+                                    </td> */}
                                 </tr>
                             );
                         })}
@@ -113,4 +111,4 @@ const AppliedTrainer = () => {
     )
 }
 
-export default AppliedTrainer
+export default NewsletterSubscribers
