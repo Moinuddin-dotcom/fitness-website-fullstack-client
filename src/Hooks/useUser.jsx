@@ -5,7 +5,7 @@ import useAuth from './useAuth'
 const useUser = () => {
     const axiosSecure = useAxiosSecure()
     const { user } = useAuth()
-    const { data: users, isLoading } = useQuery({
+    const { data: users, isLoading, refetch } = useQuery({
         queryKey: ['users', user?.email],
         queryFn: async () => {
             const response = await axiosSecure(`/users/singleUser/${user?.email}`)
@@ -15,7 +15,7 @@ const useUser = () => {
     })
     // if (isPending) return 'Loading...'
 
-    return [users, isLoading]
+    return [users, isLoading, refetch]
 }
 
 export default useUser

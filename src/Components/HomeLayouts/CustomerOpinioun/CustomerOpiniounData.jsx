@@ -38,16 +38,16 @@ const CustomerOpiniounData = ({ reviews }) => {
                             </Typography>
                         </div>
                         <Typography color="blue-gray">
-                        <Box sx={{ '& > legend': { mt: 1, py: 1 } }}  >
-                                    <Rating
-                                        name="simple-controlled"
-                                        defaultValue={rating}
-                                    />
-                                </Box>
+                            <Box sx={{ '& > legend': { mt: 1, py: 1 } }}  >
+                                <Rating
+                                    name="simple-controlled"
+                                    defaultValue={rating}
+                                />
+                            </Box>
                         </Typography>
                     </div>
                 </CardHeader>
-                <Divider/>
+                <Divider />
                 <CardBody className="mb-6 p-0">
                     <Typography>
                         &quot;{feedback} !!!&quot;

@@ -23,6 +23,7 @@ import AllClasses from "../Components/Pages/Class/AllClasses";
 import AddNewSlots from "../Components/Pages/DashboardPages/RealTrainerRoutes/RealTrainerRoutesPages/AddNewSlots";
 import PaymentPage from "../Components/Pages/Trainer/TrainerBookedPage/Payment/PaymentPage";
 import BookedTrainer from "../Components/Pages/DashboardPages/MemberRoutes/BookedTrainer";
+import ProfilePage from "../Components/Pages/DashboardPages/MemberRoutes/MyProfile/ProfilePage";
 
 export const Router = createBrowserRouter([
     {
@@ -95,11 +96,24 @@ export const Router = createBrowserRouter([
             // Member routes
             {
                 path: "member-activity",
-                element: <ActivityLog />
+                element:
+                    <PrivateRoute>
+                        <ActivityLog />
+                    </PrivateRoute>
             },
             {
                 path: "booked-trainer",
-                element: <BookedTrainer />
+                element:
+                    <PrivateRoute>
+                        <BookedTrainer />
+                    </PrivateRoute>
+            },
+            {
+                path: "profile-page",
+                element:
+                    <PrivateRoute>
+                        <ProfilePage />,
+                    </PrivateRoute>
             },
             // Trainers routes
             {
