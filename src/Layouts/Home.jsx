@@ -9,6 +9,7 @@ import Community from '../Components/HomeLayouts/Community'
 import Subscriber from '../Components/HomeLayouts/Subscriber'
 import TeamSection from '../Components/HomeLayouts/TeamSection'
 import CustomerOpiniounData from '../Components/HomeLayouts/CustomerOpinioun/CustomerOpiniounData'
+import HomeCommunity from '../Components/HomeLayouts/HomeCommunity'
 
 const Home = () => {
     return (
@@ -20,7 +21,7 @@ const Home = () => {
             <Marque />
             <FeatureClass />
             <CustomerOpinioun />
-            <Community />
+            <HomeCommunity />
             <Subscriber />
             <TeamSection />
         </div>

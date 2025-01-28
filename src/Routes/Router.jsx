@@ -26,6 +26,12 @@ import BookedTrainer from "../Components/Pages/DashboardPages/MemberRoutes/Booke
 import ProfilePage from "../Components/Pages/DashboardPages/MemberRoutes/MyProfile/ProfilePage";
 import NewsletterSubscribers from "../Components/Pages/DashboardPages/Admin/AdminRoutePages/NewsletterSubscribers";
 import AdminBalance from "../Components/Pages/DashboardPages/Admin/AdminRoutePages/AdminBalance";
+import AddForum from "../Components/Pages/DashboardPages/Admin/AdminRoutePages/AddForum";
+import MemberRoute from "../Components/Pages/DashboardPages/MemberRoutes/MemberRoute";
+import AdminOrTrainer from "./AdminOrTrainer";
+import Community from "../Components/HomeLayouts/Community";
+import BlogDetails from "../Components/HomeLayouts/CommunityRoutes/BlogDetails";
+import HomeCommunity from "../Components/HomeLayouts/HomeCommunity";
 
 export const Router = createBrowserRouter([
     {
@@ -75,6 +81,27 @@ export const Router = createBrowserRouter([
                 element:
                     <PrivateRoute>
                         <PaymentPage />
+                    </PrivateRoute>
+            },
+            {
+                path: "/community",
+                element:
+                    <PrivateRoute>
+                        <Community />
+                    </PrivateRoute>
+            },
+            {
+                path: "/home-community",
+                element:
+                    <PrivateRoute>
+                        <HomeCommunity />
+                    </PrivateRoute>
+            },
+            {
+                path: "/blogDetails/:id",
+                element:
+                    <PrivateRoute>
+                        <BlogDetails />
                     </PrivateRoute>
             },
             {
@@ -136,6 +163,15 @@ export const Router = createBrowserRouter([
                         </TrainerRoute>
                     </PrivateRoute>
             },
+            // {
+            //     path: "add-forum",
+            //     element:
+            //         <PrivateRoute>
+            //             <TrainerRoute>
+            //                 <AddForum />
+            //             </TrainerRoute>
+            //         </PrivateRoute>
+            // },
             // Admin routes
             {
                 path: "admin-balance",
@@ -189,6 +225,15 @@ export const Router = createBrowserRouter([
                         <AdminRoute>
                             <AppliedTrainerDetails />
                         </AdminRoute>
+                    </PrivateRoute>
+            },
+            {
+                path: "add-forum",
+                element:
+                    <PrivateRoute>
+                        <AdminOrTrainer>
+                            <AddForum />
+                        </AdminOrTrainer>
                     </PrivateRoute>
             },
         ]

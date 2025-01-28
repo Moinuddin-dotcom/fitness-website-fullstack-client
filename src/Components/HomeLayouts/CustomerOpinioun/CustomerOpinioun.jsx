@@ -14,6 +14,7 @@ import 'swiper/css/navigation';
 // import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import CustomerOpiniounData from './CustomerOpiniounData';
+import SectionTitles from '../../SharedMarque/SectionTitles';
 
 
 
@@ -25,9 +26,8 @@ const CustomerOpinioun = () => {
     console.log(reviews)
     if (isLoading) return <Loading />
     return (
-        <div className='border border-white'>
-            {/* <h1 className='lg:text-5xl text-center text-white'>CustomerOpinioun(Pending)</h1>
-            <p>Review will come from dashboard</p> */}
+        <div className=' md:max-w-[60vw] mx-auto'>
+             <SectionTitles subHeading={'What People Saying?'} heading={'Reviews'} />
 
             <Swiper
                 spaceBetween={30}
@@ -46,15 +46,6 @@ const CustomerOpinioun = () => {
                 {reviews.map(review => <SwiperSlide>
                     <CustomerOpiniounData reviews={review} />
                 </SwiperSlide>)}
-
-                {/* <SwiperSlide>Slide 2</SwiperSlide>
-                <SwiperSlide>Slide 3</SwiperSlide>
-                <SwiperSlide>Slide 4</SwiperSlide>
-                <SwiperSlide>Slide 5</SwiperSlide>
-                <SwiperSlide>Slide 6</SwiperSlide>
-                <SwiperSlide>Slide 7</SwiperSlide>
-                <SwiperSlide>Slide 8</SwiperSlide>
-                <SwiperSlide>Slide 9</SwiperSlide> */}
             </Swiper>
 
         </div>

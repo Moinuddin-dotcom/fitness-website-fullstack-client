@@ -17,8 +17,8 @@ const CustomerOpiniounData = ({ reviews }) => {
     console.log(reviews)
     const { feedback, feedbackUserName, feedbackUserPhoto, rating } = reviews || {}
     return (
-        <div className='py-44 bg-white'>
-            <Card color="transparent" shadow={false} className=" max-w-[40vw] mx-auto bg-purple-200 p-5">
+        <div className='md:py-10 lg:py-40 '>
+            <Card color="transparent" shadow={false} className="max-w-[90vw] lg:max-w-[40vw] mx-auto bg-yellow-900 border-l border-r shadow-yellow-900 shadow-xl p-5">
                 <CardHeader
                     color="transparent"
                     floated={false}
@@ -32,7 +32,7 @@ const CustomerOpiniounData = ({ reviews }) => {
                         alt="tania andrew"
                     />
                     <div className="flex w-full flex-col gap-0.5">
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between text-white">
                             <Typography variant="h5" color="blue-gray">
                                 {feedbackUserName}
                             </Typography>
@@ -47,8 +47,8 @@ const CustomerOpiniounData = ({ reviews }) => {
                         </Typography>
                     </div>
                 </CardHeader>
-                <Divider />
-                <CardBody className="mb-6 p-0">
+                <Divider className='bg-white' />
+                <CardBody className="mb-6 p-0 text-white">
                     <Typography>
                         &quot;{feedback} !!!&quot;
                     </Typography>

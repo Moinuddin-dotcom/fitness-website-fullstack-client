@@ -58,14 +58,14 @@ const TeamSection = () => {
     console.log(trainers)
     const topThreeTrainers = trainers.slice(0, 3)
     return (
-        <div className=' max-w-[80vw] mx-auto pl-8 my-28 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center'>
+        <div className=' max-w-[80vw] mx-auto pl-8 my-28 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-center items-center'>
             {/* <h1>TeamSection(Pending)</h1>
             <p>Display at least three trainer profiles, each accompanied by key information. Each profile should include the trainer's name, a brief biography, areas of expertise, and a professional photo.</p> */}
 
 
 
             {topThreeTrainers.map(threeCard =>
-                <Card sx={{ maxWidth: 345 }} className=''>
+                <Card sx={{ maxWidth: 345 }} className='' key={threeCard._id}>
                     <CardHeader
                         title={threeCard?.name}
                         subheader={threeCard?.email}

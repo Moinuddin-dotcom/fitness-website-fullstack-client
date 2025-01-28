@@ -34,37 +34,7 @@ const PaymentCard = ({ trainerInfo }) => {
         console.log(error)
     }
 
-    const handleBooking = async (cardInfoId, cardInfoType, cardInfoPrice, cardInfoValidity, clues) => {
-        try {
-
-
-            Swal.fire({
-                title: "Are you sure?",
-                text: `Redirecting for payment: ${cardInfoPrice} / ${cardInfoValidity} `,
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, I want to make payment"
-            }).then(async (result) => {
-                if (result.isConfirmed) {
-                    const updateTrainerInfo = {
-                        ...trainerInfo,
-                        cardInfoId, cardInfoType, cardInfoPrice, cardInfoValidity, clues
-                    }
-                    const { data } = await axiosSecure.post('/book-trainer', updateTrainerInfo, {
-                        headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` },
-                    })
-                    console.log(data)
-                    if (data.insertedId) {
-                        // navigate('/paymentPage')
-                    }
-                }
-            });
-        } catch (error) {
-            console.log(error)
-        }
-    }
+  
 
 
 
@@ -112,12 +82,6 @@ const PaymentCard = ({ trainerInfo }) => {
                             </ul>
                         </CardBody>
                         <CardFooter className="mt-12 p-0">
-                            {/* <Button
-                                // paymentPage
-                                onClick={() => handleBooking(cardInfo.Id, cardInfo.type, parseInt(cardInfo.price), cardInfo.validity, cardInfo.benefits)}
-                                className='bg-black w-full text-center py-1 rounded-full mt-2'>
-                                Join Now
-                            </Button> */}
                             <Link to={'/paymentPage'}
                                 state={{
                                     cardId: cardInfo.Id,
@@ -127,20 +91,11 @@ const PaymentCard = ({ trainerInfo }) => {
                                     benefits: cardInfo.benefits,
                                     trainerInfo: { ...trainerInfo },
                                 }}
+                                
                             >
-                                Join Now
+                                <Button  className='bg-black w-full text-center py-2 rounded-full mt-2'>Join Now</Button>
                             </Link>
                         </CardFooter>
-                        {/* <div className='hidden'>
-                            <PaymentPage handleBooking={handleBooking}
-                                cardInfoId={cardInfo.Id}
-                                cardInfoType={cardInfo.type}
-                                cardInfoPrice={cardInfo.price}
-                                cardInfoValidity={cardInfo.validity}
-                                cardInfoBenefits={cardInfo.benefits}
-                            />
-
-                        </div> */}
                     </Card>
                 )
             }

@@ -67,6 +67,7 @@ const AuthProvider = ({ children }) => {
                 // if somehow token is null then remove token
                 localStorage.removeItem('access-token')
                 // setLoading(false)
+                // setUser(currentUser)
             }
             setLoading(false)
         })

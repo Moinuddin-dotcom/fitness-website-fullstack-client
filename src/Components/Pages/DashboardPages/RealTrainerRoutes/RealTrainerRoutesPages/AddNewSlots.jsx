@@ -1,18 +1,13 @@
-import React, { useEffect, useState } from 'react'
+
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../../../Hooks/useAuth';
 import Select from 'react-select';
 import { Button } from '@headlessui/react';
 import useAxiosSecure from '../../../../../Hooks/useAxiosSecure';
-import useAxiosPublic from '../../../../../Hooks/useAxiosPublic';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import useRole from '../../../../../Hooks/useRole';
+import { useNavigate } from 'react-router-dom';
 import Loading from '../../../Loading';
-import useUser from '../../../../../Hooks/useUser';
 import useLoggedUser from '../../../../../Hooks/useLoggedUser';
 import toast from 'react-hot-toast';
-import useClasses from '../../../../../Hooks/useClasses';
 import { Helmet } from 'react-helmet';
 
 const selectClass = [
@@ -31,21 +26,14 @@ const AddNewSlots = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
     const [loggedUser, isLoading] = useLoggedUser()
-    // console.log(loggedUser._id)
     const navigate = useNavigate()
 
     const { name, email, image, age, skills, availableTime, availableTimeZone,
         availableDays, qualifications, experience, cost,
         trainingInfo, trainingPrograms, otherInfo, _id } = loggedUser || {}
 
-    // ______________________________________________________________________
-    // Get all classes by using useClasses() hooks
-    // const [adminClasses,] = useClasses()
-    // console.log(adminClasses)
-
 
     const onSubmit = async (data) => {
-        // console.log('Submitted Data:', data);
         const userInfo = {
             bookedById: loggedUser._id,
             bookedBy: loggedUser.email,
@@ -82,14 +70,13 @@ const AddNewSlots = () => {
             <Helmet>
                 <title>Dashboard | Add New Slots | Aura Fusion Gym</title>
             </Helmet>
-            <div className="max-w-5xl mx-auto  rounded-md shadow-md border-4 bg-white/65 text-black border-fuchsia-800  m-10 p-10">
+            <div className="max-w-5xl mx-auto  mt-10 border-4 bg-white/5 p-5 rounded-lg shadow-xl shadow-yellow-900 border-t-2 border-yellow-900">
                 <h2 className="text-2xl font-semibold mb-4 text-center underline underline-offset-4">Submit Your Information</h2>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                         <div className="mb-4">
                             <label className="block text-sm font-medium text-gray-700">Your name is</label>
-                            {/* Name */}
                             <input
                                 type="text"
                                 defaultValue={name}

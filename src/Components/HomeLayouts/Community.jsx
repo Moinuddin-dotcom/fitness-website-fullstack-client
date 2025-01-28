@@ -1,11 +1,32 @@
 import React from 'react'
+import useBlog from '../../Hooks/useBlog'
+import Loading from '../Pages/Loading'
+import CommunityRoutes from './CommunityRoutes/CommunityRoutes'
+import BlogSection from './CommunityRoutes/BlogSection'
+import { Helmet } from 'react-helmet'
+import SectionTitles from '../SharedMarque/SectionTitles'
 
 const Community = () => {
+    const [blogData, blogLoading] = useBlog()
+    // console.log(blogData)
+    if (blogLoading) return <Loading />
     return (
-        <div className='h-40 border border-white'>
-            <h1 className='lg:text-5xl text-center text-white'>Community(Pending)</h1>
-            <h1>OUR LATEST BLOG</h1>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. the readable content of a page when looking at its layout.</p>
+        <div className=''>
+             <SectionTitles subHeading={'Why Choose Us?'} heading={'Features'} />
+            <Helmet>
+                <title>Community | Aura Fusion Gym</title>
+            </Helmet>
+            <section>
+                {(blogData && blogData.length > 0) ? <CommunityRoutes /> : ""}
+            </section>
+            <section className='max-w-[90vw] mx-auto grid grid-cols-1 md:grid-cols-3 gap-5'>
+                {(blogData && blogData.length > 0) ? <>
+                    {
+                        blogData.map(blogs => <BlogSection blogData={blogs} />)
+                    }
+                </> : <h1 className='text-5xl font-bold py-20 text-center h-screen'>No Blogs found</h1>}
+
+            </section>
         </div>
     )
 }

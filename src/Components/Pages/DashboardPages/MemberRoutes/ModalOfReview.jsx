@@ -26,7 +26,7 @@ const ModalOfReview = ({ isOpen, close }) => {
         console.log(reviewData);
 
         try {
-            const { data } = await axiosSecure.post('reviews', reviewData)
+            const { data } = await axiosSecure.post('/reviews', reviewData)
             console.log("Review posted successfully", data)
             toast.success("Your review has been posted successfully")
             close()

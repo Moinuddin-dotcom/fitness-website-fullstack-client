@@ -23,15 +23,14 @@ const Dashboard = () => {
             <Helmet>
                 <title>Dashboard | Aura Fusion Gym</title>
             </Helmet>
-      //TODO: Remove the link from dashboard
-            <Link to={'/'}>
-                <h1 className="text-center py-10 font-bold text-2xl">Dashboard</h1>
-            </Link>
+            {/* <Link to={'/'}> */}
+            <h1 className="text-center py-10 font-bold text-2xl">Dashboard</h1>
+            {/* </Link> */}
 
-            <div className="max-w-[90vw] mx-auto border flex justify-between items-center relative">
+            <div className="max-w-[90vw] mx-auto bg-white/5 p-5 rounded-lg shadow-xl shadow-yellow-900 border-t-2 border-yellow-900 flex justify-between items-center relative">
                 <div>
                     <h2 className="py-2 font-bold text-2xl">Hi! {user?.displayName}</h2>
-                    <h2>Role: <span className="uppercase">{role}</span></h2>
+                    <h2>Role: <span className="uppercase font-bold text-yellow-200">{role}</span></h2>
                 </div>
 
                 {/* Mobile view */}
@@ -54,13 +53,15 @@ const Dashboard = () => {
                             className="w-52 origin-top-right rounded-xl border-white/5 bg-white/5 p-1 text-sm text-white transition duration-100 ease-out focus:outline-none"
                         >
                             <MenuItem>
-                                <button className="group flex flex-col w-full items-start gap-2 rounded-lg py-1.5 px-3 focus:bg-black">
-                                    <Button className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm font-semibold text-white shadow-inner shadow-white/10 focus:outline-none hover:bg-gray-600">
-                                        <NavLink to={'/dashboard/member-activity'}>
-                                            Activity Log
-                                        </NavLink>
-                                    </Button>
-                                </button>
+                                <div>
+                                    {role === 'admin' && <AdminRoutes />}
+
+                                    {/* Trainer Route */}
+                                    {role === 'trainer' && <RealTrainerRoutes />}
+
+                                    {/* Member route */}
+                                    {role === 'member' && <MemberRoute />}
+                                </div>
                             </MenuItem>
                         </MenuItems>
                     </Menu>

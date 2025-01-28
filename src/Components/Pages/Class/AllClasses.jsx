@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { Helmet } from 'react-helmet';
+import SectionTitles from '../../SharedMarque/SectionTitles';
 
 const AllClasses = () => {
     const [adminClasses, isLoading] = useClasses()
@@ -26,18 +27,10 @@ const AllClasses = () => {
     const handlePageChange = (e, v) => {
         setCurrentPage(v)
     }
-
-
-
-
     if (isLoading) return <Loading />
-
-
-
-
-
     return (
         <div>
+             <SectionTitles subHeading={'See Our Classes'} heading={'Classes'} />
             <Helmet>
                 <title>All Classes | Aura Fusion Gym</title>
             </Helmet>
@@ -80,7 +73,6 @@ const AllClasses = () => {
                                                             className="border-2 border-white hover:z-10 w-10 h-10 rounded-full"
                                                         />
                                                     </Tooltip>
-                                                    {/* {img.slotTime} */}
                                                 </Link>
                                             )}
                                         </div>
