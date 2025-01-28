@@ -9,41 +9,12 @@ import { Card, Typography } from "@material-tailwind/react";
 
 const TABLE_HEAD = ["Name", "Role", "Status", "Updates"];
 
-const TABLE_ROWS = [
-    {
-        name: "John Michael",
-        job: "Manager",
-        date: "23/04/18",
-    },
-    {
-        name: "Alexa Liras",
-        job: "Developer",
-        date: "23/04/18",
-    },
-    {
-        name: "Laurent Perrier",
-        job: "Executive",
-        date: "19/09/17",
-    },
-    {
-        name: "Michael Levi",
-        job: "Developer",
-        date: "24/12/08",
-    },
-    {
-        name: "Richard Gran",
-        job: "Manager",
-        date: "04/10/21",
-    },
-];
-
 const ActivityLog = () => {
     const axiosSecure = useAxiosSecure()
     const { data: trainers = [], refetch } = useQuery({
         queryKey: ['trainers'],
         queryFn: async () => {
             const res = await axiosSecure('/users')
-            console.log(res.data)
             return res.data
 
         }
@@ -108,18 +79,14 @@ const ActivityLog = () => {
                                                 color="blue-gray"
                                                 className="font-normal"
                                             >
-                                                {/* {status} */}
-                                                {/* {status ? <p className={`${status === 'Pending' ? 'text-yellow-500' : 'text-green-500'}`}>{status}</p> : <p className='text-red-500'>Unavailable</p>} */}
                                                 {status === "Pending" && <p className='text-yellow-500'>{status}</p>}
                                                 {status === "Reject" && <p className='text-red-500'>{status}</p>}
                                                 {status === "Approved" && <p className='text-green-500'>{status}</p>}
-                                                {/* {status === "" && <p className='text-green-500'>No Data</p>} */}
+                                          
                                             </Typography>
                                         </td>
                                         <td className={classes}>
                                             <Typography
-                                                // as="a"
-                                                // href="#"
                                                 variant="small"
                                                 color="blue-gray"
                                                 className="font-medium"

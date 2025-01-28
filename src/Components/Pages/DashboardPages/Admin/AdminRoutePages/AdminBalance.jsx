@@ -11,13 +11,11 @@ const AdminBalance = () => {
   const [subscribers, subscribersLoading] = useSubscribers()
 
   const price = paymentData.reduce((total, totalPrice) => total + totalPrice.price, 0)
-  console.log(price)
 
   const chartData = {
     Subscribers: subscribers.length,
     Payments: paymentData.length,
   }
-  console.log(chartData)
   if (isLoading || subscribersLoading) return <Loading />
   return (
     <div className='my-10'>

@@ -7,41 +7,28 @@ import { Divider } from '@mui/material'
 
 const BlogDetails = () => {
     const { id } = useParams()
-    console.log(id)
     const axiosSecure = useAxiosSecure()
 
-    // try {
+  
     const { data: singleBlog = {}, isLoading } = useQuery({
         queryKey: ['singleBlog', id],
         queryFn: async () => {
             const { data } = await axiosSecure(`/blogsById/${id}`)
-            // console.log(data)
             return data
         }
     })
-    console.log(singleBlog)
-    // } catch (error) {
-    //     console.log(error.message)
-    // }
 
     const { title,
         blogImage,
         tipsImage,
         nutritionImage,
-        addedbyId,
-        addedbyName,
-        addedbyEmail,
-        addedbyPhoto,
         addedbyRole,
         createdAt,
         tipsDescription,
-        nutritionDescription,
         descriptionOfBlog,
         tipsAndTechniquesTitle,
         nutritionAndDietAdviceTitle,
-        nutritionAndDietAdviceDescription,
-        upVote,
-        downVote, _id } = singleBlog
+        nutritionAndDietAdviceDescription } = singleBlog
 
     if (isLoading) return <Loading />
 

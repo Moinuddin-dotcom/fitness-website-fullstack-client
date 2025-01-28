@@ -13,12 +13,10 @@ const UpdateProfileModal = ({ isOpen, close }) => {
     const axiosPublic = useAxiosPublic()
     const axiosSecure = useAxiosSecure()
     const [users, isLoading] = useUser()
-    console.log(users)
     if (isLoading) return <Loading />
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
-        console.log(data);
         const imageFile = { image: data.image[0] }
         const response = await axiosPublic.post(image_hosting_api, imageFile, {
             headers: { 'content-type': 'multipart/form-data' }
@@ -34,9 +32,8 @@ const UpdateProfileModal = ({ isOpen, close }) => {
                     parmanentAddress: data.permanentAddress,
                     presentAddress: data.presentAddress
                 }
-                console.log(updateInfo)
                 const { data: updateData } = await axiosSecure.patch(`/update-user-info/${users?.email}`, updateInfo)
-                console.log(updateData)
+
                 if (updateData.modifiedCount > 0) {
                     toast.success('Profile updated successfully!');
                     close();
@@ -45,7 +42,7 @@ const UpdateProfileModal = ({ isOpen, close }) => {
                 }
             }
         } catch (error) {
-            console.log(error)
+            toast.error('Failed to update profile.', error);
         }
     }
 
@@ -114,10 +111,9 @@ const UpdateProfileModal = ({ isOpen, close }) => {
                                 </div>
                                 <div className="mt-4">
                                     <Button
-                                        onClick={() => console.log("Clicked")}
                                         type="submit"
                                         className="inline-flex  items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
-                                    // onClick={close}
+
                                     >
                                         Update <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />

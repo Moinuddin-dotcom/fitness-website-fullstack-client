@@ -8,11 +8,10 @@ const useSubscribers = () => {
         queryKey: ['subscribers'],
         queryFn: async () => {
             const { data } = await axiosSecure('/subscribers')
-            // console.log(data)
+           
             return data
         }
     })
-    console.log(subscribers)
     return [subscribers, subscribersLoading]
 }
 

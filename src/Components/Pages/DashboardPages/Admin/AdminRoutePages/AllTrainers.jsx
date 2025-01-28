@@ -20,7 +20,6 @@ const AllTrainers = () => {
         queryKey: ['allTrainers', user?.email],
         queryFn: async () => {
             const { data } = await axiosSecure(`/users/${user?.email}`)
-            console.log(data)
             return data
 
         }
@@ -29,11 +28,10 @@ const AllTrainers = () => {
     const trainers = allTrainers.filter((person) => person.role === 'trainer');
 
     const handleDeleteTrainer = async (email, deleteTrainer) => {
-        console.log('Delete clicked', deleteTrainer)
 
         try {
             const { data } = await axiosSecure.patch(`/trainer-role-update/${email}`, { role: deleteTrainer })
-            console.log(data)
+         
             if (data.modifiedCount > 0) {
                 toast.success('Trainer removed successfully');
                 refetch()
@@ -41,7 +39,7 @@ const AllTrainers = () => {
                 toast.error('Failed to remove trainer.');
             }
         } catch (error) {
-            console.log(error)
+            toast.error('Failed to remove trainer')
 
         }
     }

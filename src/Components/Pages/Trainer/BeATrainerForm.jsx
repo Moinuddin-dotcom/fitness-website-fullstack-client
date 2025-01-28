@@ -51,7 +51,6 @@ const BeATrainerForm = () => {
     };
 
     const onSubmit = async (data) => {
-        console.log('Submitted Data:', data);
 
         const trainerInfo = {
             name: user?.displayName,
@@ -72,7 +71,7 @@ const BeATrainerForm = () => {
             status: "Pending"
         }
         const res = await axiosSecure.patch(`/users-from/${user?.email}`, trainerInfo)
-        console.log(res.data)
+        
         if (res.data.modifiedCount > 0) {
             toast.success('Trainer request sent successfully!');
             navigate('/dashboard/member-activity')

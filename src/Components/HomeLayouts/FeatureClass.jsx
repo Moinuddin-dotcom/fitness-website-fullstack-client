@@ -5,7 +5,6 @@ import SectionTitles from '../SharedMarque/SectionTitles'
 
 const FeatureClass = () => {
   const [adminClasses, isLoading] = useClasses()
-  console.log(adminClasses)
   if (isLoading) return <Loading />
   return (
     <>

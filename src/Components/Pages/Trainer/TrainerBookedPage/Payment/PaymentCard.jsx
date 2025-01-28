@@ -15,23 +15,18 @@ import Swal from 'sweetalert2';
 
 const PaymentCard = ({ trainerInfo }) => {
     const [cardData, setCardData] = useState([])
-    const axiosSecure = useAxiosSecure()
-    const navigate = useNavigate()
-    const location = useLocation()
-    // console.log(cardData)
     try {
         useEffect(() => {
             const cardData = async () => {
                 const res = await fetch('/public/MemberShipPlans.json')
                 const data = await res.json()
-                // console.log(data)
                 setCardData(data)
             }
             cardData()
         }, [])
 
     } catch (error) {
-        console.log(error)
+      toast.error(error)
     }
 
   

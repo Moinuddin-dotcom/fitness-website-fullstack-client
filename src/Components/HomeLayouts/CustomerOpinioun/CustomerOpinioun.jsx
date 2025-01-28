@@ -19,11 +19,7 @@ import SectionTitles from '../../SharedMarque/SectionTitles';
 
 
 const CustomerOpinioun = () => {
-
-
-
     const [reviews, isLoading] = useReviews()
-    console.log(reviews)
     if (isLoading) return <Loading />
     return (
         <div className=' md:max-w-[60vw] mx-auto'>

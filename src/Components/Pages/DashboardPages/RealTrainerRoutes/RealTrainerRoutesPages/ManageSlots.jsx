@@ -21,11 +21,8 @@ const TABLE_HEAD = ["All Class Information", "Trainer Information", "Action"];
 
 const ManageSlots = () => {
     const [adminClasses, isLoading, refetch] = useClasses()
-    console.log(adminClasses)
-    const axiosSecure = useAxiosSecure()
 
-    // const { _id } = adminClasses;
-    // console.log(_id)
+    const axiosSecure = useAxiosSecure()
 
     const handleDelete = async (className, bookedByImage, bookedByName, bookedBy, slotName, slotTime, bookedById) => {
 
@@ -39,18 +36,12 @@ const ManageSlots = () => {
             confirmButtonText: "Yes, delete it!"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                console.log("Delete")
                 try {
-                    // const upSlot = {
-                    //     className,
-                    //     slot: []
-                    // }
                     const { data } = await axiosSecure.patch(`/remove-slots`, { className, bookedByImage, bookedByName, bookedBy, slotName, slotTime, bookedById }, {
                         headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` },
                     })
-                    console.log(data)
                     if (data.modifiedCount > 0) {
-                        // toast.success('Slot cleared successfully');
+
                         Swal.fire({
                             title: "Deleted!",
                             text: "Slot cleared successfully.",
@@ -61,7 +52,7 @@ const ManageSlots = () => {
                         toast.error('Failed to clear slot.');
                     }
                 } catch (error) {
-                    console.log(error.message);
+                    toast.error(error.message);
 
                 }
 

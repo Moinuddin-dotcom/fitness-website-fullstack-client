@@ -16,13 +16,11 @@ const AddForum = () => {
     const axiosPublic = useAxiosPublic()
     const axiosSecure = useAxiosSecure()
     const [users, isLoading] = useUser()
-    // console.log(users)
     const { register, handleSubmit, setValue, reset, formState: { errors } } = useForm();
 
 
 
     const onSubmit = async (data) => {
-        console.log('Submitted Data:', data);
 
         const imageFile = { image: data.image[0] }
         const response = await axiosPublic.post(image_hosting_api, imageFile, {
@@ -52,9 +50,7 @@ const AddForum = () => {
                     downVote: ""
                     // updatedAt: new Date().toISOString(),
                 }
-                console.log(forumData)
                 const { data: postBlog } = await axiosSecure.post('/blogs', forumData)
-                console.log(postBlog)
                 if (postBlog.insertedId) {
                     toast.success("Blog posted successfully")
                     reset()
@@ -63,7 +59,7 @@ const AddForum = () => {
                 }
             }
         } catch (error) {
-            console.log(error.message)
+            toast.error("An error occurred while posting a blog", error.message)
         }
         if (isLoading) return <Loading />
     }

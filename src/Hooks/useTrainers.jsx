@@ -11,11 +11,10 @@ const useTrainers = () => {
         enabled: !!user,
         queryFn: async () => {
             const { data } = await axiosSecure(`/users/all-trainers/role?role=trainer`)
-            // console.log(data)
+          
             return data
         }
     })
-    // console.log(trainers)
     return [trainers, isLoading]
 }
 

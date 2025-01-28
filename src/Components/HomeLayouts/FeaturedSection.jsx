@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import SectionTitles from '../SharedMarque/SectionTitles';
 
-// const features = 
+
 
 const FeaturedSection = () => {
     const [features, setFeatures] = useState([])
     const featureData = async () => {
         const res = await fetch('/public/feature.json')
         const data = await res.json()
-        // console.log(data)
         setFeatures(data)
     }
 

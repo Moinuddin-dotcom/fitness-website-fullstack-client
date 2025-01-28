@@ -29,7 +29,7 @@ const TrainerDetails = () => {
     const { name, image, role, experience,
         availableDays, _id, age, availableTime, email, otherInfo, qualifications,
         skills, trainingInfo, trainingPrograms } = trainerDetails || {};
-    console.log(availableTime)
+    
 
 
 
@@ -41,7 +41,6 @@ const TrainerDetails = () => {
             return data
         }
     })
-    console.log(trainerBookings)
     if (isLoading || trainerBookingsLoading) return <Loading />
 
 

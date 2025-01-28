@@ -13,8 +13,6 @@ import SectionTitles from '../SharedMarque/SectionTitles';
 
 const HomeCommunity = () => {
     const [blogData, blogLoading] = useBlog()
-    console.log(blogData)
-    // const topThreeBlog = blogData.slice(0, 6)
     if (blogLoading) return <Loading />
     return (
         <>

@@ -12,14 +12,12 @@ const Subscriber = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
-        console.log(data);
         const subscriberInfo = {
             name: data.name,
             email: data.email
         }
         await axiosPublic.post('/subscribers', subscriberInfo)
             .then(res => {
-                console.log(res.data)
                 if (res.data.insertedId) {
                     toast.success("Subscribed successfully")
                     reset()

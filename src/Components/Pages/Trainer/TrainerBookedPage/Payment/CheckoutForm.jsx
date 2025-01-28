@@ -23,31 +23,18 @@ const CheckoutForm = () => {
 
 
     const [bookedData, isLoading] = useBookedTrainer()
-    console.log(bookedData)
+ 
 
     const bookedTrainerPrice = bookedData.reduce((total, item) => total + item.cardInfoPrice, 0)
-    console.log(bookedTrainerPrice)
+ 
     useEffect(() => {
         const paymentIntent = async () => {
-            // const { data } = await axiosSecure.post('/create-payment-intent', { price: bookedTrainerPrice })
             const { data } = await axiosSecure.post('/create-payment-intent', { price: price })
-            console.log(data.clientSecret)
+          
             setClientSecret(data.clientSecret)
         }
         paymentIntent()
     }, [axiosSecure, bookedTrainerPrice])
-
-
-    // const handleBooking = async () => {
-    //     // console.log('Booking Details:', { cardId, type, price, validity, benefits, })
-    //     // console.log("Trainer info: ", trainerInfo)
-    //     console.log(cardId, type, price, validity, benefits, trainerInfo)
-    // }
-    // const handleBooking = async (cardId, type, price, validity, benefits,) => {
-    //     console.log('Booking Details:', { cardId, type, price, validity, benefits, })
-    //     console.log("Trainer info: ", trainerInfo)
-    // }
-
 
 
 
@@ -87,7 +74,7 @@ const CheckoutForm = () => {
 
         if (confirmError) {
             console.log("Confirm payment error", confirmError)
-            // setError(confirmError.message)
+           
         } else {
             console.log("Payment intent", paymentIntent)
             if (paymentIntent.status === "succeeded") {

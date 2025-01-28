@@ -31,7 +31,6 @@ const TABLE_ROWS = [
 ];
 
 const PaymentTable = ({ paymentData }) => {
-    console.log(paymentData)
     return (
         <div>
             <Card className="h-full w-full overflow-scroll">

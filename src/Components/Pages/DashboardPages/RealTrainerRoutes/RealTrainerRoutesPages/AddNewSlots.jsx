@@ -43,12 +43,10 @@ const AddNewSlots = () => {
             slotTime: parseInt(data.slotTime),
             selectClass: data.selectClass[0].value,
         }
-        console.log(userInfo)
         try {
             const response = await axiosSecure.patch(`/add-slots`, userInfo, {
                 headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` },
             })
-            console.log(response.data)
             if (response?.data?.modifiedCount > 0) {
                 navigate("/dashboard/manage-slots")
                 toast.success("New Slot added successfully")
@@ -56,7 +54,7 @@ const AddNewSlots = () => {
             }
         }
         catch (err) {
-            console.log(err.message)
+            toast.err(err.message)
         }
 
     }

@@ -17,7 +17,7 @@ const Register = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
-        console.log(data);
+      
         createUser(data.email, data.password)
             .then(res => {
                 const user = res.user

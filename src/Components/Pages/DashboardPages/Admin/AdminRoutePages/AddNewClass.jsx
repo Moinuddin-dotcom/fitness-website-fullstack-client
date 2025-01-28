@@ -14,10 +14,8 @@ const AddNewClass = () => {
     const axiosPublic = useAxiosPublic()
     const axiosSecure = useAxiosSecure()
     const { user } = useAuth()
-    console.log(user)
 
     const onSubmit = async (data) => {
-        console.log('Submitted Data:', data);
 
         const imageFile = { image: data.image[0] }
         const response = await axiosPublic.post(image_hosting_api, imageFile, {
@@ -33,9 +31,7 @@ const AddNewClass = () => {
                     image: response.data.data.url,
                     otherInfo: data.otherInfo
                 }
-                console.log(classData)
                 const { data: res } = await axiosSecure.post('/classes', classData)
-                console.log(res)
                 if (res.insertedId) {
                     toast.success("A New class added successfully")
                     reset()
@@ -44,7 +40,6 @@ const AddNewClass = () => {
                 }
             }
         } catch (error) {
-            console.log(error)
             toast.error("An error occurred while adding a new class", error.message)
         }
     }

@@ -9,11 +9,10 @@ const useClasses = () => {
         queryKey: ['adminClasses'],
         queryFn: async () => {
             const { data } = await axiosSecure('/classes')
-            // console.log(data)
+           
             return data
         }
     })
-    // console.log(adminClasses)
 
     return [adminClasses, isLoading, refetch]
 }

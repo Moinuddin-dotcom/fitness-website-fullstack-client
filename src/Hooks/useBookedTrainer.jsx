@@ -10,7 +10,7 @@ const useBookedTrainer = () => {
         queryKey: ['bookedData', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/book-trainer?bookedUserEmail=${user?.email}`)
-            // console.log(res.data)
+          
             return res.data
         }
     })

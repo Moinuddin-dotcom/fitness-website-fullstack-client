@@ -13,7 +13,6 @@ const Trainer = () => {
 
     const [trainers, isLoading] = useTrainers()
     if (isLoading) return <Loading />
-    // console.log(trainers)
 
     return (
         <>

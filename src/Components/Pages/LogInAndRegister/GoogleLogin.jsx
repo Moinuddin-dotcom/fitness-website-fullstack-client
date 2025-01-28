@@ -13,7 +13,6 @@ const GoogleLogin = () => {
     const handleGoogle = () => {
         googleLogin()
             .then(res => {
-                console.log(res.user)
                 const userInfo = {
                     email: res.user.email,
                     name: res.user.displayName,
@@ -21,7 +20,6 @@ const GoogleLogin = () => {
                     role: "member",
                     status: " "
                 }
-                // console.log(userInfo)
 
                 axiosPublic.post('/users', userInfo)
                     .then((res) => {
@@ -33,7 +31,7 @@ const GoogleLogin = () => {
                 navigate('/')
             })
             .catch(err => {
-                console.log(err.message)
+                toast.log(err.message)
             })
     }
 

@@ -30,7 +30,7 @@ const AppliedTrainerDetails = () => {
     }
     // modal info end
     const [accepted, setAccepted] = useState('trainer')
-    // console.log(accepted)
+  
     const { id } = useParams()
     const axiosSecure = useAxiosSecure()
 
@@ -38,7 +38,7 @@ const AppliedTrainerDetails = () => {
         queryKey: ['trainerDetails', id],
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/users-details/${id}`)
-            // console.log(data)
+           
             return data
         }
     })
@@ -47,18 +47,15 @@ const AppliedTrainerDetails = () => {
         trainingInfo, trainingPrograms, otherInfo, _id } = trainerDetails || {}
 
     if (isLoading) return <Loading />
-    // if (!trainerDetails) return <p>No data found</p>
-    // console.log(trainerDetails)
 
 
 
 
     // handle user role & status update
     const handleAccpted = async (acceptedData) => {
-        console.log('Confirmed clicked', acceptedData)
         try {
             const { data } = await axiosSecure.patch(`/users-role-update/${email}`, { role: acceptedData })
-            console.log(data)
+           
             if (data.modifiedCount > 0) {
                 toast.success('Trainer request approved');
                 navigate('/dashboard/applied-trainer')
@@ -68,22 +65,22 @@ const AppliedTrainerDetails = () => {
             }
         }
         catch (error) {
-            console.error('Error updating user role', error)
+            toast.error('Error updating user role', error)
         }
     }
 
 
     // handle reject button by updating his status
     const onSubmit = async (data) => {
-        console.log('Submitted Data:', data);
+  
 
         const rejectInfo = {
             rejectReason: data.otherInfo
         }
-        console.log(rejectInfo)
+      
         try {
             const { data } = await axiosSecure.patch(`/users-role-updateForReject/${email}`, { rejectInfo })
-            console.log(data)
+          
             if (data.modifiedCount > 0) {
                 toast.success('Trainer request Rejected');
                 navigate('/dashboard/applied-trainer')
@@ -93,7 +90,7 @@ const AppliedTrainerDetails = () => {
             }
         }
         catch (error) {
-            console.error('Error updating user role', error)
+            toast.error('Error updating user role', error)
         }
 
 
@@ -170,12 +167,6 @@ const AppliedTrainerDetails = () => {
                         </div>
 
                         <div className="mt-6 flex justify-between">
-                            {/* <button
-                                className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition"
-                                onClick={() => console.log('Reject clicked')}
-                            >
-                                Reject
-                            </button> */}
                             <Button
                                 onClick={open}
                                 className="rounded-md bg-red-600 py-2 px-4 text-sm font-medium text-white focus:outline-none data-[hover]:bg-black/30 data-[focus]:outline-1 data-[focus]:outline-white"

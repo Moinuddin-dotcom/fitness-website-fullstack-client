@@ -15,7 +15,6 @@ const ModalOfReview = ({ isOpen, close }) => {
     const axiosSecure = useAxiosSecure()
     const [users,] = useUser()
     const navigate = useNavigate()
-    // console.log(users)
     const handleSubmit = async () => {
         const reviewData = {
             feedbackUserName: users?.name,
@@ -23,16 +22,14 @@ const ModalOfReview = ({ isOpen, close }) => {
             feedback: feedback,
             rating: rating,
         };
-        console.log(reviewData);
 
         try {
             const { data } = await axiosSecure.post('/reviews', reviewData)
-            console.log("Review posted successfully", data)
             toast.success("Your review has been posted successfully")
             close()
             navigate('/trainer')
         } catch (error) {
-            console.log('Can not submit feedback', error);
+            toast.error('Can not submit feedback', error.message);
         }
     }
 

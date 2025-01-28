@@ -14,7 +14,6 @@ import Typography from '@mui/material/Typography';
 import { Divider } from '@mui/material';
 
 const CustomerOpiniounData = ({ reviews }) => {
-    console.log(reviews)
     const { feedback, feedbackUserName, feedbackUserPhoto, rating } = reviews || {}
     return (
         <div className='md:py-10 lg:py-40 '>

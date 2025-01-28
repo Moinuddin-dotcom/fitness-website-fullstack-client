@@ -6,7 +6,6 @@ import { Helmet } from 'react-helmet'
 
 const Main = () => {
     const location = useLocation()
-    // console.log(location)
 
     const isLogin = location.pathname.includes('login')
     const isRegister = location.pathname.includes('register')

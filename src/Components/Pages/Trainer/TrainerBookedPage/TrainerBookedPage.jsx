@@ -15,34 +15,28 @@ const TrainerBookedPage = () => {
     const { id, exp } = useParams();
     const axiosSecure = useAxiosSecure()
     const [users,] = useUser()
-    console.log(users)
-    // console.log(id, exp);
-    // const { bookedById } = useParams()
-
 
 
     const { data: trainerBookings, isLoading: trainerBookingsLoading } = useQuery({
         queryKey: ['trainerBookings', id],
         queryFn: async () => {
             const { data } = await axiosSecure(`/trainer-bookings/${id}`)
-            // console.log(data)
+         
             return data
         }
     })
-    console.log(trainerBookings)
-
 
 
     const { data: usersData, isLoading } = useQuery({
         queryKey: ['users', id],
         queryFn: async () => {
             const { data } = await axiosSecure(`/single-trainer-data/${id}`)
-            // console.log(data)
+          
             return data
         }
     })
     if (isLoading || trainerBookingsLoading) return <Loading />
-    console.log(usersData)
+  
 
     const trainerInfo = {
         trainerId: id,
@@ -52,7 +46,7 @@ const TrainerBookedPage = () => {
         // bookedUserName: users?.name
     }
 
-    console.log(trainerInfo)
+    
 
     return (
         <div className=''>

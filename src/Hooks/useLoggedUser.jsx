@@ -12,7 +12,6 @@ const useLoggedUser = () => {
             const { data } = await axiosSecure.get('/logedInUser', {
                 headers: { authorization: `Bearer ${token}` },
             });
-            // console.log(data)
             return data;
         }
     })

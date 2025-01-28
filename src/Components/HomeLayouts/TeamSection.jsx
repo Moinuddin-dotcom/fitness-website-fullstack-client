@@ -55,7 +55,6 @@ const TeamSection = () => {
 
     const [trainers, isLoading] = useTrainers()
     if (isLoading) return <Loading />
-    console.log(trainers)
     const topThreeTrainers = trainers.slice(0, 3)
     return (
         <div className=' max-w-[80vw] mx-auto pl-8 my-28 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-center items-center'>

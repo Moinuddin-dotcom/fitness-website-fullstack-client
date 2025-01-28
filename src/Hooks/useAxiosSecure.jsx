@@ -17,8 +17,6 @@ const useAxiosSecure = () => {
         } else {
             console.log("No token found in the interceptor")
         }
-        // console.log('Config in the interceptor-->', config)
-        // console.log('Token in the interceptor-->', token)
         return config
     }, (error) => {
         return Promise.reject(error)

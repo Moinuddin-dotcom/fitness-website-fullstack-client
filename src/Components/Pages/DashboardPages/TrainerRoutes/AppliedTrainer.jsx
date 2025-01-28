@@ -19,13 +19,12 @@ const AppliedTrainer = () => {
         queryKey: ['appliedTrainers', user?.email],
         queryFn: async () => {
             const { data } = await axiosSecure(`/users/${user?.email}`)
-            // console.log(data)
+          
             return data
 
         }
     })
     if (isLoading) return <Loading />
-    console.log(appliedTrainers)
     return (
         <div className='max-w-[80vw] mx-auto my-10'>
             <Helmet>

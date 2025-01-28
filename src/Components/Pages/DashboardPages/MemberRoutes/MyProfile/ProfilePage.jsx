@@ -29,7 +29,6 @@ const ProfilePage = () => {
 
 
     const [users, isLoading, refetch] = useUser()
-    // console.log(users)
     if (isLoading) return <Loading />
     return (
         <div className='flex justify-center items-center my-28'>
@@ -58,19 +57,8 @@ const ProfilePage = () => {
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                             </svg>
                         </Button>
-
-
-
-                        {/* update */}
-                        {/* <Button
-                            onClick={open}
-                            className="rounded-md bg-black/20 py-2 px-4 text-sm font-medium text-white focus:outline-none data-[hover]:bg-black/30 data-[focus]:outline-1 data-[focus]:outline-white"
-                        >
-                            Open dialog
-                        </Button> */}
-
                         <UpdateProfileModal close={close} isOpen={isOpen} refetch={refetch} />
-                        {/* update */}
+                    
                     </CardFooter>
                 </Card>
             </div>

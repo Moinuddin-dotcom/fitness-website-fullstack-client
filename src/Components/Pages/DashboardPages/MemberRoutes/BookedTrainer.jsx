@@ -30,18 +30,15 @@ const BookedTrainer = () => {
         setIsOpen(false)
     }
     const [users, isLoading] = useUser()
-    // console.log(users)
     const axiosSecure = useAxiosSecure()
     const { data: bookedTrainerData = [], isLoading: bookedTrainerDataLoading } = useQuery({
         queryKey: ['bookedTrainerData', users?.email],
         queryFn: async () => {
             const { data } = await axiosSecure(`/payment-info/${users?.email}`)
-            // console.log(res.data)
             return data
         },
     })
     if (isLoading || bookedTrainerDataLoading) return <Loading />
-    console.log(bookedTrainerData)
 
     const { bookingUserEmail, bookingUserName, date, packageName,
         price, trainerInfo, transactionId

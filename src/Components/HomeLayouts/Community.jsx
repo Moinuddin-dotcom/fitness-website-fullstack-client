@@ -8,7 +8,6 @@ import SectionTitles from '../SharedMarque/SectionTitles'
 
 const Community = () => {
     const [blogData, blogLoading] = useBlog()
-    // console.log(blogData)
     if (blogLoading) return <Loading />
     return (
         <div className=''>
