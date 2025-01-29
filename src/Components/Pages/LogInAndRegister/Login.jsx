@@ -8,17 +8,18 @@ import toast from 'react-hot-toast';
 import GoogleLogin from './GoogleLogin';
 
 const Login = () => {
-  const { signIn } = useAuth()
+  const { signIn, setLoading } = useAuth()
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = (data) => {
-   
+
     signIn(data.email, data.password)
       .then(res => {
         const user = res.user
         toast.success("User log in successfully", user)
-        navigate('/')
+        setLoading(true)
+        // navigate('/')
       })
       .catch(err => {
         toast.error("Error logged in user: ", err.message)

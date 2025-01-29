@@ -15,22 +15,27 @@ import SectionTitles from '../../SharedMarque/SectionTitles';
 
 const AllClasses = () => {
     const [adminClasses, isLoading] = useClasses()
+    // console.log(adminClasses)
     const [currentPage, setCurrentPage] = useState(1)
-    const itemPerPage = 5;
+    const itemPerPage = 6;
 
     const startPage = (currentPage - 1) * itemPerPage
     const endPage = startPage + itemPerPage
     const paginateClass = adminClasses.slice(startPage, endPage)
+   
+    // const paginateClass = Array.isArray(adminClasses) ? adminClasses.slice(startPage, endPage) : [];
+
 
     const totalPages = Math.ceil(adminClasses.length / itemPerPage)
 
     const handlePageChange = (e, v) => {
         setCurrentPage(v)
     }
+    console.log(paginateClass)
     if (isLoading) return <Loading />
     return (
         <div>
-             <SectionTitles subHeading={'See Our Classes'} heading={'Classes'} />
+            <SectionTitles subHeading={'See Our Classes'} heading={'Classes'} />
             <Helmet>
                 <title>All Classes | Aura Fusion Gym</title>
             </Helmet>
@@ -43,7 +48,7 @@ const AllClasses = () => {
                     :
                     <>
                         <div className='max-w-[80vw] mx-auto my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-                            {paginateClass.map(classCard =>
+                            {paginateClass?.map(classCard =>
                                 <Card key={classCard._id} sx={{ maxWidth: 345 }}>
                                     <CardMedia
                                         component="img"
@@ -62,7 +67,7 @@ const AllClasses = () => {
                                     </CardContent>
                                     <CardFooter className="flex items-center justify-between border-2 border-t">
                                         <div className="flex items-center -space-x-3">
-                                            {classCard.slot.map((img, idx) =>
+                                            {classCard?.slot?.map((img, idx) =>
                                                 <Link key={idx} to={`/trainerDetails/${img?.bookedById}`}>
                                                     <Tooltip content={img?.bookedByName}>
                                                         <Avatar

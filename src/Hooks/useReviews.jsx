@@ -1,11 +1,11 @@
 import React from 'react'
-import useAxiosSecure from './useAxiosSecure'
+// import useAxiosSecure from './useAxiosSecure'
 import { useQuery } from '@tanstack/react-query'
 import useAuth from './useAuth'
 import useAxiosPublic from './useAxiosPublic'
 
 const useReviews = () => {
-    const axiosSecure = useAxiosSecure()
+    // const axiosSecure = useAxiosSecure()
     const axiosPublic = useAxiosPublic()
 
     const { user } = useAuth()
@@ -13,7 +13,7 @@ const useReviews = () => {
         queryKey: ['reviews'],
         // enabled: !!user,
         queryFn: async () => {
-            const response = await axiosSecure('/reviews')
+            const response = await axiosPublic('/reviews')
             return response.data
         }
     })
