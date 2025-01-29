@@ -17,6 +17,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import { useQuery } from '@tanstack/react-query';
+import useAuth from '../../Hooks/useAuth';
 
 
 const ExpandMore = styled((props) => {
@@ -51,11 +54,28 @@ const TeamSection = () => {
     };
 
 
+    const axiosPublic = useAxiosPublic()
+    const { user, loading } = useAuth()
+    // console.log(loading)
+    const { data: trainers = [], isLoading } = useQuery({
+        queryKey: ['trainer', user?.email],
+        // enabled: !loading && !!user?.email && !localStorage.getItem('access-token'),
+        queryFn: async () => {
+            const { data } = await axiosPublic(`/users/all-trainers/role?role=trainer`)
+            return data
+        }
+    })
 
-
-    const [trainers, isLoading] = useTrainers()
-    if (isLoading) return <Loading />
+    console.log(trainers)
     const topThreeTrainers = trainers.slice(0, 3)
+    console.log(topThreeTrainers)
+    if (isLoading || loading) return <Loading />
+
+
+
+
+
+    // const [trainers, isLoading] = useTrainers()
     return (
         <div className=' max-w-[80vw] mx-auto pl-8 my-28 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-center items-center'>
             {/* <h1>TeamSection(Pending)</h1>

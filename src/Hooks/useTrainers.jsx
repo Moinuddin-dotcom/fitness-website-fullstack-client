@@ -9,13 +9,14 @@ const useTrainers = () => {
     console.log(loading)
     const { data: trainers = [], isLoading } = useQuery({
         queryKey: ['trainer', user?.email],
-        enabled: !loading && !!user?.email && !localStorage.getItem('access-token'),
+        // enabled: !loading && !!user?.email && !localStorage.getItem('access-token'),
         queryFn: async () => {
             const { data } = await axiosSecure(`/users/all-trainers/role?role=trainer`)
-          
+            console.log(data)
             return data
         }
     })
+    console.log(trainers)
     return [trainers, isLoading]
 }
 

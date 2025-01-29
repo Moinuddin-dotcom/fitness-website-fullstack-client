@@ -12,6 +12,7 @@ import SectionTitles from '../../SharedMarque/SectionTitles';
 const Trainer = () => {
 
     const [trainers, isLoading] = useTrainers()
+    console.log(trainers)
     if (isLoading) return <Loading />
 
     return (
