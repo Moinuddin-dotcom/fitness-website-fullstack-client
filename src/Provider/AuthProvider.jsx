@@ -48,10 +48,10 @@ const AuthProvider = ({ children }) => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             console.log("Current user=> ", currentUser)
             setUser(currentUser)
-            setLoading(true)
+            // setLoading(true)
             if (currentUser) {
                 const existingToken = localStorage.getItem('access-token');
-                setLoading(false)
+                // setLoading(false)
                 if (!existingToken) {
                     // get token and store client
                     const userInfo = { email: currentUser.email }
@@ -68,10 +68,10 @@ const AuthProvider = ({ children }) => {
                 // TODO: remove token
                 // if somehow token is null then remove token
                 localStorage.removeItem('access-token')
-                setLoading(false)
+                // setLoading(false)
                 // setUser(currentUser)
             }
-            // setLoading(false)
+            setLoading(false)
         })
         return () => {
             unSubscribe()

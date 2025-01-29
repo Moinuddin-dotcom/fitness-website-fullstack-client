@@ -18,8 +18,8 @@ const Login = () => {
       .then(res => {
         const user = res.user
         toast.success("User log in successfully", user)
-        setLoading(true)
-        // navigate('/')
+        // setLoading(true)
+        navigate('/')
       })
       .catch(err => {
         toast.error("Error logged in user: ", err.message)
