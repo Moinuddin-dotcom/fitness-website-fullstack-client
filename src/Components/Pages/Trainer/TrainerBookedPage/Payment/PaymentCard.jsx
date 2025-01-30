@@ -18,7 +18,7 @@ const PaymentCard = ({ trainerInfo }) => {
     try {
         useEffect(() => {
             const cardData = async () => {
-                const res = await fetch('/public/MemberShipPlans.json')
+                const res = await fetch('/MemberShipPlans.json')
                 const data = await res.json()
                 setCardData(data)
             }

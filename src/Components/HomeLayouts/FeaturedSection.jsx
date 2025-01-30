@@ -6,7 +6,7 @@ import SectionTitles from '../SharedMarque/SectionTitles';
 const FeaturedSection = () => {
     const [features, setFeatures] = useState([])
     const featureData = async () => {
-        const res = await fetch('/public/feature.json')
+        const res = await fetch('/feature.json')
         const data = await res.json()
         setFeatures(data)
     }
