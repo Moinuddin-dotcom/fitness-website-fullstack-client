@@ -58,17 +58,17 @@
 
 **1️⃣ Clone the Repository**
 
-    -git clone https://github.com/yourusername/aura-fusion-gym.git
-    -cd aura-fusion-gym
+    git clone https://github.com/yourusername/aura-fusion-gym.git
+    cd aura-fusion-gym
 
 **2️⃣ Install Dependencies**
 
-    -npm install
+    npm install
 
 
 **3️⃣ Run the Development Server**
 
-    -npm run dev
+    npm run dev
 
 
 Ensure you have your .env file set up with API keys and database credentials.
