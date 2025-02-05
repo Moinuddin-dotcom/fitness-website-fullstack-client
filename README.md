@@ -81,5 +81,5 @@ Ensure you have your .env file set up with API keys and database credentials.
 
 
     -📧 Email: moinchy7@gmail.com
-    -🔗 LinkedIn: in/md-moinuddin-chowdhury-67098123b
+    -🔗 LinkedIn: https://www.linkedin.com/in/md-moinuddin-chowdhury-67098123b/?originalSubdomain=bd
     -🔗 GitHub: https://github.com/Moinuddin-dotcom
