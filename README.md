@@ -7,22 +7,26 @@
 
 
 **🔥 Features**
-*🏆 User Roles & Dashboard Access*
-✅ Admin Dashboard:
+**🏆 User Roles & Dashboard Access**
+**✅ Admin Dashboard:**
 
-Balance Management
-My Profile
-Newsletter Subscribers
-Applied Trainers
-Manage Trainers
-Add Classes & Forums
-✅ Trainer Dashboard:
+    -Balance Management
+    -My Profile
+    -Newsletter Subscribers
+    -Applied Trainers
+    -Manage Trainers
+    -Add Classes & Forums
+
+
+**✅ Trainer Dashboard:**
 
 My Profile
 Manage Slots
 Add New Slots
 Add Forum
-✅ Member Dashboard:
+
+
+**✅ Member Dashboard:**
 
 My Profile
 Activity Log
