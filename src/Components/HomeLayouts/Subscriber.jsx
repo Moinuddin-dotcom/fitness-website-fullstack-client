@@ -31,12 +31,15 @@ const Subscriber = () => {
 
     return (
         <>
-            <SectionTitles subHeading={'Get Notification'} heading={'Subscribe'} />
+            <div className='px-4'>
+
+                <SectionTitles subHeading={'Get Notification'} heading={'Subscribe'} />
+            </div>
             <div className="flex items-center justify-center min-h-screen py-16">
-                <div className="bg-white rounded-lg shadow-lg w-full md:max-w-[90vw] lg:max-w-[50vw] h-96 overflow-hidden">
-                    <div className="grid grid-cols-2 ">
+                <div className="bg-white md:rounded-lg shadow-lg w-full md:max-w-[90vw] lg:max-w-[50vw] h-96 overflow-hidden">
+                    <div className="px-10 py-5 md:grid grid-cols-2 ">
                         <div className='hidden md:flex'>
-                            <img src={subscribeImage} className=' h-96' alt="" />
+                            <img src={subscribeImage} className='w-[500px] h-96' alt="" />
                         </div>
                         <div className=" md:p-6">
                             <h2 className="text-2xl font-bold text-gray-800 mb-2 ">HEY, WAIT...</h2>

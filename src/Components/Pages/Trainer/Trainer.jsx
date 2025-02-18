@@ -18,7 +18,8 @@ const Trainer = () => {
     return (
         <>
             <SectionTitles subHeading={'Experienced Trainers'} heading={'Trainers'} />
-            <div className="xl:max-w-[80vw] mx-auto shadow-xl shadow-yellow-900 rounded-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-10">
+            {/* <div className="max-w-[95vw] xl:max-w-[80vw] mx-auto shadow-xl shadow-yellow-900 rounded-xl grid grid-cols-1 md:grid-cols-2 gap-5 my-10"> */}
+            <div className="max-w-[95vw] xl:max-w-[80vw] mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 my-10">
                 <Helmet>
                     <title>Trainers | Aura Fusion Gym</title>
                 </Helmet>

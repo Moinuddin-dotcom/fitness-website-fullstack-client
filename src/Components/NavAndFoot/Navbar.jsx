@@ -1,6 +1,6 @@
 import { Button, Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { Bars3Icon, BellIcon, UserCircleIcon, XMarkIcon } from '@heroicons/react/16/solid'
-import React from 'react'
+import { Bars3Icon, BellIcon, MoonIcon, SunIcon, UserCircleIcon, XMarkIcon } from '@heroicons/react/16/solid'
+import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import websiteLogo from '../../../src/assets/Animation - Website-logo.json'
 import Lottie from 'lottie-react'
@@ -18,12 +18,26 @@ import {
 
 const Navbar = () => {
     const { user, logout } = useAuth()
+    const [darkMode, setDarkMode] = useState(
+        localStorage.getItem("theme") === "dark"
+    );
+
+    useEffect(() => {
+        if (darkMode) {
+            document.documentElement.classList.add("dark");
+            localStorage.setItem("theme", "dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+            localStorage.setItem("theme", "light");
+        }
+    }, [darkMode]);
+
     const navLinks = <>
-        <NavLink to={'/'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-green-400 font-semibold" : ""} >Home</NavLink>
-        <NavLink to={'/trainer'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-green-400 font-semibold" : ""}>Trainer</NavLink>
-        <NavLink to={'/all-classes'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-green-400 font-semibold" : ""}>Classes </NavLink>
-        <NavLink to={'/dashboard'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-green-400 font-semibold" : ""}>Dashboard</NavLink>
-        <NavLink to={'/community'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-green-400 font-semibold" : ""}>Community</NavLink>
+        <NavLink to={'/'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-black  dark:text-[#91edb1] font-semibold" : " text-black dark:text-[#e8f7ed]"} >Home</NavLink>
+        <NavLink to={'/trainer'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-black  dark:text-[#91edb1] font-semibold" : "text-black dark:text-[#e8f7ed]"}>Trainer</NavLink>
+        <NavLink to={'/all-classes'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-black  dark:text-[#91edb1] font-semibold" : "text-black dark:text-[#e8f7ed]"}>Classes </NavLink>
+        <NavLink to={'/dashboard'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-black  dark:text-[#91edb1] font-semibold" : "text-black dark:text-[#e8f7ed]"}>Dashboard</NavLink>
+        <NavLink to={'/community'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-black  dark:text-[#91edb1] font-semibold" : "text-black dark:text-[#e8f7ed]"}>Community</NavLink>
 
     </>
 
@@ -35,8 +49,8 @@ const Navbar = () => {
 
 
     return (
-        <div>
-            <Disclosure as="nav" className="fixed z-10 w-full bg-white/25">
+        <div className=''>
+            <Disclosure as="nav" className="fixed z-10 w-full bg-white dark:bg-white/25">
                 <div className=" px-2 py-4 sm:px-6 lg:px-8 ">
                     <div className="relative flex h-16 items-center justify-between">
                         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -69,7 +83,7 @@ const Navbar = () => {
                                     </div>
                                     <div className='hidden lg:flex flex-col'>
                                         <h1 className='font-bold text-xl text-start'>Aura Fusion Gym</h1>
-                                        <h3 className=' text-green-500 text-sm text-start'>Fitness & Yoga</h3>
+                                        <h3 className='text-[#91edb1] text-sm text-start'>Fitness & Yoga</h3>
                                     </div>
                                 </Button>
                             </Link>
@@ -80,11 +94,17 @@ const Navbar = () => {
                                 </div>
                             </div>
                         </div>
+                        <button
+                            onClick={() => setDarkMode(!darkMode)}
+                            className="btn btn-ghost btn-circle"
+                        >
+                            {darkMode ? <SunIcon className="w-6 h-6 text-yellow-400" /> : <MoonIcon className="w-6 h-6 text-blue-600" />}
+                        </button>
                         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 
                             {
                                 user && user?.email ? <div>
-                                    <p className='md:text-xl font-bold'>Welcome!</p> <p className='hidden lg:flex text-green-500'>{user?.displayName}</p>
+                                    <p className='md:text-xl font-bold text-[#08170d] dark:text-[#e8f7ed] hidden md:flex'>Welcome!</p> <p className='hidden lg:flex text-[#08170d] dark:text-[#91edb1]'>{user?.displayName}</p>
                                 </div>
                                     :
                                     <Link to={'/login'}>

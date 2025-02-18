@@ -83,13 +83,7 @@ export const Router = createBrowserRouter([
                         <PaymentPage />
                     </PrivateRoute>
             },
-            {
-                path: "/community",
-                element:
-                    <PrivateRoute>
-                        <Community />
-                    </PrivateRoute>
-            },
+            
             {
                 path: "/home-community",
                 element:
@@ -114,6 +108,13 @@ export const Router = createBrowserRouter([
             },
 
         ]
+    },
+    {
+        path: "/community",
+        element:
+            <PrivateRoute>
+                <Community />
+            </PrivateRoute>
     },
     {
         path: "dashboard",

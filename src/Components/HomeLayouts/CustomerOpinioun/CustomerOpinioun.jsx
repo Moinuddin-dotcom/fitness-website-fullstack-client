@@ -23,7 +23,10 @@ const CustomerOpinioun = () => {
     if (isLoading) return <Loading />
     return (
         <div className=' md:max-w-[60vw] mx-auto'>
+            <div className='px-4'>
+
              <SectionTitles subHeading={'What People Saying?'} heading={'Reviews'} />
+            </div>
 
             <Swiper
                 spaceBetween={30}

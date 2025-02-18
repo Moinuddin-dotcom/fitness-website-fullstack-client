@@ -5,13 +5,14 @@ import CommunityRoutes from './CommunityRoutes/CommunityRoutes'
 import BlogSection from './CommunityRoutes/BlogSection'
 import { Helmet } from 'react-helmet'
 import SectionTitles from '../SharedMarque/SectionTitles'
+import Footer from '../NavAndFoot/Footer'
 
 const Community = () => {
     const [blogData, blogLoading] = useBlog()
     if (blogLoading) return <Loading />
     return (
-        <div className=''>
-             <SectionTitles subHeading={'Why Choose Us?'} heading={'Features'} />
+        <div className='pt-0'>
+            {/* <SectionTitles subHeading={'Why Choose Us?'} heading={'Features'} /> */}
             <Helmet>
                 <title>Community | Aura Fusion Gym</title>
             </Helmet>
@@ -26,6 +27,9 @@ const Community = () => {
                 </> : <h1 className='text-5xl font-bold py-20 text-center h-screen'>No Blogs found</h1>}
 
             </section>
+            <footer>
+                <Footer />
+            </footer>
         </div>
     )
 }

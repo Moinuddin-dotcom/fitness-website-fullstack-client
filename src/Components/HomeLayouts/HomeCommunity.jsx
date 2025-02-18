@@ -16,30 +16,33 @@ const HomeCommunity = () => {
     if (blogLoading) return <Loading />
     return (
         <>
-             <SectionTitles subHeading={'Latest Community posts'} heading={'Community'} />
-        <div className='max-w-[85vw] mx-auto my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
-            {blogData.slice(0, 6).map(blog =>
-                <Card sx={{ maxWidth: 345 }} key={blog._id}>
-                    <CardMedia
-                        sx={{ height: 140 }}
-                        image={blog.blogImage}
-                        title="green iguana"
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                            {blog.title}
-                        </Typography>
-                        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                            Posted by: <strong>{blog.addedbyRole}</strong>
-                        </Typography>
-                        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                            {blog.descriptionOfBlog.slice(0, 60)}
+        <div className='px-4'>
 
-                        </Typography>
-                    </CardContent>
-                </Card>
-            )}
+            <SectionTitles subHeading={'Latest Community posts'} heading={'Community'} />
         </div>
+            <div className='px-2 md:max-w-[85vw] mx-auto my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
+                {blogData.slice(0, 6).map(blog =>
+                    <Card sx={{ maxWidth: 345 }} key={blog._id}>
+                        <CardMedia
+                            sx={{ height: 140 }}
+                            image={blog.blogImage}
+                            title="green iguana"
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                {blog.title}
+                            </Typography>
+                            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                                Posted by: <strong>{blog.addedbyRole}</strong>
+                            </Typography>
+                            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                                {blog.descriptionOfBlog.slice(0, 60)}
+
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                )}
+            </div>
         </>
     )
 }

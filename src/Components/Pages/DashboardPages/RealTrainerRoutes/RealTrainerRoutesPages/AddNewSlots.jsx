@@ -19,6 +19,12 @@ const selectClass = [
     { value: 'Boxing Basics', label: 'Boxing Basics' },
     { value: 'Zumba Rhythms', label: 'Zumba Rhythms' },
     { value: 'Kettlebell Power', label: 'Kettlebell Power' },
+    { value: 'Powerhouse Pump', label: 'Powerhouse Pump' },
+    { value: 'Iron Warriors', label: 'Iron Warriors' },
+    { value: 'Barbell Brigade', label: 'Barbell Brigade' },
+    { value: 'Strength Surge', label: 'Strength Surge' },
+    { value: 'Lifting Legends', label: 'Lifting Legends' },
+    { value: 'Cardio Crushers', label: 'Cardio Crushers' },
 ];
 
 const AddNewSlots = () => {
@@ -74,7 +80,7 @@ const AddNewSlots = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                         <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700">Your name is</label>
+                            <label className="block text-sm font-medium text-white">Your name is</label>
                             <input
                                 type="text"
                                 defaultValue={name}
@@ -85,7 +91,7 @@ const AddNewSlots = () => {
                         </div>
 
                         <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700">Email</label>
+                            <label className="block text-sm font-medium text-white">Email</label>
                             {/* Email */}
                             <input
                                 type="email"
@@ -99,7 +105,7 @@ const AddNewSlots = () => {
 
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                         <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700">Age</label>
+                            <label className="block text-sm font-medium text-white">Age</label>
                             {/* Age */}
                             <input
                                 type="number"
@@ -110,19 +116,19 @@ const AddNewSlots = () => {
                             {errors.age && <p className="text-red-500 text-sm">{errors.age.message}</p>}
                         </div>
 
-                        <div className="mb-4">
+                        {/* Profile image */}
+                        {/* <div className="mb-4">
                             <label className="block text-sm font-medium text-gray-700">Profile Image</label>
-                            {/* Profile image */}
                             <input
                                 type="image"
                                 defaultValue={image}
                                 {...register(`${user?.photoURL}`, { required: 'Profile Image is required' })}
                                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
                             />
-                        </div>
+                        </div> */}
                     </div>
                     <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700">Skills</label>
+                        <label className="block text-sm font-medium text-white">Skills</label>
                         {/* skills */}
                         <textarea
                             defaultValue={skills}
@@ -134,32 +140,79 @@ const AddNewSlots = () => {
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
 
                         <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700">Available Days</label>
+                            <label className="block text-sm font-medium text-white">Available Days</label>
                             {/* Available Days */}
                             <Select
                                 isMulti
                                 name="availableDays"
                                 defaultValue={availableDays}
                                 className="mt-1 "
-                                readOnly
+                                isDisabled={true} // 'readOnly' is not a valid prop in react-select, use 'isDisabled' instead
+                            styles={{
+                                control: (baseStyles) => ({
+                                    ...baseStyles,
+                                    backgroundColor: "lightblue", // Change to your preferred color
+                                    color: "black", // Adjust text color
+                                }),
+                                multiValue: (baseStyles) => ({
+                                    ...baseStyles,
+                                    backgroundColor: "lightblue", // Background for selected options
+                                }),
+                                multiValueLabel: (baseStyles) => ({
+                                    ...baseStyles,
+                                    color: "black", // Text color for selected options
+                                }),
+                                multiValueRemove: (baseStyles) => ({
+                                    ...baseStyles,
+                                    color: "red",
+                                    ":hover": {
+                                        backgroundColor: "darkred",
+                                        color: "white",
+                                    },
+                                }),
+                            }}
                             />
                             {errors.availableDays && <p className="text-red-500 text-sm">{errors.availableDays.message}</p>}
                         </div>
                         <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700">Available TimeZone: </label>
+                            <label className="block text-sm font-medium text-white">Available TimeZone: </label>
                             {/* Available availableTimeZone */}
                             <Select
                                 isMulti
                                 name="availableTimeZone"
                                 defaultValue={availableTimeZone}
                                 className="mt-1 "
+                                isDisabled={true} // 'readOnly' is not a valid prop in react-select, use 'isDisabled' instead
+                            styles={{
+                                control: (baseStyles) => ({
+                                    ...baseStyles,
+                                    backgroundColor: "lightblue", // Change to your preferred color
+                                    color: "black", // Adjust text color
+                                }),
+                                multiValue: (baseStyles) => ({
+                                    ...baseStyles,
+                                    backgroundColor: "lightblue", // Background for selected options
+                                }),
+                                multiValueLabel: (baseStyles) => ({
+                                    ...baseStyles,
+                                    color: "black", // Text color for selected options
+                                }),
+                                multiValueRemove: (baseStyles) => ({
+                                    ...baseStyles,
+                                    color: "red",
+                                    ":hover": {
+                                        backgroundColor: "darkred",
+                                        color: "white",
+                                    },
+                                }),
+                            }}
                             />
                             {errors.availableTimeZone && <p className="text-red-500 text-sm">{errors.availableTimeZone.message}</p>}
                         </div>
                     </div>
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                         <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700">Available Time(In a day)</label>
+                            <label className="block text-sm font-medium text-white">Available Time(In a day)</label>
                             {/* Available Time hrs */}
                             <input
                                 type="text"
@@ -172,7 +225,7 @@ const AddNewSlots = () => {
                         </div>
 
                         <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700">Qualifications and Certifications</label>
+                            <label className="block text-sm font-medium text-white">Qualifications and Certifications</label>
                             {/* Qualifications */}
                             <input
                                 type="text"
@@ -187,20 +240,43 @@ const AddNewSlots = () => {
 
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                         <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700">Experience</label>
+                            <label className="block text-sm font-medium text-white">Experience</label>
                             {/* Experience */}
                             <Select
                                 isMulti
                                 name="experience"
                                 defaultValue={experience}
                                 className="mt-1 "
-                                readOnly
+                                isDisabled={true} // 'readOnly' is not a valid prop in react-select, use 'isDisabled' instead
+                                styles={{
+                                    control: (baseStyles) => ({
+                                        ...baseStyles,
+                                        backgroundColor: "lightblue", // Change to your preferred color
+                                        color: "black", // Adjust text color
+                                    }),
+                                    multiValue: (baseStyles) => ({
+                                        ...baseStyles,
+                                        backgroundColor: "lightblue", // Background for selected options
+                                    }),
+                                    multiValueLabel: (baseStyles) => ({
+                                        ...baseStyles,
+                                        color: "black", // Text color for selected options
+                                    }),
+                                    multiValueRemove: (baseStyles) => ({
+                                        ...baseStyles,
+                                        color: "red",
+                                        ":hover": {
+                                            backgroundColor: "darkred",
+                                            color: "white",
+                                        },
+                                    }),
+                                }}
                             />
                             {errors.experience && <p className="text-red-500 text-sm">{errors.experience.message}</p>}
                         </div>
 
                         <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700">Your expection (BDT)</label>
+                            <label className="block text-sm font-medium text-white">Your expection (BDT)</label>
                             {/* Costs and Policies */}
                             <input
                                 type="number"
@@ -213,14 +289,37 @@ const AddNewSlots = () => {
                     </div>
 
                     <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700">Training Programs</label>
+                        <label className="block text-sm font-medium text-white">Training Programs</label>
                         {/* Training Programs */}
                         <Select
                             isMulti
                             name="trainingPrograms"
                             defaultValue={trainingPrograms}
                             className="mt-1 "
-                            readOnly
+                            isDisabled={true} // 'readOnly' is not a valid prop in react-select, use 'isDisabled' instead
+                            styles={{
+                                control: (baseStyles) => ({
+                                    ...baseStyles,
+                                    backgroundColor: "lightblue", // Change to your preferred color
+                                    color: "black", // Adjust text color
+                                }),
+                                multiValue: (baseStyles) => ({
+                                    ...baseStyles,
+                                    backgroundColor: "lightblue", // Background for selected options
+                                }),
+                                multiValueLabel: (baseStyles) => ({
+                                    ...baseStyles,
+                                    color: "black", // Text color for selected options
+                                }),
+                                multiValueRemove: (baseStyles) => ({
+                                    ...baseStyles,
+                                    color: "red",
+                                    ":hover": {
+                                        backgroundColor: "darkred",
+                                        color: "white",
+                                    },
+                                }),
+                            }}
                         />
                         {/* {textareaVisible && */}
                         <textarea
@@ -233,7 +332,7 @@ const AddNewSlots = () => {
                     </div>
 
                     <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700">Other Info</label>
+                        <label className="block text-sm font-medium text-white">Other Info</label>
                         {/* otherInfo */}
                         <textarea
                             {...register('otherInfo')}
@@ -245,7 +344,7 @@ const AddNewSlots = () => {
                     <div className='border-t-4 border-gray-300 h-60 mt-8'>
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-4 my-5'>
                             <div className="mb-4">
-                                <label className="block text-sm font-medium text-gray-700">Slot name:</label>
+                                <label className="block text-sm font-medium text-white">Slot name:</label>
                                 {/* slotName */}
                                 <input
                                     type="text"
@@ -256,7 +355,7 @@ const AddNewSlots = () => {
                                 {errors.slotName && <p className="text-red-500 text-sm">{errors.slotName.message}</p>}
                             </div>
                             <div className="mb-4">
-                                <label className="block text-sm font-medium text-gray-700">Slot Time(Hours)</label>
+                                <label className="block text-sm font-medium text-white">Slot Time(Hours)</label>
                                 {/* Available Time hrs */}
                                 <input
                                     type="number"
@@ -268,9 +367,9 @@ const AddNewSlots = () => {
                             </div>
                         </div>
                         <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700">Select Class(Choose only one)</label>
+                            <label className="block text-sm font-medium text-white">Select Class(Choose only one)</label>
                             {/* Training Programs */}
-                            <Select
+                            {/* <Select
                                 isMulti
                                 name="selectClass"
 
@@ -279,8 +378,55 @@ const AddNewSlots = () => {
                                     setValue('selectClass', selected)
                                 }}
                                 className="mt-1 "
-                                readOnly
+                                
+                            /> */}
+                            <Select
+                                isMulti
+                                name="selectClass"
+                                options={selectClass}
+                                onChange={(selected) => {
+                                    setValue('selectClass', selected);
+                                }}
+                                className="mt-1"
+                                styles={{
+                                    control: (baseStyles) => ({
+                                        ...baseStyles,
+                                        backgroundColor: "lightblue", // Change to your preferred color
+                                        color: "black", // Adjust text color
+                                    }),
+                                    menu: (baseStyles) => ({
+                                        ...baseStyles,
+                                        backgroundColor: "#1e293b", // Change dropdown background
+                                    }),
+                                    option: (baseStyles, { isFocused, isSelected }) => ({
+                                        ...baseStyles,
+                                        backgroundColor: isSelected
+                                            ? "#0ea5e9" // Selected option background color
+                                            : isFocused
+                                                ? "#334155" // Hover effect color
+                                                : "#1e293b", // Default background color
+                                        color: "white", // Text color
+                                        cursor: "pointer",
+                                    }),
+                                    multiValue: (baseStyles) => ({
+                                        ...baseStyles,
+                                        backgroundColor: "lightblue", // Background for selected options
+                                    }),
+                                    multiValueLabel: (baseStyles) => ({
+                                        ...baseStyles,
+                                        color: "black", // Text color for selected options
+                                    }),
+                                    multiValueRemove: (baseStyles) => ({
+                                        ...baseStyles,
+                                        color: "red",
+                                        ":hover": {
+                                            backgroundColor: "darkred",
+                                            color: "white",
+                                        },
+                                    }),
+                                }}
                             />
+                            {/* isDisabled={true} // 'readOnly' is not a valid prop in react-select, use 'isDisabled' instead */}
                         </div>
                     </div>
 

@@ -17,7 +17,8 @@ const CustomerOpiniounData = ({ reviews }) => {
     const { feedback, feedbackUserName, feedbackUserPhoto, rating } = reviews || {}
     return (
         <div className='md:py-10 lg:py-40 '>
-            <Card color="transparent" shadow={false} className="max-w-[90vw] lg:max-w-[40vw] mx-auto bg-yellow-900 border-l border-r shadow-yellow-900 shadow-xl p-5">
+            {/* bg-[#91edb1] */}
+            <Card color="transparent" shadow={false} className="max-w-[90vw] lg:max-w-[40vw] mx-auto shadow-xl shadow-yellow-900  p-5">
                 <CardHeader
                     color="transparent"
                     floated={false}
