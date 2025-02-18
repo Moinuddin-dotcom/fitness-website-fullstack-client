@@ -14,7 +14,7 @@ const HeroSwiperSlide = ({ image, bannerImage, title, description }) => {
             }}
         >
             {/* flex items-center justify-center */}
-            <div className=' w-full min-h-screen bg-gray-900/70'>
+            <div className=' w-full min-h-screen bg-gray-900/35 dark:bg-gray-900/70'>
                 {/* <div className='grid grid-cols-1 md:grid-cols-2'> */}
                 <div className='justify-self-center items-center relative'>
                     <img src={bannerImage} alt="" className='md:h-[600px] lg:h-[800px]' />

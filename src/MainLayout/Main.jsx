@@ -12,7 +12,7 @@ const Main = () => {
     const isDashboard = location.pathname.includes('dashboard')
     const iscommunity = location.pathname.includes('community')
     return (
-        <div className='poppins bg-black text-white' >
+        <div className='poppins bg-[#eafaf0] dark:bg-black text-white' >
             <Helmet>
                 <title>Home | Aura Fusion Gym</title>
             </Helmet>

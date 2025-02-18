@@ -4,7 +4,7 @@ import AboutUsImage from './AboutUsImage'
 const AboutUs = () => {
     return (
 
-        <div className="  lg:max-w-[80vw] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-5 px-4 md:px-10 py-16 text-white">
+        <div className="  lg:max-w-[80vw] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-5 px-4 md:px-10 py-16 text-[#08170d] dark:text-white">
             {/* Text Section */}
             <div className="max-w-md space-y-4 self-center">
                 <h2 className="text-3xl font-bold ">About Us</h2>
