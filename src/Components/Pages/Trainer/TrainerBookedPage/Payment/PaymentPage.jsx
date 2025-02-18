@@ -7,7 +7,7 @@ import CheckoutForm from './CheckoutForm'
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GETWAY_PK)
 const PaymentPage = () => {
-   
+
     return (
         <div className='my-10'>
             {/* Payment page Here */}
