@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import useAuth from '../../../Hooks/useAuth';
 import GoogleLogin from './GoogleLogin';
 import useAxiosPublic from '../../../Hooks/useAxiosPublic';
+import { Button } from '@mui/material';
 
 
 
@@ -17,7 +18,7 @@ const Register = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
-      
+
         createUser(data.email, data.password)
             .then(res => {
                 const user = res.user
@@ -81,6 +82,7 @@ const Register = () => {
                     {/* Social Register */}
                     <GoogleLogin />
                     <div className="divider divider-accent text-black dark:text-white">OR</div>
+                  
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                         {/* First Name */}
                         <input
