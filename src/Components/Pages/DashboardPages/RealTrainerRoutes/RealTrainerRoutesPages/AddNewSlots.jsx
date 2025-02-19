@@ -115,17 +115,6 @@ const AddNewSlots = () => {
                             />
                             {errors.age && <p className="text-red-500 text-sm">{errors.age.message}</p>}
                         </div>
-
-                        {/* Profile image */}
-                        {/* <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700">Profile Image</label>
-                            <input
-                                type="image"
-                                defaultValue={image}
-                                {...register(`${user?.photoURL}`, { required: 'Profile Image is required' })}
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-                            />
-                        </div> */}
                     </div>
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-white">Skills</label>
@@ -148,29 +137,29 @@ const AddNewSlots = () => {
                                 defaultValue={availableDays}
                                 className="mt-1 "
                                 isDisabled={true} // 'readOnly' is not a valid prop in react-select, use 'isDisabled' instead
-                            styles={{
-                                control: (baseStyles) => ({
-                                    ...baseStyles,
-                                    backgroundColor: "lightblue", // Change to your preferred color
-                                    color: "black", // Adjust text color
-                                }),
-                                multiValue: (baseStyles) => ({
-                                    ...baseStyles,
-                                    backgroundColor: "lightblue", // Background for selected options
-                                }),
-                                multiValueLabel: (baseStyles) => ({
-                                    ...baseStyles,
-                                    color: "black", // Text color for selected options
-                                }),
-                                multiValueRemove: (baseStyles) => ({
-                                    ...baseStyles,
-                                    color: "red",
-                                    ":hover": {
-                                        backgroundColor: "darkred",
-                                        color: "white",
-                                    },
-                                }),
-                            }}
+                                styles={{
+                                    control: (baseStyles) => ({
+                                        ...baseStyles,
+                                        backgroundColor: "lightblue", // Change to your preferred color
+                                        color: "black", // Adjust text color
+                                    }),
+                                    multiValue: (baseStyles) => ({
+                                        ...baseStyles,
+                                        backgroundColor: "lightblue", // Background for selected options
+                                    }),
+                                    multiValueLabel: (baseStyles) => ({
+                                        ...baseStyles,
+                                        color: "black", // Text color for selected options
+                                    }),
+                                    multiValueRemove: (baseStyles) => ({
+                                        ...baseStyles,
+                                        color: "red",
+                                        ":hover": {
+                                            backgroundColor: "darkred",
+                                            color: "white",
+                                        },
+                                    }),
+                                }}
                             />
                             {errors.availableDays && <p className="text-red-500 text-sm">{errors.availableDays.message}</p>}
                         </div>
@@ -183,29 +172,29 @@ const AddNewSlots = () => {
                                 defaultValue={availableTimeZone}
                                 className="mt-1 "
                                 isDisabled={true} // 'readOnly' is not a valid prop in react-select, use 'isDisabled' instead
-                            styles={{
-                                control: (baseStyles) => ({
-                                    ...baseStyles,
-                                    backgroundColor: "lightblue", // Change to your preferred color
-                                    color: "black", // Adjust text color
-                                }),
-                                multiValue: (baseStyles) => ({
-                                    ...baseStyles,
-                                    backgroundColor: "lightblue", // Background for selected options
-                                }),
-                                multiValueLabel: (baseStyles) => ({
-                                    ...baseStyles,
-                                    color: "black", // Text color for selected options
-                                }),
-                                multiValueRemove: (baseStyles) => ({
-                                    ...baseStyles,
-                                    color: "red",
-                                    ":hover": {
-                                        backgroundColor: "darkred",
-                                        color: "white",
-                                    },
-                                }),
-                            }}
+                                styles={{
+                                    control: (baseStyles) => ({
+                                        ...baseStyles,
+                                        backgroundColor: "lightblue", // Change to your preferred color
+                                        color: "black", // Adjust text color
+                                    }),
+                                    multiValue: (baseStyles) => ({
+                                        ...baseStyles,
+                                        backgroundColor: "lightblue", // Background for selected options
+                                    }),
+                                    multiValueLabel: (baseStyles) => ({
+                                        ...baseStyles,
+                                        color: "black", // Text color for selected options
+                                    }),
+                                    multiValueRemove: (baseStyles) => ({
+                                        ...baseStyles,
+                                        color: "red",
+                                        ":hover": {
+                                            backgroundColor: "darkred",
+                                            color: "white",
+                                        },
+                                    }),
+                                }}
                             />
                             {errors.availableTimeZone && <p className="text-red-500 text-sm">{errors.availableTimeZone.message}</p>}
                         </div>

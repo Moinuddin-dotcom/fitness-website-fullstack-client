@@ -2,38 +2,11 @@ import { Card, Typography } from "@material-tailwind/react";
 
 const TABLE_HEAD = ["Trainer Name", "User Name", "Price", "Package Type"];
 
-const TABLE_ROWS = [
-    {
-        name: "John Michael",
-        job: "Manager",
-        date: "23/04/18",
-    },
-    {
-        name: "Alexa Liras",
-        job: "Developer",
-        date: "23/04/18",
-    },
-    {
-        name: "Laurent Perrier",
-        job: "Executive",
-        date: "19/09/17",
-    },
-    {
-        name: "Michael Levi",
-        job: "Developer",
-        date: "24/12/08",
-    },
-    {
-        name: "Richard Gran",
-        job: "Manager",
-        date: "04/10/21",
-    },
-];
 
 const PaymentTable = ({ paymentData }) => {
     return (
         <div>
-            <Card className="h-full w-full overflow-scroll">
+            <Card className="h-full w-full overflow-scroll rounded-none">
                 <h1 className="font-bold text-xl text-center py-5 underline underline-offset-4">Leatest Transaction</h1>
                 <table className="w-full min-w-max table-auto text-left">
                     <thead>

@@ -3,32 +3,19 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { PieChart } from '@mui/x-charts/PieChart';
+import { BarChart } from '@mui/x-charts/BarChart';
 
-const Chart = ({ chartData }) => {
-    const pieParams = {
-        height: 200,
-        margin: { right: 5 },
-        slotProps: { legend: { hidden: true } },
-    };
-    const formattedData = Object.entries(chartData).map(([key, value]) => ({
-        id: key,
-        value,
-    }));
+
+const Chart = ({ subscribers, paymentData }) => {
 
     return (
-        <Stack direction="row" width="100%" textAlign="center" spacing={2}>
-            <Box flexGrow={1}>
-                <Typography>Data Overview</Typography>
-                <PieChart
-                    series={[
-                        {
-                            data: formattedData,
-                        },
-                    ]}
-                    {...pieParams}
-                />
-            </Box>
-        </Stack>
+        <BarChart
+            xAxis={[{ scaleType: 'band', data: ['Subscribers', 'Payments'], label: 'Category' }]}
+            series={[
+                { data: [subscribers.length, paymentData.length], label: 'Count', color: '#1976d2' } // Blue color
+            ]}
+            className='w-[300px] h-[300px] lg:w-[500px] lg:h-[300px]'
+        />
     );
 };
 

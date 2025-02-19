@@ -30,16 +30,16 @@ const Login = () => {
       <Helmet>
         <title>Log In | Aura Fusion Gym</title>
       </Helmet>
-      <div className="flex lg:max-w-[80vw] mx-auto min-h-screen bg-black text-white p-10">
+      <div className="flex lg:max-w-[80vw] mx-auto min-h-screen dark:bg-black text-white p-10">
 
         {/* Left Panel */}
         <div className="flex-1 flex flex-col justify-center lg:px-16">
-          <h2 className="text-2xl font-bold mb-6 text-center">Log In Account</h2>
-          <p className="mb-8 text-center">Enter your email & password.</p>
+          <h2 className="text-2xl font-bold mb-6 text-center text-black dark:text-white">Log In Account</h2>
+          <p className="mb-8 text-center text-black dark:text-white">Enter your email & password.</p>
           {/* social log in */}
           <GoogleLogin />
 
-          <div className="divider divider-accent">OR</div>
+          <div className="divider divider-accent text-black dark:text-white">OR</div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {/* Email */}
@@ -70,8 +70,8 @@ const Login = () => {
             </button>
           </form>
 
-          <p className="text-gray-500 mt-4 text-center">
-            Create an account? <Link to={'/register'} className="text-white">Register</Link>
+          <p className="mt-4 text-center text-black dark:text-white">
+            Create an account? <Link to={'/register'} className="text-green-600 font-semibold">Register</Link>
           </p>
         </div>
         {/* Right Panel */}

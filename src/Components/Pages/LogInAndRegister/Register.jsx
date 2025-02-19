@@ -58,7 +58,7 @@ const Register = () => {
             <Helmet>
                 <title>Register | Aura Fusion Gym</title>
             </Helmet>
-            <div className="flex  lg:max-w-[80vw] mx-auto min-h-screen bg-black text-white p-10">
+            <div className="flex  lg:max-w-[80vw] mx-auto min-h-screen dark:bg-black text-white p-10">
                 {/* Left Panel */}
                 <div className="hidden bg-gradient-to-br from-purple-700 to-black p-12 lg:flex flex-col justify-center items-center rounded-l-xl lg:w-[30vw] xl:w-[35vw] ">
                     <h1 className="text-4xl font-bold mb-4">Aura Fusion Gym</h1>
@@ -76,11 +76,11 @@ const Register = () => {
 
                 {/* Right Panel */}
                 <div className="flex-1 flex flex-col justify-center lg:px-16">
-                    <h2 className="text-2xl font-bold mb-6 text-center">Register Account</h2>
-                    <p className="mb-8 text-center">Enter your personal data to create your account.</p>
+                    <h2 className="text-2xl font-bold mb-6 text-center text-black dark:text-white">Register Account</h2>
+                    <p className="mb-8 text-center text-black dark:text-white">Enter your personal data to create your account.</p>
                     {/* Social Register */}
                     <GoogleLogin />
-                    <div className="divider divider-accent">OR</div>
+                    <div className="divider divider-accent text-black dark:text-white">OR</div>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                         {/* First Name */}
                         <input
@@ -136,8 +136,8 @@ const Register = () => {
                         </button>
                     </form>
 
-                    <p className="text-gray-500 mt-4 text-center">
-                        Already have an account? <Link to={'/login'} className="text-white">Log in</Link>
+                    <p className=" mt-4 text-center text-black dark:text-white">
+                        Already have an account? <Link to={'/login'} className="text-green-600 font-semibold">Log in</Link>
                     </p>
                 </div>
             </div>

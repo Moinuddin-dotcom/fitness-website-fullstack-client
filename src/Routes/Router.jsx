@@ -32,6 +32,7 @@ import AdminOrTrainer from "./AdminOrTrainer";
 import Community from "../Components/HomeLayouts/Community";
 import BlogDetails from "../Components/HomeLayouts/CommunityRoutes/BlogDetails";
 import HomeCommunity from "../Components/HomeLayouts/HomeCommunity";
+import NewDash from "../Components/Dashboard/NewDash";
 
 export const Router = createBrowserRouter([
     {
@@ -120,7 +121,8 @@ export const Router = createBrowserRouter([
         path: "dashboard",
         element:
             <PrivateRoute>
-                <Dashboard />,
+                {/* <Dashboard />, */}
+                <NewDash />,
             </PrivateRoute>,
         children: [
             // Member routes

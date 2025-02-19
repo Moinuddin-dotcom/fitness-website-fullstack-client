@@ -1,6 +1,6 @@
 import { Button } from '@headlessui/react';
-import React from 'react'
-import { Helmet } from 'react-helmet'
+import React from 'react';
+import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
 import useUser from '../../../../../Hooks/useUser';
 import useAxiosPublic from '../../../../../Hooks/useAxiosPublic';
@@ -9,23 +9,20 @@ import toast from 'react-hot-toast';
 import Loading from '../../../Loading';
 import { Divider } from '@mui/material';
 
-const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY
-const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddForum = () => {
-    const axiosPublic = useAxiosPublic()
-    const axiosSecure = useAxiosSecure()
-    const [users, isLoading] = useUser()
-    const { register, handleSubmit, setValue, reset, formState: { errors } } = useForm();
-
-
+    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
+    const [users, isLoading] = useUser();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
-
-        const imageFile = { image: data.image[0] }
+        const imageFile = { image: data.image[0] };
         const response = await axiosPublic.post(image_hosting_api, imageFile, {
             headers: { 'content-type': 'multipart/form-data' }
-        })
+        });
 
         try {
             if (response.data.success) {
@@ -41,141 +38,81 @@ const AddForum = () => {
                     addedbyRole: users?.role,
                     createdAt: new Date().toISOString(),
                     tipsDescription: data.tipsAndTechniques,
-                    // nutritionDescription: data.nutritionAndDietAdvice,
                     descriptionOfBlog: data.descriptionOfBlog,
                     tipsAndTechniquesTitle: data.tipsAndTechniquesTitle,
                     nutritionAndDietAdviceTitle: data.nutritionAndDietAdviceTitle,
                     nutritionAndDietAdviceDescription: data.nutritionAndDietAdviceDescription,
                     upVote: "",
                     downVote: ""
-                    // updatedAt: new Date().toISOString(),
-                }
-                const { data: postBlog } = await axiosSecure.post('/blogs', forumData)
+                };
+                const { data: postBlog } = await axiosSecure.post('/blogs', forumData);
                 if (postBlog.insertedId) {
-                    toast.success("Blog posted successfully")
-                    reset()
+                    toast.success("Blog posted successfully");
+                    reset();
                 } else {
-                    toast.error("An error occurred while posting a blog")
+                    toast.error("An error occurred while posting a blog");
                 }
             }
         } catch (error) {
-            toast.error("An error occurred while posting a blog", error.message)
+            toast.error("An error occurred while posting a blog", error.message);
         }
-        if (isLoading) return <Loading />
-    }
+        if (isLoading) return <Loading />;
+    };
+
     return (
-        <div className='max-w-[80vw] mx-auto my-10 bg-white/5 p-5 rounded-lg shadow-xl shadow-yellow-900 border-t-2 border-yellow-900'>
+        <div className='max-w-4xl mx-auto my-10 bg-gray-800 p-6 rounded-lg shadow-lg border border-yellow-500'>
             <Helmet>
                 <title>Dashboard | Add Forum | Aura Fusion Gym</title>
             </Helmet>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <h1 className='text-xl font-semibold mb-5 text-center underline'> Add Forum</h1>
-                <div className='grid grid-cols-1 md:grid-cols-2 justify-center items-center gap-4'>
-                    <div className="mb-4">
-                        <label className="block text-md font-medium text-white">Bloge title: </label>
-                        {/* Title */}
-                        <input
-                            type="text"
-                            {...register("title", { required: 'Blog Title is required' })}
-                            className="mt-1 block w-full px-3 py-2 border border-yellow-900 bg-black/20 text-white  rounded-md"
-
-                        />
-                        {errors.title && <p className="text-red-500 text-sm">{errors.title.message}</p>}
+            <h1 className='text-2xl font-bold text-center text-white mb-6'>Add Forum</h1>
+            <form onSubmit={handleSubmit(onSubmit)} className='space-y-6'>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                    <div>
+                        <label className='block text-white font-semibold'>Blog Title:</label>
+                        <input type='text' {...register("title", { required: 'Blog Title is required' })} 
+                            className='w-full px-4 py-2 mt-2 bg-gray-900 text-white border border-yellow-500 rounded-md' />
+                        {errors.title && <p className='text-red-500 text-sm'>{errors.title.message}</p>}
                     </div>
-                    <div className="mb-4">
-                        <label className="block text-md font-medium text-white">Blog Image: </label>
-                        {/* Profile image */}
-                        <input
-                            type="file"
-                            // defaultValue={user?.photoURL}
-                            {...register("image", { required: 'Profile Image is required' })}
-                            className="mt-1 block w-full px-3 py-2 border border-yellow-900 rounded-md "
-                        />
-                        {errors.image && <p className="text-red-500 text-sm">{errors.image.message}</p>}
+                    <div>
+                        <label className='block text-white font-semibold'>Blog Image:</label>
+                        <input type='file' {...register("image", { required: 'Blog Image is required' })} 
+                            className='w-full px-4 py-2 mt-2 bg-gray-900 text-white border border-yellow-500 rounded-md' />
+                        {errors.image && <p className='text-red-500 text-sm'>{errors.image.message}</p>}
                     </div>
                 </div>
-                {/* <div className='grid grid-cols-1 md:grid-cols-2 justify-center items-center gap-4'>
-
-                    
-                </div> */}
-                <Divider />
-                <div className='grid grid-cols-1 md:grid-cols-2 justify-center items-center gap-4'>
-                    <div className='border p-5 bg-yellow-900 rounded-lg my-10'>
-                        <div className="mb-4">
-                            <label className="block text-md font-medium text-black">Tips and Techniques Image(Optional): </label>
-                            {/* Tips and Techniques image */}
-                            <input
-                                type="file"
-                                {...register("tipsAndTechniquesImage",)}
-                                className="mt-1 block w-full px-3 py-2 border border-yellow-900 rounded-md "
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label className="block text-sm font-medium text-black">Tips and Techniques Title: </label>
-                            {/* Tips and Techniques Title */}
-                            <input
-                                type="text"
-                                {...register("tipsAndTechniquesTitle", { required: 'Blog Title is required' })}
-                                className="mt-1 block w-full px-3 py-2 border border-yellow-900 bg-black/20 text-white  rounded-md"
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label className="block text-sm font-medium text-black">Tips and Techniques Description: </label>
-                            {/* Tips and Techniques Description */}
-                            <textarea
-                                {...register('tipsAndTechniques')}
-                                className="mt-1 block w-full px-3 py-2 border border-yellow-900 bg-black/20 text-black rounded-md"
-                            />
-                        </div>
+                <Divider className='bg-yellow-500' />
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                    <div className='p-4 bg-yellow-900 rounded-lg'>
+                        <label className='block text-white font-semibold'>Tips & Techniques Title:</label>
+                        <input type='text' {...register("tipsAndTechniquesTitle")} 
+                            className='w-full px-4 py-2 mt-2 bg-gray-900 text-white border border-yellow-500 rounded-md' />
+                        <label className='block text-white font-semibold mt-4'>Tips & Techniques Description:</label>
+                        <textarea {...register("tipsAndTechniques")} 
+                            className='w-full px-4 py-2 mt-2 bg-gray-900 text-white border border-yellow-500 rounded-md' />
                     </div>
-                    <div className='border p-5 bg-yellow-900 rounded-lg my-10'>
-                        <div className="mb-4">
-                            <label className="block text-md font-medium text-black">Nutrition and Diet Advice Image(Optional): </label>
-                            {/* Nutrition and Diet Advice image */}
-                            <input
-                                type="file"
-                                {...register("nutritionAndDietAdviceImage",)}
-                                className="mt-1 block w-full px-3 py-2 border border-yellow-900 rounded-md "
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label className="block text-sm font-medium text-black">Nutrition and Diet Advice Title: </label>
-                            {/* Nutrition and Diet Advice Title */}
-                            <input
-                                type="text"
-                                {...register("nutritionAndDietAdviceTitle", { required: 'Blog Title is required' })}
-                                className="mt-1 block w-full px-3 py-2 border border-yellow-900 bg-black/20 text-white  rounded-md"
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label className="block text-sm font-medium text-black">Nutrition and Diet Advice Description: </label>
-                            {/* Nutrition and Diet Advice Description */}
-                            <textarea
-                                {...register('nutritionAndDietAdviceDescription')}
-                                className="mt-1 block w-full px-3 py-2 border border-yellow-900 bg-black/20 text-black rounded-md"
-                            />
-                        </div>
+                    <div className='p-4 bg-yellow-900 rounded-lg'>
+                        <label className='block text-white font-semibold'>Nutrition & Diet Advice Title:</label>
+                        <input type='text' {...register("nutritionAndDietAdviceTitle")} 
+                            className='w-full px-4 py-2 mt-2 bg-gray-900 text-white border border-yellow-500 rounded-md' />
+                        <label className='block text-white font-semibold mt-4'>Nutrition & Diet Advice Description:</label>
+                        <textarea {...register("nutritionAndDietAdviceDescription")} 
+                            className='w-full px-4 py-2 mt-2 bg-gray-900 text-white border border-yellow-500 rounded-md' />
                     </div>
                 </div>
-                <Divider />
-                <div className="mb-4">
-                    <label className="block text-sm font-medium text-white">Description: </label>
-                    {/* otherInfo */}
-                    <textarea
-                        {...register('descriptionOfBlog')}
-                        className="mt-1 block w-full px-3 py-2 border  border-yellow-900 bg-black/20 text-white rounded-md"
-                    />
+                <Divider className='bg-yellow-500' />
+                <div>
+                    <label className='block text-white font-semibold'>Description:</label>
+                    <textarea {...register('descriptionOfBlog')} 
+                        className='w-full px-4 py-2 mt-2 bg-gray-900 text-white border border-yellow-500 rounded-md' />
                 </div>
-
-
-                <div className="mb-4 text-center">
-                    <Button type="submit" className="inline-flex justify-center items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white w-1/3 ">
+                <div className='text-center'>
+                    <Button type='submit' className='px-6 py-2 bg-yellow-500 text-white font-bold rounded-md hover:bg-yellow-600'>
                         Add Forum
                     </Button>
                 </div>
             </form>
         </div>
-    )
-}
+    );
+};
 
-export default AddForum
+export default AddForum;

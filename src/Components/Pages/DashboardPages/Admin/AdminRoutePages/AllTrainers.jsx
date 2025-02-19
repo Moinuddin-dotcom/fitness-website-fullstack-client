@@ -51,7 +51,7 @@ const AllTrainers = () => {
             <Helmet>
                 <title>Dashboard | All Trainers | Aura Fusion Gym</title>
             </Helmet>
-            <Card className="max-w-[80vw] mx-auto my-10 overflow-scroll px-6">
+            <Card className="max-w-[80vw] mx-auto my-10 overflow-scroll px-6 h-screen">
                 <h1 className='font-bold text-xl underline underline-offset-4 text-center py-5'>All Trainers</h1>
                 <table className="w-full min-w-max table-auto text-left">
                     <thead>

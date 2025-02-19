@@ -1,7 +1,5 @@
 import React from 'react'
-import useAxiosSecure from '../../../../../Hooks/useAxiosSecure'
 import Loading from '../../../Loading'
-import { useQuery } from '@tanstack/react-query'
 import { Card, Typography } from "@material-tailwind/react";
 import { Helmet } from 'react-helmet';
 import useSubscribers from '../../../../../Hooks/useSubscribers';
@@ -13,7 +11,7 @@ const NewsletterSubscribers = () => {
 
 
     return (
-        <div className='max-w-[60vw] mx-auto my-10'>
+        <div className='max-w-[60vw] mx-auto my-10 h-screen'>
             <Helmet>
                 <title>Dashboard | Subscribers | Aura Fusion Gym</title>
             </Helmet>

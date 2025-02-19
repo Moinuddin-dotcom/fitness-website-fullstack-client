@@ -36,7 +36,7 @@ const Navbar = () => {
         <NavLink to={'/'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-black  dark:text-[#91edb1] font-semibold" : " text-black dark:text-[#e8f7ed]"} >Home</NavLink>
         <NavLink to={'/trainer'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-black  dark:text-[#91edb1] font-semibold" : "text-black dark:text-[#e8f7ed]"}>Trainer</NavLink>
         <NavLink to={'/all-classes'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-black  dark:text-[#91edb1] font-semibold" : "text-black dark:text-[#e8f7ed]"}>Classes </NavLink>
-        <NavLink to={'/dashboard'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-black  dark:text-[#91edb1] font-semibold" : "text-black dark:text-[#e8f7ed]"}>Dashboard</NavLink>
+        <NavLink to={'/dashboard/profile-page'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-black  dark:text-[#91edb1] font-semibold" : "text-black dark:text-[#e8f7ed]"}>Dashboard</NavLink>
         <NavLink to={'/community'} className={({ isActive }) => isActive ? " underline underline-offset-4 text-black  dark:text-[#91edb1] font-semibold" : "text-black dark:text-[#e8f7ed]"}>Community</NavLink>
 
     </>
@@ -50,7 +50,7 @@ const Navbar = () => {
 
     return (
         <div className=''>
-            <Disclosure as="nav" className="fixed z-10 w-full bg-white dark:bg-white/25">
+            <Disclosure as="nav" className="fixed z-10 w-full bg-white/80 dark:bg-white/25">
                 <div className=" px-2 py-4 sm:px-6 lg:px-8 ">
                     <div className="relative flex h-16 items-center justify-between">
                         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">

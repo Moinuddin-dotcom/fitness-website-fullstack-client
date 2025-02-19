@@ -26,7 +26,7 @@ const AppliedTrainer = () => {
     })
     if (isLoading) return <Loading />
     return (
-        <div className='max-w-[80vw] mx-auto my-10'>
+        <div className='max-w-[80vw] mx-auto my-10 h-screen'>
             <Helmet>
                 <title>Dashboard | Applied Trainers | Aura Fusion Gym</title>
             </Helmet>
