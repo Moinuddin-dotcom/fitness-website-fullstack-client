@@ -44,14 +44,14 @@ const AddNewClass = () => {
     };
 
     return (
-        <div className="max-w-4xl mx-auto h-screen my-12 p-8 bg-gray-900 text-white shadow-lg rounded-lg border border-gray-700">
+        <div className="max-w-[95vw] md:max-w-4xl mx-auto h-screen my-12 p-8 bg-gray-900 text-white shadow-lg rounded-lg border border-gray-700">
             {/* Page Title */}
             <Helmet>
                 <title>Dashboard | Add New Class | Aura Fusion Gym</title>
             </Helmet>
             <div className="text-center mb-6">
-                <h2 className="text-3xl font-semibold text-yellow-400">Add a New Class</h2>
-                <p className="text-gray-400 mt-1">Fill in the details to add a new class.</p>
+                <h2 className="text-xl md:text-3xl font-semibold text-yellow-400">Add a New Class</h2>
+                <p className="text-sm text-gray-400 mt-1">Fill in the details to add a new class.</p>
             </div>
 
             {/* Form Section */}
@@ -95,7 +95,7 @@ const AddNewClass = () => {
                 <div className="text-center">
                     <button 
                         type="submit"
-                        className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-3 px-6 rounded-lg transition-all duration-300"
+                        className="btn btn-wide bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-3 px-6 rounded-lg transition-all duration-300"
                     >
                         Add Class
                     </button>

@@ -11,12 +11,12 @@ const NewsletterSubscribers = () => {
 
 
     return (
-        <div className='max-w-[60vw] mx-auto my-10 h-screen'>
+        <div className='md:max-w-[60vw] mx-auto my-10 h-screen  '>
             <Helmet>
                 <title>Dashboard | Subscribers | Aura Fusion Gym</title>
             </Helmet>
 
-            <Card className="h-full w-full overflow-scroll">
+            <Card className="h-full w-full overflow-scroll rounded-none">
                 <table className="w-full min-w-max table-auto text-left">
                     <thead>
                         {(subscribers) ? <>

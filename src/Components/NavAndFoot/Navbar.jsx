@@ -15,9 +15,13 @@ import {
     Square2StackIcon,
     TrashIcon,
 } from '@heroicons/react/16/solid'
+import useAllUser from '../../Hooks/useAllUser'
+import useUser from '../../Hooks/useUser'
 
 const Navbar = () => {
     const { user, logout } = useAuth()
+    const [users, , ] = useUser()
+    console.log(users)
     const [darkMode, setDarkMode] = useState(
         localStorage.getItem("theme") === "dark"
     );
@@ -65,10 +69,11 @@ const Navbar = () => {
                                 <MenuItems
                                     transition
                                     anchor="bottom end"
-                                    className="w-52 origin-top-right rounded-xl  border-white/5 bg-white/5 p-1 text-sm/6 text-white transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
+                                    className="w-52 origin-top-right rounded-xl  border-white/5 bg-white/5 p-1 text-sm/6 text-white  transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0 z-10"
                                 >
                                     <MenuItem>
-                                        <button className="group flex flex-col w-full items-start gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-black">
+                                        <button className="group flex flex-col w-full items-start gap-2 rounded-lg py-1.5 px-3 
+                                        data-[focus]:bg-white">
                                             {navLinks}
                                         </button>
                                     </MenuItem>
@@ -105,7 +110,8 @@ const Navbar = () => {
                                 </button>
                                 {
                                     user && user?.email ? <div>
-                                        <p className='md:text-xl font-bold text-[#08170d] dark:text-[#e8f7ed] hidden md:flex'>Welcome!</p> <p className='hidden lg:flex text-[#08170d] dark:text-[#91edb1]'>{user?.displayName}</p>
+                                        <p className='md:text-xl font-bold text-[#08170d] dark:text-[#e8f7ed] hidden md:flex'>Welcome!</p> <p className='hidden lg:flex text-[#08170d] dark:text-[#91edb1]'>
+                                            {users && users?.email ? <>{users?.name}</> : <>{user?.displayName}</> } </p>
                                     </div>
                                         :
                                         <Link to={'/login'}>

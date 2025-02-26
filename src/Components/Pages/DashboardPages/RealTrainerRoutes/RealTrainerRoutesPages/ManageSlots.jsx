@@ -62,12 +62,12 @@ const ManageSlots = () => {
     }
 
     return (
-        <div className="max-w-[80vw] mx-auto my-10">
+        <div className="md:max-w-[80vw] mx-auto my-10">
             <Helmet>
                 <title>Dashboard | ManageSlots | Aura Fusion Gym</title>
             </Helmet>
 
-            <Card className="h-full w-full">
+            <Card className="h-full w-full rounded-none">
                 <CardHeader floated={false} shadow={false} className="rounded-none">
                     <div className="flex items-center justify-center">
                         <div className='text-center'>

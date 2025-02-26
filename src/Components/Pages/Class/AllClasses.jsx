@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Loading from '../Loading'
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
@@ -12,8 +11,14 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { Helmet } from 'react-helmet';
 import SectionTitles from '../../SharedMarque/SectionTitles';
+import { Description, Field, Input, Label } from '@headlessui/react'
+import clsx from 'clsx'
+import { useDebounce } from 'use-debounce';
 
 const AllClasses = () => {
+    const [searchTerms, setSearchTerms] = useState("");
+    // const [debouncedSearch] = useDebounce(searchTerms, 1000)
+    // const [adminClasses, isLoading] = useClasses(debouncedSearch)
     const [adminClasses, isLoading] = useClasses()
     // console.log(adminClasses)
     const [currentPage, setCurrentPage] = useState(1)
@@ -22,15 +27,18 @@ const AllClasses = () => {
     const startPage = (currentPage - 1) * itemPerPage
     const endPage = startPage + itemPerPage
     const paginateClass = adminClasses.slice(startPage, endPage)
-   
-    // const paginateClass = Array.isArray(adminClasses) ? adminClasses.slice(startPage, endPage) : [];
-
-
     const totalPages = Math.ceil(adminClasses.length / itemPerPage)
 
     const handlePageChange = (e, v) => {
         setCurrentPage(v)
     }
+
+    // const handleSearch = (e) => {
+    //     // e.preventDefault()
+
+    //     setSearchTerms(e.target.value);
+    // };
+
     console.log(paginateClass)
     if (isLoading) return <Loading />
     return (
@@ -47,7 +55,21 @@ const AllClasses = () => {
                     </>
                     :
                     <>
+                        {/* <div className="w-full max-w-md mx-auto px-4 ">
+                            <Field>
+                                <Input
+                                    className={clsx(
+                                        'mt-3 block w-full rounded-lg border-none dark:bg-white  py-1.5 px-3 text-sm/6 text-white dark:text-black',
+                                        'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25'
+                                    )}
+                                    placeholder='Search'
+                                    value={searchTerms}
+                                    onChange={handleSearch}
+                                />
+                            </Field>
+                        </div> */}
                         <div className='max-w-[80vw] mx-auto my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+
                             {paginateClass?.map(classCard =>
                                 <Card key={classCard._id} sx={{ maxWidth: 345 }}>
                                     <CardMedia

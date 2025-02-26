@@ -48,7 +48,7 @@ const Login = () => {
       <Helmet>
         <title>Log In | Aura Fusion Gym</title>
       </Helmet>
-      <div className="flex lg:max-w-[80vw] mx-auto min-h-screen dark:bg-black text-white p-10">
+      <div className="flex lg:max-w-[80vw] mx-auto min-h-screen dark:bg-black text-white p-5 md:p-10">
 
         {/* Left Panel */}
         <div className="flex-1 flex flex-col justify-center lg:px-16">
@@ -58,11 +58,14 @@ const Login = () => {
           <GoogleLogin />
 
           <div className="divider divider-accent text-black dark:text-white">OR</div>
-          <div className='space-x-3 my-2 text-center'>
+          <div className=' my-2 text-center'>
             <h1 className='text-black dark:text-white pb-2'>Role wise Email & Password</h1>
+            <div className='flex flex-col md:flex-row justify-center gap-4'>
+
             <Button onClick={() => handleRole('admin')} variant="contained">Admin</Button>
             <Button onClick={() => handleRole('trainer')} variant="contained">Trainer</Button>
             <Button onClick={() => handleRole('member')} variant="contained">Member</Button>
+            </div>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

@@ -88,7 +88,7 @@ const ProfilePage = () => {
     if (isLoading) return <Loading />;
 
     return (
-        <div className="flex justify-center items-center min-h-screen  text-white">
+        <div className="flex justify-center items-center min-h-screen px-4 text-white">
             <div className="w-full max-w-3xl bg-gray-800 shadow-md rounded-lg p-6">
                 {/* Profile Header */}
                 <div className="flex flex-col items-center border-b pb-6">

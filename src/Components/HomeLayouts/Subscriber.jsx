@@ -35,7 +35,7 @@ const Subscriber = () => {
 
                 <SectionTitles subHeading={'Get Notification'} heading={'Subscribe'} />
             </div>
-            <div className="flex items-center justify-center min-h-screen py-16">
+            <div className="flex items-center justify-center pb-10">
                 <div className="bg-white md:rounded-lg shadow-lg w-full md:max-w-[90vw] lg:max-w-[50vw] h-96 overflow-hidden">
                     <div className="px-10 py-5 md:grid grid-cols-2 ">
                         <div className='hidden md:flex'>

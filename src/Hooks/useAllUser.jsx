@@ -1,6 +1,7 @@
 import React from 'react'
 import useAxiosPublic from './useAxiosPublic'
 import { useQuery } from '@tanstack/react-query'
+import useAuth from './useAuth'
 
 const useAllUser = () => {
     const axiosPuplic = useAxiosPublic()

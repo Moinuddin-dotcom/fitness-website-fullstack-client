@@ -20,12 +20,12 @@ const ActivityLog = () => {
         }
     })
     return (
-        <div className='max-w-[80vw] mx-auto my-10'>
+        <div className='md:max-w-[80vw] mx-auto my-10'>
             <Helmet>
                 <title>Dashboard | Activity Log | Aura Fusion Gym</title>
             </Helmet>
 
-            <Card className="h-full w-full overflow-scroll">
+            <Card className="h-full w-full overflow-scroll rounded-none">
                 <table className="w-full min-w-max table-auto text-left">
                     <thead>
                         <tr>

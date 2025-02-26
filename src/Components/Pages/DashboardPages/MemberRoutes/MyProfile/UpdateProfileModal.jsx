@@ -28,12 +28,13 @@ const UpdateProfileModal = ({ isOpen, close }) => {
                 const updateInfo = {
                     name: data.name,
                     email: data.email,
-                    image: response.data.data.url,
+                    image: response?.data?.data?.url,
                     parmanentAddress: data.permanentAddress,
                     presentAddress: data.presentAddress
                 }
+                console.log(updateInfo)
                 const { data: updateData } = await axiosSecure.patch(`/update-user-info/${users?.email}`, updateInfo)
-
+                console.log(updateData)
                 if (updateData.modifiedCount > 0) {
                     toast.success('Profile updated successfully!');
                     close();

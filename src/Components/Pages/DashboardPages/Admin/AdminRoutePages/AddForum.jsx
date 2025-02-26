@@ -60,7 +60,7 @@ const AddForum = () => {
     };
 
     return (
-        <div className='max-w-4xl mx-auto my-10 bg-gray-800 p-6 rounded-lg shadow-lg border border-yellow-500'>
+        <div className='max-w-[95vw] md:max-w-4xl mx-auto my-10 bg-gray-800 p-2 rounded-lg shadow-lg border border-yellow-500'>
             <Helmet>
                 <title>Dashboard | Add Forum | Aura Fusion Gym</title>
             </Helmet>

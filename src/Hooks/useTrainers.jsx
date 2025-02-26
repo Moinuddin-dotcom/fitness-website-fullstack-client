@@ -6,7 +6,7 @@ import useAuth from './useAuth'
 const useTrainers = () => {
     const axiosSecure = useAxiosSecure()
     const { user, loading } = useAuth()
-    console.log(loading)
+    // console.log(loading)
     const { data: trainers = [], isLoading } = useQuery({
         queryKey: ['trainer', user?.email],
         // enabled: !loading && !!user?.email && !localStorage.getItem('access-token'),
