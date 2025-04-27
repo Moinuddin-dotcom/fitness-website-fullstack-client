@@ -14,12 +14,12 @@ const HeroSwiperSlide = ({ image, bannerImage, title, description }) => {
             }}
         >
             {/* flex items-center justify-center */}
-            <div className=' w-full min-h-screen bg-gray-900/35 dark:bg-gray-900/70'>
+            <div className=' w-full min-h-screen bg-gray-900/35 dark:bg-gray-900/70 flex justify-center items-center'>
                 {/* <div className='grid grid-cols-1 md:grid-cols-2'> */}
                 <div className='justify-self-center items-center relative'>
                     <img src={bannerImage} alt="" className='md:h-[600px] lg:h-[800px]' />
                 </div>
-                <div className='absolute top-44 md:left-28 lg:left-60 xl:left-[430px] max-w-xl text-center space-y-4 px-5 my-5 justify-self-center self-center '>
+                <div className=' md:left-28 lg:left-60 xl:left-[430px] max-w-xl text-center space-y-4 px-5 my-5 justify-self-center self-center '>
                     <h1 className='text-3xl font-bold bg-gradient-to-r from-[#91edb1] to-[#1af968] bg-clip-text text-transparent lg:text-5xl'>{title}</h1>
                     <p className='text-[#e8f7ed]'>{description}</p>
                     <Link

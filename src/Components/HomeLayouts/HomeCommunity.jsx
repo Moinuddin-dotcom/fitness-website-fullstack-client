@@ -8,7 +8,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom';
 import SectionTitles from '../SharedMarque/SectionTitles';
 
 const HomeCommunity = () => {
@@ -16,10 +15,10 @@ const HomeCommunity = () => {
     if (blogLoading) return <Loading />
     return (
         <>
-        <div className='px-4'>
+            <div className='px-4'>
 
-            <SectionTitles subHeading={'Latest Community posts'} heading={'Community'} />
-        </div>
+                <SectionTitles subHeading={'Latest Community posts'} heading={'Community'} />
+            </div>
             <div className='px-2 md:max-w-[85vw] mx-auto my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 {blogData.slice(0, 6).map(blog =>
                     <Card sx={{ maxWidth: 345 }} key={blog._id}>
@@ -37,7 +36,6 @@ const HomeCommunity = () => {
                             </Typography>
                             <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                                 {blog.descriptionOfBlog.slice(0, 60)}
-
                             </Typography>
                         </CardContent>
                     </Card>
